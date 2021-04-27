@@ -8,7 +8,7 @@ function SkillPill({ skill, type }: { skill: string; type: string }) {
         <Tooltip text={type}>
             <motion.li
                 whileHover={{ scale: 1.05 }}
-                className="select-none inline-block relative rounded-full py-3 px-6 bg-skill-pill ring-2 ring-skill-pill-ring text-white text-center shadow">
+                className="select-none inline-block relative rounded-full py-3 px-6 bg-puerto-rico-500 ring-2 ring-blue-dianne-500 text-white text-center shadow">
                 {skill}
             </motion.li>
         </Tooltip>

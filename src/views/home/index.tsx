@@ -1,14 +1,14 @@
 import React from "react";
-import HomeEducation from "./education";
-import HomeExperience from "./experience";
-import HomeSkills from "./skills";
+import Education from "./education";
+import Experience from "./experience";
+import Skills from "./skills";
 
 export default function HomeView() {
     return (
         <>
-            <HomeEducation />
-            <HomeSkills />
-            <HomeExperience />
+            <Skills />
+            <Experience />
+            <Education />
         </>
     );
 };
