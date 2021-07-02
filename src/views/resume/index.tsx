@@ -39,7 +39,7 @@ export default function ResumeView() {
                                     </div>
                                 </div>
                                 <div className="font-extralight tracking-tight">
-                                    Software Engineer 2
+                                    Software Engineer II
                                 </div>
                                 <div>
                                     <ul className="list-disc list-outside ml-5">
@@ -54,7 +54,7 @@ export default function ResumeView() {
                                         Evive Health LLC.
                                     </div>
                                     <div className="col-span-4 text-right">
-                                        August 2019 - July 2021
+                                        August 2019 - June 2021
                                     </div>
                                 </div>
                                 <div className="font-extralight tracking-tight">
