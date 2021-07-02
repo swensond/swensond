@@ -1,0 +1,42 @@
+{
+  "name": "swensond",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@headlessui/react": "^1.2.0",
+    "@heroicons/react": "^1.0.1",
+    "@tailwindcss/forms": "^0.3.3",
+    "@types/react": "^17.0.11",
+    "@types/react-dom": "^17.0.8",
+    "@types/react-router": "^5.1.15",
+    "@types/react-router-dom": "^5.1.7",
+    "@types/webpack-env": "^1.16.0",
+    "autoprefixer": "^10.2.6",
+    "classnames": "^2.3.1",
+    "css-loader": "^5.2.6",
+    "get-port": "^5.1.1",
+    "helmet": "^4.6.0",
+    "html-webpack-plugin": "^5.3.1",
+    "postcss": "^8.3.5",
+    "postcss-loader": "^6.1.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
+    "style-loader": "^2.0.0",
+    "stylelint-config-recommended": "^5.0.0",
+    "tailwindcss": "^2.2.2",
+    "ts-loader": "^9.2.3",
+    "typescript": "^4.3.4",
+    "typescript-plugin-css-modules": "^3.4.0",
+    "webpack": "^5.39.1",
+    "webpack-cli": "^4.7.2",
+    "webpack-plugin-serve": "^1.4.1"
+  }
+}
