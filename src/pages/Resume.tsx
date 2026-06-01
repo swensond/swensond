@@ -22,6 +22,37 @@ function Resume() {
           <div className="space-y-10">
             <div className="space-y-2">
               <div className="grid grid-cols-12">
+                <div className="col-span-8">Global Unity Impact</div>
+                <div className="col-span-4 text-right">
+                  March 2023 - Present
+                </div>
+              </div>
+              <div className="font-extralight text-sm text-gray-400">Chicago, IL</div>
+              <div className="font-extralight tracking-tight">
+                Senior Software Engineer (Volunteer)
+              </div>
+              <div>
+                <ul className="list-disc list-outside ml-5">
+                  <li>
+                    Developed and maintained responsive web applications using React, TypeScript, and MongoDB, delivering scalable full-stack solutions.
+                  </li>
+                  <li>
+                    Designed and implemented RESTful APIs with TypeScript, ensuring type safety and maintainable backend services.
+                  </li>
+                  <li>
+                    Built interactive UI components with React and TypeScript, improving user engagement and application performance.
+                  </li>
+                  <li>
+                    Managed MongoDB databases for data storage and retrieval, optimizing queries for performance and reliability.
+                  </li>
+                  <li>
+                    Leveraged AI coding agents (Qwen, GitHub Copilot) to accelerate development workflows and improve code quality.
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div className="space-y-2">
+              <div className="grid grid-cols-12">
                 <div className="col-span-8">Evive Health LLC.</div>
                 <div className="col-span-4 text-right">
                   January 2022 - March 2023
@@ -233,8 +264,8 @@ function Resume() {
             </div>
             <div className="grid grid-cols-12 gap-4">
               <div className="col-span-12 font-extralight tracking-tight">
-                <span className="font-bold mr-2">Mobile:</span>
-                Cordova (iOS/Android)
+                <span className="font-bold mr-2">AI Tools:</span>
+                Qwen, GitHub Copilot
               </div>
             </div>
           </div>
