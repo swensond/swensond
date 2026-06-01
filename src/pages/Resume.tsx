@@ -3,7 +3,20 @@ import "./Resume.css";
 function Resume() {
   return (
     <>
-      <div className="mt-40 mb-10 space-y-20">
+      <div className="mt-10 mb-10 space-y-20">
+        <div className="text-white">
+          <h3 className="font-bold text-2xl">Summary</h3>
+          <p className="font-extralight tracking-tight leading-relaxed mt-4">
+            Senior Software Engineer with over a decade of experience building scalable, 
+            high-performance applications across diverse industries. Expert in full-stack 
+            development with Python, Java, C#, TypeScript, and JavaScript. Proven track 
+            record leading migrations to AWS, implementing CI/CD pipelines, and architecting 
+            serverless solutions. Strong background in mentoring teams, modernizing legacy 
+            systems, and delivering products that drive business impact.
+          </p>
+        </div>
+      </div>
+      <div className="mt-10 mb-10 space-y-20">
         <div className="text-white">
           <h3 className="font-bold text-2xl">Experience</h3>
           <div className="space-y-10">
@@ -14,29 +27,23 @@ function Resume() {
                   January 2022 - March 2023
                 </div>
               </div>
+              <div className="font-extralight text-sm text-gray-400">Chicago, IL</div>
               <div className="font-extralight tracking-tight">
                 Senior Software Engineer
               </div>
               <div>
                 <ul className="list-disc list-outside ml-5">
                   <li>
-                    Developed and maintained applications using Python, Java,
-                    C#, and TypeScript for various backend and frontend systems.
+                    Built and maintained production applications using Python, Java, C#, and TypeScript across backend services and frontend platforms.
                   </li>
                   <li>
-                    Contributed to the design and development of an automated
-                    messaging system, enhancing the platform's ability to handle
-                    complex logic and improve communication workflows.
+                    Engineered an automated messaging system that streamlined complex communication workflows and improved platform responsiveness.
                   </li>
                   <li>
-                    Assisted in designing and developing a demo sales site to
-                    explore potential future iterations of myevive.com,
-                    contributing to strategic planning and user experience.
+                    Led development of a demo sales site to explore strategic product iterations for myevive.com, directly informing user experience decisions.
                   </li>
                   <li>
-                    Implemented and designed an auditing service to ensure data
-                    integrity across multiple microservices, improving system
-                    reliability and consistency.
+                    Designed and deployed an auditing service that enforced data integrity across multiple microservices, significantly improving system reliability.
                   </li>
                 </ul>
               </div>
@@ -48,35 +55,26 @@ function Resume() {
                   July 2021 - January 2022
                 </div>
               </div>
+              <div className="font-extralight text-sm text-gray-400">Chicago, IL</div>
               <div className="font-extralight tracking-tight">
                 Software Engineer II
               </div>
               <div>
                 <ul className="list-disc list-outside ml-5">
                   <li>
-                    Developed and maintained applications using Python, Java,
-                    C#, and TypeScript, contributing to both backend and
-                    frontend systems.
+                    Developed and maintained cross-platform applications using Python, Java, C#, and TypeScript, delivering both backend services and frontend interfaces.
                   </li>
                   <li>
-                    Assisted in integrating ephemeral GoCD agents into the build
-                    process, optimizing CI/CD workflows and reducing build
-                    times.
+                    Integrated ephemeral GoCD agents into the CI/CD pipeline, reducing build times and accelerating deployment cycles.
                   </li>
                   <li>
-                    Mentored an intern in RESTful API development and serverless
-                    infrastructure, helping evolve their project into a
-                    full-fledged medical code mapping service.
+                    Mentored an intern through the development of a RESTful API and serverless infrastructure, guiding their project into a production-ready medical code mapping service.
                   </li>
                   <li>
-                    Designed and implemented an external authentication service,
-                    enabling partners to generate access tokens for API calls on
-                    behalf of their users.
+                    Built an external authentication service enabling partners to generate access tokens for API calls on behalf of end users.
                   </li>
                   <li>
-                    Contributed to the retooling of an internal authentication
-                    service by migrating to Auth0, improving security and
-                    scalability.
+                    Migrated the internal authentication system to Auth0, strengthening security posture and improving system scalability.
                   </li>
                 </ul>
               </div>
@@ -88,48 +86,35 @@ function Resume() {
                   August 2019 - June 2021
                 </div>
               </div>
+              <div className="font-extralight text-sm text-gray-400">Chicago, IL</div>
               <div className="font-extralight tracking-tight">
                 Software Engineer
               </div>
               <div>
                 <ul className="list-disc list-outside ml-5">
                   <li>
-                    Developed and maintained applications using Python, Java,
-                    C#, and TypeScript, contributing to both backend and
-                    frontend systems.
+                    Developed and maintained cross-platform applications using Python, Java, C#, and TypeScript across backend services and frontend interfaces.
                   </li>
                   <li>
-                    Introduced TypeScript into the backend development process,
-                    improving code consistency and maintainability.
+                    Introduced TypeScript into backend development, improving code consistency, type safety, and long-term maintainability.
                   </li>
                   <li>
-                    Assisted in the adoption of AWS CloudFormation for
-                    orchestration, streamlining infrastructure management.
+                    Implemented AWS CloudFormation for infrastructure orchestration, standardizing and automating environment provisioning.
                   </li>
                   <li>
-                    Contributed to the design and implementation of a serverless
-                    architecture, optimizing scalability and reducing
-                    operational costs.
+                    Architected serverless solutions that optimized system scalability while reducing operational costs.
                   </li>
                   <li>
-                    Supported the migration of internal tooling from Rackspace
-                    to AWS, ensuring smoother infrastructure management and
-                    improved performance.
+                    Led the migration of internal tooling from Rackspace to AWS, improving infrastructure management and system performance.
                   </li>
                   <li>
-                    Assisted in integrating GoCD into the development pipeline,
-                    enhancing continuous integration and deployment (CI/CD)
-                    workflows.
+                    Integrated GoCD into the development pipeline, establishing robust continuous integration and deployment workflows.
                   </li>
                   <li>
-                    Advocated for a modern, accessibility-friendly frontend to
-                    improve the user experience and ensure compliance with
-                    accessibility standards.
+                    Championed the adoption of a modern, accessibility-compliant frontend framework, improving user experience and meeting accessibility standards.
                   </li>
                   <li>
-                    Contributed to the development and design of Evive Care, a
-                    platform that consolidates and enables state/county-level
-                    COVID-19 testing site searches.
+                    Developed Evive Care, a platform enabling real-time searches of state and county-level COVID-19 testing sites.
                   </li>
                 </ul>
               </div>
@@ -141,20 +126,17 @@ function Resume() {
                   April 2018 - July 2019
                 </div>
               </div>
+              <div className="font-extralight text-sm text-gray-400">Boston, MA</div>
               <div className="font-extralight tracking-tight">
                 Software Engineer
               </div>
               <div>
                 <ul className="list-disc list-outside ml-5">
                   <li>
-                    Developed and managed a Cordova-based mobile application for
-                    both iOS and Android versions of mywiserhealth.com, ensuring
-                    consistency across platforms.
+                    Built and maintained a Cordova-based mobile application for iOS and Android, delivering feature parity across platforms for mywiserhealth.com.
                   </li>
                   <li>
-                    Collaborated in the migration process from Adobe's analytics
-                    platform to a privately hosted instance of Matomo, enhancing
-                    data privacy and control for the organization.
+                    Migrated analytics infrastructure from Adobe to a self-hosted Matomo instance, improving data privacy and organizational control over user analytics.
                   </li>
                 </ul>
               </div>
@@ -166,35 +148,26 @@ function Resume() {
                   December 2015 - March 2018
                 </div>
               </div>
+              <div className="font-extralight text-sm text-gray-400">Boston, MA</div>
               <div className="font-extralight tracking-tight">
                 Jr. Software Engineer
               </div>
               <div>
                 <ul className="list-disc list-outside ml-5">
                   <li>
-                    Developed and maintained applications using Python, PHP,
-                    Java, and TypeScript, contributing to both backend and
-                    frontend systems.
+                    Developed and maintained applications using Python, PHP, Java, and TypeScript across backend services and frontend interfaces.
                   </li>
                   <li>
-                    Introduced and integrated TypeScript into the frontend
-                    development process, improving code maintainability and
-                    scalability.
+                    Introduced TypeScript to the frontend codebase, improving code maintainability and enabling scalable feature development.
                   </li>
                   <li>
-                    Assisted in the containerization of backend services,
-                    transitioning from OpenShift to Aurora Apache for enhanced
-                    performance and scalability.
+                    Containerized backend services and migrated infrastructure from OpenShift to Aurora Apache, improving system performance and scalability.
                   </li>
                   <li>
-                    Assisted in the migration of the build process from Travis
-                    CI to Jenkins, optimizing continuous integration and
-                    deployment workflows.
+                    Transitioned the build pipeline from Travis CI to Jenkins, streamlining continuous integration and deployment workflows.
                   </li>
                   <li>
-                    Collaborated in the design and implementation of a
-                    public-facing API service, ensuring security, scalability,
-                    and ease of use.
+                    Designed and implemented a public-facing API service, ensuring security, scalability, and developer-friendly documentation.
                   </li>
                 </ul>
               </div>
@@ -208,30 +181,63 @@ function Resume() {
                   January 2014 - December 2014
                 </div>
               </div>
+              <div className="font-extralight text-sm text-gray-400">Boston, MA</div>
               <div className="font-extralight tracking-tight">
                 Software Engineer Intern
               </div>
               <div>
                 <ul className="list-disc list-outside ml-5">
                   <li>
-                    Contributed to the design, development, and maintenance of
-                    key platforms, including Continuum Cloud Console (C3) and
-                    Sync247, using PHP and JavaScript.
+                    Developed and maintained Continuum Cloud Console (C3) and Sync247 platforms using PHP and JavaScript, delivering key features to production.
                   </li>
                   <li>
-                    Assisted in expanding C3 to integrate with additional cloud
-                    providers, enhancing platform versatility and functionality.
+                    Expanded C3 integrations with additional cloud providers, broadening platform capabilities and customer options.
                   </li>
                   <li>
-                    Supported fellow interns in learning and applying RESTful
-                    API development best practices, fostering team knowledge and
-                    growth.
+                    Supported fellow interns in mastering RESTful API development, contributing to team growth and knowledge sharing.
                   </li>
                 </ul>
               </div>
             </div>
           </div>
   
+        </div>
+      </div>
+      <div className="mb-10 space-y-20">
+        <div className="text-white">
+          <h3 className="font-bold text-2xl">Skills</h3>
+          <div className="space-y-4 mt-4">
+            <div className="grid grid-cols-12 gap-4">
+              <div className="col-span-12 font-extralight tracking-tight">
+                <span className="font-bold mr-2">Languages:</span>
+                Python, Java, C#, TypeScript, JavaScript, PHP
+              </div>
+            </div>
+            <div className="grid grid-cols-12 gap-4">
+              <div className="col-span-12 font-extralight tracking-tight">
+                <span className="font-bold mr-2">Frontend:</span>
+                React, Tailwind CSS, Accessibility Standards
+              </div>
+            </div>
+            <div className="grid grid-cols-12 gap-4">
+              <div className="col-span-12 font-extralight tracking-tight">
+                <span className="font-bold mr-2">Backend:</span>
+                RESTful APIs, Serverless Architecture, Auth0
+              </div>
+            </div>
+            <div className="grid grid-cols-12 gap-4">
+              <div className="col-span-12 font-extralight tracking-tight">
+                <span className="font-bold mr-2">Cloud & DevOps:</span>
+                AWS (CloudFormation), Docker, GoCD, Jenkins, Travis CI, Rackspace
+              </div>
+            </div>
+            <div className="grid grid-cols-12 gap-4">
+              <div className="col-span-12 font-extralight tracking-tight">
+                <span className="font-bold mr-2">Mobile:</span>
+                Cordova (iOS/Android)
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div className="mb-10 space-y-20">
@@ -245,6 +251,7 @@ function Resume() {
                     </div>
                     <div className="col-span-4 text-right">2011 - 2015</div>
                   </div>
+                  <div className="font-extralight text-sm text-gray-400">Boston, MA</div>
                   <div className="font-extralight tracking-tight">
                     Bachelor of Science in Computer Networking
                   </div>
