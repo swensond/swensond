@@ -4,15 +4,14 @@
         {
             company: "Global Unity Impact",
             period: "March 2023 - Present",
-            location: "Millbury, MA",
-            title: "Senior Software Engineer (Volunteer)",
+            location: "Chicago, IL",
+            title: "Senior Software Engineer",
             achievements: [
-                "Architected and shipped full-stack web applications with React, TypeScript, and MongoDB, enabling a scalable platform serving nonprofit operations.",
-                "Designed and implemented RESTful APIs using TypeScript, Node.js, and MongoDB, ensuring type safety and maintainable backend services.",
-                "Built interactive UI components with React and TypeScript, improving user engagement and application performance.",
+                "Architected and developing full-stack web applications with React, TypeScript, MongoDB, Bun, and Hono, enabling a scalable platform serving nonprofit operations.",
+                "Designed and implemented RESTful APIs using TypeScript, Node.js, MongoDB, Bun, and Hono, ensuring type safety and maintainable backend services.",
                 "Managed MongoDB databases for data storage and retrieval, optimizing query performance, indexing strategies, and operational reliability.",
-                "Accelerated development velocity by integrating AI coding tools (Qwen, GitHub Copilot), reducing boilerplate time and improving code review quality."
-            ]
+                "Accelerated development velocity by integrating AI coding tools (Qwen, GitHub Copilot), reducing boilerplate time and improving code review quality.",
+            ],
         },
         {
             company: "Evive Health LLC.",
@@ -23,8 +22,8 @@
                 "Built and maintained production microservices and web applications using Python, Java, C#, TypeScript, PostgreSQL, and AWS.",
                 "Engineered an automated messaging system that eliminated manual communication bottlenecks, improving platform responsiveness at scale.",
                 "Led development of a demo sales site to explore strategic product iterations for myevive.com, directly informing user experience decisions.",
-                "Designed and deployed a cross-microservice auditing layer that enforced data integrity and became a critical reliability pillar across the platform."
-            ]
+                "Designed and deployed a cross-microservice auditing layer that enforced data integrity and became a critical reliability pillar across the platform.",
+            ],
         },
         {
             company: "Evive Health LLC.",
@@ -36,8 +35,8 @@
                 "Integrated ephemeral GoCD agents into CI/CD pipelines, reducing build times and accelerating automated testing and deployment workflows.",
                 "Mentored an intern from onboarding to production — guiding the full design and build of a serverless medical code mapping API that shipped to production.",
                 "Built an external authentication service enabling partners to generate access tokens for API calls on behalf of end users.",
-                "Migrated the internal authentication system to Auth0, strengthening security posture and improving system scalability."
-            ]
+                "Migrated the internal authentication system to Auth0, strengthening security posture and improving system scalability.",
+            ],
         },
         {
             company: "Evive Health LLC.",
@@ -51,8 +50,8 @@
                 "Led the migration of internal tooling from Rackspace to AWS, improving infrastructure management and system performance.",
                 "Integrated GoCD into the development pipeline, establishing robust continuous integration and deployment workflows.",
                 "Drove company-wide adoption of an accessibility-compliant frontend framework, raising WCAG compliance and modernizing the user experience.",
-                "Launched Evive Care in response to the COVID-19 pandemic, delivering a real-time search platform for state and county testing sites used by thousands of employees."
-            ]
+                "Launched Evive Care in response to the COVID-19 pandemic, delivering a real-time search platform for state and county testing sites used by thousands of employees.",
+            ],
         },
         {
             company: "WiserTogether Inc.",
@@ -61,8 +60,8 @@
             title: "Software Engineer",
             achievements: [
                 "Built and maintained a Cordova-based mobile application for iOS and Android, delivering feature parity across platforms for mywiserhealth.com.",
-                "Migrated analytics infrastructure from Adobe to a self-hosted Matomo instance, improving data privacy and organizational control over user analytics."
-            ]
+                "Migrated analytics infrastructure from Adobe to a self-hosted Matomo instance, improving data privacy and organizational control over user analytics.",
+            ],
         },
         {
             company: "WiserTogether Inc.",
@@ -74,8 +73,8 @@
                 "Introduced TypeScript to the frontend codebase, improving code maintainability and enabling scalable feature development.",
                 "Containerized backend services and migrated infrastructure from OpenShift to Aurora Apache, improving system performance and scalability.",
                 "Transitioned the build pipeline from Travis CI to Jenkins, streamlining continuous integration and deployment workflows.",
-                "Designed and implemented a public-facing API service, ensuring security, scalability, and developer-friendly documentation."
-            ]
+                "Designed and implemented a public-facing API service, ensuring security, scalability, and developer-friendly documentation.",
+            ],
         },
         {
             company: "Continuum Managed Services, LLC",
@@ -85,26 +84,29 @@
             achievements: [
                 "Developed and maintained Continuum Cloud Console (C3) and Sync247 platforms using PHP and JavaScript, delivering key features to production.",
                 "Expanded C3 integrations with additional cloud providers, broadening platform capabilities and customer options.",
-                "Supported fellow interns in mastering RESTful API development, contributing to team growth and knowledge sharing."
-            ]
-        }
+                "Supported fellow interns in mastering RESTful API development, contributing to team growth and knowledge sharing.",
+            ],
+        },
     ];
-    
+
     let skills = {
         languages: "Python, Java, C#, TypeScript, JavaScript, PHP, SQL",
-        frontend: "React, Tailwind CSS, HTML5, CSS3, Accessibility Standards (WCAG)",
-        backend: "Node.js, Bun, RESTful APIs, Auth0, Serverless Architecture, Microservices",
+        frontend:
+            "React, Tailwind CSS, HTML5, CSS3, Accessibility Standards (WCAG)",
+        backend:
+            "Node.js, Bun, RESTful APIs, Auth0, Serverless Architecture, Microservices",
         databases: "MongoDB, PostgreSQL, MySQL",
-        cloudDevOps: "AWS, CloudFormation, Docker, CI/CD, GoCD, Jenkins, Travis CI, GitHub Actions, Rackspace",
+        cloudDevOps:
+            "AWS, CloudFormation, Docker, CI/CD, GoCD, Jenkins, Travis CI, GitHub Actions, Rackspace",
         testing: "Vitest, Jest, Pytest",
-        aiTools: "GitHub Copilot, Qwen"
+        aiTools: "GitHub Copilot, Qwen",
     };
-    
+
     let education = {
         institution: "Wentworth Institute of Technology",
         location: "Boston, MA",
         period: "2011 - 2015",
-        degree: "Bachelor of Science in Computer Networking"
+        degree: "Bachelor of Science in Computer Networking",
     };
 </script>
 
@@ -113,30 +115,43 @@
     <section class="mb-10">
         <h3 class="font-bold text-2xl">Summary</h3>
         <p class="font-extralight tracking-tight leading-relaxed mt-4">
-            Senior Software Engineer with 10+ years of experience designing cloud-native applications,
-            distributed systems, and developer platforms. Proven record leading AWS migrations, modernizing
-            legacy systems, mentoring engineers, and delivering production software across healthcare, SaaS,
-            and nonprofit sectors. Expert in full-stack development with Python, Java, C#,
-            TypeScript, JavaScript, Node.js, and React, with deep experience building scalable backend services, CI/CD
-            pipelines, serverless architectures, and microservice-based systems.
+            Senior Software Engineer with 10+ years of experience designing
+            cloud-native applications, distributed systems, and developer
+            platforms. Proven record leading AWS migrations, modernizing legacy
+            systems, mentoring engineers, and delivering production software
+            across healthcare, SaaS, and nonprofit sectors. Expert in full-stack
+            development with Python, Java, C#, TypeScript, JavaScript, Node.js,
+            and React, with deep experience building scalable backend services,
+            CI/CD pipelines, serverless architectures, and microservice-based
+            systems.
         </p>
     </section>
 
     <!-- Experience Section -->
     <section class="mb-10">
         <h3 class="font-bold text-2xl">Experience</h3>
-        <div class="space-y-10 mt-6">
+        <div class="space-y-8 mt-6">
             {#each experiences as exp}
-                <div class="space-y-2">
-                    <div class="grid grid-cols-12">
-                        <div class="col-span-8">{exp.company}</div>
-                        <div class="col-span-4 text-right">
-                            {exp.period}
-                        </div>
+                <div class="experience-entry">
+                    <div class="company-title-row">
+                        <div class="company-name">{exp.company}</div>
+                        <div class="job-title">{exp.title}</div>
                     </div>
-                    <div class="font-extralight text-sm text-gray-400">{exp.location}</div>
-                    <div class="font-extralight tracking-tight">
-                        {exp.title}
+                    <div class="grid grid-cols-12 gap-4 items-center">
+                        <div class="col-span-8">
+                            <div class="company-period-container">
+                                <div
+                                    class="font-extralight text-sm text-gray-400"
+                                >
+                                    {exp.location}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-span-4 text-right">
+                            <div class="font-extralight text-sm">
+                                {exp.period}
+                            </div>
+                        </div>
                     </div>
                     <div>
                         <ul class="list-disc list-outside ml-5 space-y-2">
@@ -149,51 +164,71 @@
             {/each}
         </div>
     </section>
-
+    <!-- Skills Section -->
     <!-- Skills Section -->
     <section class="mb-10">
         <h3 class="font-bold text-2xl">Skills</h3>
-        <div class="space-y-4 mt-4">
-            <div class="grid grid-cols-12 gap-4">
-                <div class="col-span-12 font-extralight tracking-tight">
-                    <span class="font-bold mr-2">Languages:</span>
-                    {skills.languages}
+        <div class="space-y-6 mt-4">
+            <div class="skill-category">
+                <div class="skill-category-title">Languages</div>
+                <div class="skills-chips">
+                    {#each skills.languages.split(", ") as language}
+                        <span class="skill-chip">{language}</span>
+                    {/each}
                 </div>
             </div>
-            <div class="grid grid-cols-12 gap-4">
-                <div class="col-span-12 font-extralight tracking-tight">
-                    <span class="font-bold mr-2">Frontend:</span>
-                    {skills.frontend}
+
+            <div class="skill-category">
+                <div class="skill-category-title">Frontend</div>
+                <div class="skills-chips">
+                    {#each skills.frontend.split(", ") as frontend}
+                        <span class="skill-chip">{frontend}</span>
+                    {/each}
                 </div>
             </div>
-            <div class="grid grid-cols-12 gap-4">
-                <div class="col-span-12 font-extralight tracking-tight">
-                    <span class="font-bold mr-2">Backend:</span>
-                    {skills.backend}
+
+            <div class="skill-category">
+                <div class="skill-category-title">Backend</div>
+                <div class="skills-chips">
+                    {#each skills.backend.split(", ") as backend}
+                        <span class="skill-chip">{backend}</span>
+                    {/each}
                 </div>
             </div>
-            <div class="grid grid-cols-12 gap-4">
-                <div class="col-span-12 font-extralight tracking-tight">
-                    <span class="font-bold mr-2">Databases:</span>
-                    {skills.databases}
+
+            <div class="skill-category">
+                <div class="skill-category-title">Databases</div>
+                <div class="skills-chips">
+                    {#each skills.databases.split(", ") as database}
+                        <span class="skill-chip">{database}</span>
+                    {/each}
                 </div>
             </div>
-            <div class="grid grid-cols-12 gap-4">
-                <div class="col-span-12 font-extralight tracking-tight">
-                    <span class="font-bold mr-2">Cloud & DevOps:</span>
-                    {skills.cloudDevOps}
+
+            <div class="skill-category">
+                <div class="skill-category-title">Cloud & DevOps</div>
+                <div class="skills-chips">
+                    {#each skills.cloudDevOps.split(", ") as cloudDevOps}
+                        <span class="skill-chip">{cloudDevOps}</span>
+                    {/each}
                 </div>
             </div>
-            <div class="grid grid-cols-12 gap-4">
-                <div class="col-span-12 font-extralight tracking-tight">
-                    <span class="font-bold mr-2">Testing:</span>
-                    {skills.testing}
+
+            <div class="skill-category">
+                <div class="skill-category-title">Testing</div>
+                <div class="skills-chips">
+                    {#each skills.testing.split(", ") as testing}
+                        <span class="skill-chip">{testing}</span>
+                    {/each}
                 </div>
             </div>
-            <div class="grid grid-cols-12 gap-4">
-                <div class="col-span-12 font-extralight tracking-tight">
-                    <span class="font-bold mr-2">AI Tools:</span>
-                    {skills.aiTools}
+
+            <div class="skill-category">
+                <div class="skill-category-title">AI Tools</div>
+                <div class="skills-chips">
+                    {#each skills.aiTools.split(", ") as aiTool}
+                        <span class="skill-chip">{aiTool}</span>
+                    {/each}
                 </div>
             </div>
         </div>
@@ -210,7 +245,9 @@
                     </div>
                     <div class="col-span-4 text-right">{education.period}</div>
                 </div>
-                <div class="font-extralight text-sm text-gray-400">{education.location}</div>
+                <div class="font-extralight text-sm text-gray-400">
+                    {education.location}
+                </div>
                 <div class="font-extralight tracking-tight">
                     {education.degree}
                 </div>

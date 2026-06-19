@@ -2,6 +2,7 @@
     import "./layout.css";
     import { Icon } from '@steeze-ui/svelte-icon';
 	import { DevicePhoneMobile, Envelope, MapPin } from '@steeze-ui/heroicons';
+    // @ts-ignore
     import SocialIcons from '@rodneylab/svelte-social-icons';
 
     let information = [
@@ -30,7 +31,7 @@
             <div class="flex-shrink-0">
                 <img 
                     class="rounded-full w-48 h-48 shadow-lg" 
-                    src="https://avatars.githubusercontent.com/u/1354954?v=4" 
+                    src="avatar.png"
                     alt="David Swenson" 
                 />
             </div>

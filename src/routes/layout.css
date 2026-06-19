@@ -142,3 +142,104 @@ a:hover {
         padding-right: 2rem;
     }
 }
+/* Increase padding between sections */
+.resume-container > section {
+    margin-bottom: 2rem;
+}
+
+/* Make job title and company name appear on same line with emphasis */
+.experience-entry {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #e2e8f0;
+    margin-bottom: 1.5rem;
+}
+
+.company-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.company-name {
+    font-weight: 700;
+    font-size: 1.125rem; /* text-lg */
+    color: #1e293b;
+}
+
+.job-title {
+    font-weight: 600;
+    font-size: 1rem;
+    color: #1d4ed8;
+    text-decoration: none;
+}
+
+/* For the experience grid layout - ensure proper alignment */
+.experience-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1rem;
+    align-items: center;
+}
+
+/* Ensure company and period are properly aligned */
+.company-period-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+/* Increase spacing between experience entries */
+.experience-item {
+    margin-bottom: 1.5rem;
+}
+/* Skills section - tags and chips */
+.skills-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.skill-chip {
+    background-color: #eff6ff;
+    color: #1d4ed8;
+    border: 1px solid #dbeafe;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.skill-chip:hover {
+    background-color: #dbeafe;
+    transform: translateY(-1px);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.skill-category {
+    margin-top: 1rem;
+}
+
+.skill-category-title {
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #1e293b;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .skill-chip {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.75rem;
+    }
+    
+    .skills-chips {
+        gap: 0.25rem;
+    }
+}
