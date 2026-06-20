@@ -25,12 +25,12 @@
 
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <!-- Header Section - Contact Information Only -->
-    <header class="bg-white rounded-2xl shadow-lg p-8 mb-12">
+    <header class="bg-white border-zinc-200 border-1 rounded-2xl shadow-lg p-8 mb-12">
         <div class="flex flex-col md:flex-row items-center gap-8">
             <!-- Profile Image -->
             <div class="flex-shrink-0">
                 <img 
-                    class="rounded-full w-48 h-48 shadow-lg" 
+                    class="rounded-full border-zinc-200 border-1 w-48 h-48 shadow-lg" 
                     src="avatar.png"
                     alt="David Swenson" 
                 />
@@ -68,7 +68,7 @@
     </header>
 
     <!-- Main Content - This can be replaced with other content -->
-    <main class="bg-white rounded-2xl shadow-lg p-8">
+    <main class="bg-white border-zinc-200 border-1 rounded-2xl shadow-lg p-8">
         {@render children()}
     </main>
 </div>
