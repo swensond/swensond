@@ -1,7 +1,7 @@
 <script>
     import "./layout.css";
     import { Icon } from "@steeze-ui/svelte-icon";
-    import { DevicePhoneMobile, Envelope, MapPin } from "@steeze-ui/heroicons";
+    import { Envelope, MapPin } from "@steeze-ui/heroicons";
     // @ts-ignore
     import SocialIcons from "@rodneylab/svelte-social-icons";
 
@@ -13,11 +13,7 @@
         {
             content: "david@swensond.com",
             icon: Envelope,
-        },
-        {
-            content: "(508) 579-6980",
-            icon: DevicePhoneMobile,
-        },
+        }
     ];
 
     let { children } = $props();
