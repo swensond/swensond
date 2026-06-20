@@ -25,12 +25,18 @@
 
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <!-- Header Section - Contact Information Only -->
-    <header class="bg-white border border-zinc-200 rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.06)] p-8 mb-12">
+    <header
+        class="bg-white border border-zinc-200 rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.06)] p-8 mb-12"
+    >
         <div class="flex flex-col md:flex-row items-center gap-8">
             <!-- Profile Image -->
             <div class="flex-shrink-0 relative">
-                <div class="absolute inset-0 rounded-full bg-white/5 blur-xl scale-110"></div>
-                <div class="relative rounded-full p-[2px] bg-gradient-to-br from-zinc-600 via-zinc-400 to-zinc-700">
+                <div
+                    class="absolute inset-0 rounded-full bg-white/5 blur-xl scale-110"
+                ></div>
+                <div
+                    class="relative rounded-full p-[2px] bg-gradient-to-br from-zinc-600 via-zinc-400 to-zinc-700"
+                >
                     <img
                         class="w-48 h-48 rounded-full bg-zinc-950"
                         src="avatar.png"
@@ -87,7 +93,9 @@
     </header>
 
     <!-- Main Content - This can be replaced with other content -->
-    <main class="bg-white border border-zinc-200 rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.06)] p-8">
+    <main
+        class="bg-white border border-zinc-200 rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.06)] p-8"
+    >
         {@render children()}
     </main>
 </div>

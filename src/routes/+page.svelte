@@ -92,14 +92,14 @@
     let skills = {
         languages: "Python, Java, C#, TypeScript, JavaScript, PHP, SQL",
         frontend:
-            "React, Tailwind CSS, HTML5, CSS3, Accessibility Standards (WCAG)",
+            "React, Tailwind CSS, HTML5, CSS3, Svelte, Accessibility Standards (WCAG)",
         backend:
             "Node.js, Bun, RESTful APIs, Auth0, Serverless Architecture, Microservices",
-        databases: "MongoDB, PostgreSQL, MySQL",
+        databases: "MongoDB, PostgreSQL, MySQL, DynamoDB, Redis, Memcached",
         cloudDevOps:
-            "AWS, CloudFormation, Docker, CI/CD, GoCD, Jenkins, Travis CI, GitHub Actions, Rackspace",
+            "AWS, CloudFormation, ECS, Lambda, Docker, CI/CD, GoCD, Jenkins, Travis CI, GitHub Actions, Rackspace",
         testing: "Vitest, Jest, Pytest",
-        aiTools: "GitHub Copilot, Qwen",
+        aiTools: "GitHub Copilot, Qwen, LM Studio",
     };
 
     let education = {
@@ -197,7 +197,7 @@
             </div>
 
             <div class="skill-category">
-                <div class="skill-category-title">Databases</div>
+                <div class="skill-category-title">Databases and Caching</div>
                 <div class="skills-chips">
                     {#each skills.databases.split(", ") as database}
                         <span class="skill-chip">{database}</span>

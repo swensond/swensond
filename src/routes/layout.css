@@ -2,15 +2,27 @@
 @plugin '@tailwindcss/typography';
 
 /* Global styles */
+:root {
+    font-family: Inter, sans-serif;
+    font-feature-settings: 'liga' 1, 'calt' 1;
+    /* fix for Chrome */
+}
+
+@supports (font-variation-settings: normal) {
+    :root {
+        font-family: InterVariable, sans-serif;
+    }
+}
+
 html,
 body {
     margin: 0;
     padding: 0;
     min-height: 100vh;
-    /* background-color: #f8fafc; */
-    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+
+    @apply bg-zinc-100 text-zinc-900;
 }
 
 /* Smooth scrolling */
@@ -142,8 +154,9 @@ a:hover {
         padding-right: 2rem;
     }
 }
+
 /* Increase padding between sections */
-.resume-container > section {
+.resume-container>section {
     margin-bottom: 2rem;
 }
 
@@ -167,7 +180,8 @@ a:hover {
 
 .company-name {
     font-weight: 700;
-    font-size: 1.125rem; /* text-lg */
+    font-size: 1.125rem;
+    /* text-lg */
     color: #1e293b;
 }
 
@@ -197,6 +211,7 @@ a:hover {
 .experience-item {
     margin-bottom: 1.5rem;
 }
+
 /* Skills section - tags and chips */
 .skills-chips {
     display: flex;
@@ -238,7 +253,7 @@ a:hover {
         padding: 0.25rem 0.5rem;
         font-size: 0.75rem;
     }
-    
+
     .skills-chips {
         gap: 0.25rem;
     }
