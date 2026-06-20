@@ -1,42 +1,68 @@
-# sv
+# Hi, I'm David Swenson 👋
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+Full-Stack Software Engineer focused on building scalable platforms, cloud-native applications, and developer-friendly systems.
 
-## Creating a project
+I enjoy taking products from idea to production, owning everything from architecture and backend services to frontend experiences, CI/CD pipelines, and infrastructure.
 
-If you're seeing this, you've probably already done this step. Congrats!
+## 🚀 What I Do
 
-```sh
-# create a new project
-npx sv create my-app
-```
+- Design and build scalable web applications
+- Architect cloud-native systems and APIs
+- Lead backend development and platform engineering efforts
+- Improve developer experience through automation and tooling
+- Turn complex business requirements into maintainable software
 
-To recreate this project with the same configuration:
+## 🛠️ Tech Stack
 
-```sh
-# recreate this project
-bun x sv@0.16.1 create --template minimal --types ts --add tailwindcss="plugins:typography" --install bun swensond
-```
+### Languages
 
-## Developing
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)
+![CSharp](https://img.shields.io/badge/C%23-512BD4?logo=csharp&logoColor=white)
+![Java](https://img.shields.io/badge/Java-ED8B00?logo=openjdk&logoColor=white)
+![PHP](https://img.shields.io/badge/PHP-777BB4?logo=php&logoColor=white)
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+### Frontend
 
-```sh
-npm run dev
+![Svelte](https://img.shields.io/badge/Svelte-FF3E00?logo=svelte&logoColor=white)
+![SvelteKit](https://img.shields.io/badge/SvelteKit-000000?logo=svelte&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/Tailwind-06B6D4?logo=tailwindcss&logoColor=white)
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+### Backend
 
-## Building
+![Node.js](https://img.shields.io/badge/Node.js-339933?logo=node.js&logoColor=white)
+![Bun](https://img.shields.io/badge/Bun-000000?logo=bun&logoColor=white)
+![Express](https://img.shields.io/badge/Express-000000?logo=express&logoColor=white)
 
-To create a production version of your app:
+### Cloud & Infrastructure
 
-```sh
-npm run build
-```
+![AWS](https://img.shields.io/badge/AWS-232F3E?logo=amazonaws&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white)
+![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?logo=githubactions&logoColor=white)
 
-You can preview the production build with `npm run preview`.
+### Databases
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+![MongoDB](https://img.shields.io/badge/MongoDB-47A248?logo=mongodb&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=white)
+
+## 📌 Featured Projects
+
+### 🌐 Portfolio
+Personal website showcasing projects, experience, and technical work.
+
+➡️ https://swensond.com
+
+### 🚀 Global Unity Impact
+Building a platform focused on creating meaningful impact through technology.
+
+### ⚙️ Backend Platform Engineering
+Designing scalable APIs, authentication systems, health monitoring, and cloud-native services.
+
+## 📈 GitHub Stats
+
+![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=swensond&layout=compact)
+
+## 🤝 Connect With Me
+
+- 🌐 Portfolio: https://swensond.com
+- 💼 LinkedIn: https://linkedin.com/in/swensond
