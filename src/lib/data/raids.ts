@@ -7,6 +7,10 @@ export interface Raid {
   tradableGold: number;
 }
 
+export function raidFamily(raidId: string): string {
+  return raidId.replace(/-(nm|hm|nmr|stage-\d+)$/, "");
+}
+
 export const raids: Raid[] = [
   {
     id: "belgardin-nm",

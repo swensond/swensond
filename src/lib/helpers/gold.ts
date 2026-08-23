@@ -27,6 +27,27 @@ export function characterWeeklyGold(char: Character): number {
 }
 
 // --------------------
+// SINGLE CHARACTER GOLD SPLIT (TRADEABLE VS TOTAL)
+// --------------------
+
+export function characterGoldBreakdown(
+  char: Character,
+): { tradable: number; total: number } {
+  let tradable = 0;
+  let total = 0;
+
+  for (const raidId of char.assignedRaids) {
+    const raid = raidMap.get(raidId);
+    if (!raid) continue;
+
+    tradable += raid.tradableGold ?? 0;
+    total += raid.rewardGold;
+  }
+
+  return { tradable, total };
+}
+
+// --------------------
 // ROSTER TOTAL GOLD
 // --------------------
 

@@ -147,10 +147,10 @@ function createDefaultPlanner(): Planner {
 
     accessories: [
       { slot: "necklace", label: "Necklace", owned: false, goldCost: 0 },
-      { slot: "earring1", label: "Earring 1/2", owned: false, goldCost: 0 },
-      { slot: "earring2", label: "Earring 2/2", owned: false, goldCost: 0 },
-      { slot: "ring1", label: "Ring 1/2", owned: false, goldCost: 0 },
-      { slot: "ring2", label: "Ring 2/2", owned: false, goldCost: 0 },
+      { slot: "earring1", label: "Earring 1", owned: false, goldCost: 0 },
+      { slot: "earring2", label: "Earring 2", owned: false, goldCost: 0 },
+      { slot: "ring1", label: "Ring 1", owned: false, goldCost: 0 },
+      { slot: "ring2", label: "Ring 2", owned: false, goldCost: 0 },
     ],
 
     weapon: defaultTrack(),

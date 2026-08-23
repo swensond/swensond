@@ -1,7 +1,7 @@
 <script lang="ts">
   import { raidApi, rosterApi } from "$lib/api/planner";
   import { raids } from "$lib/data/raids";
-  import { characterWeeklyGold } from "$lib/helpers/gold";
+  import { characterGoldBreakdown } from "$lib/helpers/gold";
 
   import { planner } from "$lib/stores/planner";
 
@@ -29,6 +29,7 @@
     </div>
   {:else}
     {#each $planner.roster as char (char.id)}
+      {@const gold = characterGoldBreakdown(char)}
       <div class="card">
         <div class="card-header">
           <input
@@ -40,8 +41,14 @@
               })}
           />
 
-          <div class="text-sm tabular-nums">
-            {characterWeeklyGold(char).toLocaleString()} g
+          <div class="flex items-center gap-2" title="Tradable / Total weekly gold">
+            <span class="text-sm tabular-nums la-gold-text">
+              {gold.tradable.toLocaleString()}g
+            </span>
+            <span class="text-xs text-[#6e6a64]">/</span>
+            <span class="text-sm tabular-nums text-[#a29e96]">
+              {gold.total.toLocaleString()}g
+            </span>
           </div>
 
           <button class="btn" onclick={() => openAssign(char.id)}>

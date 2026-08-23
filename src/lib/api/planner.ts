@@ -1,5 +1,5 @@
 import chronomancerData from "$lib/data/chronomancer.json";
-import { raids } from "$lib/data/raids";
+import { raids, raidFamily } from "$lib/data/raids";
 import { createDefaultCharacter, type Character } from "$lib/helpers/character";
 import { calculateMaterialRequirements } from "$lib/helpers/honing";
 import { type AccessorySlot, type armorPieces, type modes, type ArmorSlot, type HoningMode, type KarmaKey, type Planner, planner } from "$lib/stores/planner";
@@ -374,21 +374,61 @@ export const rosterApi = {
     },
 
     toggleAssignedRaid(charId: string, raidId: string) {
-        update((p) => ({
-            ...p,
-            roster: p.roster.map((c: Character) => {
-                if (c.id !== charId) return c;
+        update((p) => {
+            const char = p.roster.find((c: Character) => c.id === charId);
+            if (!char) return p;
 
-                const assigned = c.assignedRaids.includes(raidId);
+            const assigned = char.assignedRaids.includes(raidId);
+            let assignedRaids: string[];
 
-                return {
-                    ...c,
-                    assignedRaids: assigned
-                        ? c.assignedRaids.filter((r) => r !== raidId)
-                        : [...c.assignedRaids, raidId],
+            if (assigned) {
+                assignedRaids = char.assignedRaids.filter((r) => r !== raidId);
+            } else {
+                const family = raidFamily(raidId);
+
+                assignedRaids = [
+                    ...char.assignedRaids.filter(
+                        (r) => raidFamily(r) !== family
+                    ),
+                    raidId,
+                ];
+            }
+
+            const staleCompleted = (p.completedRaids[charId] ?? []).filter(
+                (r) => !assignedRaids.includes(r)
+            );
+
+            let completedRaids = p.completedRaids;
+            let currentGold = p.currentGold;
+
+            if (staleCompleted.length > 0) {
+                completedRaids = {
+                    ...p.completedRaids,
+                    [charId]: (p.completedRaids[charId] ?? []).filter((r) =>
+                        assignedRaids.includes(r)
+                    ),
                 };
-            }),
-        }));
+
+                currentGold = Math.max(
+                    0,
+                    staleCompleted.reduce(
+                        (sum, id) =>
+                            sum -
+                            (raids.find((r) => r.id === id)?.tradableGold ?? 0),
+                        p.currentGold
+                    )
+                );
+            }
+
+            return {
+                ...p,
+                currentGold,
+                completedRaids,
+                roster: p.roster.map((c: Character) =>
+                    c.id === charId ? { ...c, assignedRaids } : c
+                ),
+            };
+        });
     },
 };
 

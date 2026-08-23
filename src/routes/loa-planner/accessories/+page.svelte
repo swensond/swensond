@@ -3,7 +3,8 @@
     import NumberInput from "$lib/components/NumberInput.svelte";
     import { displayAccessoriesCost } from "$lib/derived/planner";
     import { planner } from "$lib/stores/planner";
-    import goldIcon from "$lib/assets/gold.png";
+
+    const rowGrid = "grid grid-cols-[minmax(0,1fr)_80px_180px] gap-3 items-center";
 </script>
 
 <section class="space-y-4">
@@ -12,22 +13,46 @@
             <div class="text-[#a29e96]">No accessories configured.</div>
         </div>
     {:else}
-        {#each $planner.accessories as accessory (accessory.slot)}
-            <div class="card">
-                <div class="card-header justify-between">
-                    <div>
-                        <input
-                            class="font-medium text-[#f2efe9] bg-transparent outline-none w-full"
-                            value={accessory.label}
-                            oninput={(e) =>
-                                plannerApi.updateAccessory(accessory.slot, {
-                                    label: e.currentTarget.value,
-                                })}
-                        />
-                        <div class="text-xs text-[#a29e96] capitalize">{accessory.slot}</div>
-                    </div>
+        <div class="card">
+            <!-- HEADER -->
+            <div class="card-header justify-between">
+                <h2>Accessories</h2>
+                <div class="text-xs text-[#a29e96]">
+                    {$planner.accessories.filter((a) => a.owned).length}
+                    /
+                    {$planner.accessories.length} owned
+                </div>
+            </div>
 
-                    <label class="flex items-center gap-2 cursor-pointer select-none">
+            <!-- COLUMN LABELS -->
+            <div
+                class="{rowGrid} px-4 py-2 text-xs uppercase tracking-widest text-[#a29e96] border-b"
+                style="border-color: var(--la-border); background: rgba(255,255,255,0.03);"
+            >
+                <div>Name</div>
+                <div class="justify-self-center">Owned</div>
+                <div class="text-right">Gold Cost</div>
+            </div>
+
+            <!-- ROWS -->
+            {#each $planner.accessories as accessory (accessory.slot)}
+                <div
+                    class="{rowGrid} px-4 py-2.5 border-b last:border-b-0 transition"
+                    class:opacity-50={accessory.owned}
+                    style="border-color: rgba(255,255,255,0.06);"
+                >
+                    <input
+                        class="name-input !text-sm"
+                        value={accessory.label}
+                        oninput={(e) =>
+                            plannerApi.updateAccessory(accessory.slot, {
+                                label: e.currentTarget.value,
+                            })}
+                    />
+
+                    <label
+                        class="justify-self-center flex items-center cursor-pointer select-none"
+                    >
                         <input
                             type="checkbox"
                             checked={accessory.owned}
@@ -35,35 +60,23 @@
                                 plannerApi.updateAccessory(accessory.slot, {
                                     owned: e.currentTarget.checked,
                                 })}
-                            class="w-4 h-4 rounded "
                         />
-                        <span class="text-sm text-[#a29e96]">Owned</span>
                     </label>
+
+                    <NumberInput
+                        value={accessory.goldCost}
+                        onchange={(v) =>
+                            plannerApi.updateAccessory(accessory.slot, {
+                                goldCost: Math.max(0, v),
+                            })}
+                    />
                 </div>
-
-                <div class="px-4 py-3 bg-[rgba(255,255,255,0.02)]">
-                    <div class="flex items-center gap-2">
-                        <img src={goldIcon} alt="Gold" class="w-5 h-5" />
-                        <div class="text-xs text-[#a29e96]">Gold Cost</div>
-                    </div>
-                    <div class="mt-1">
-                        <NumberInput
-                            value={accessory.goldCost}
-                            onchange={(v) =>
-                                plannerApi.updateAccessory(accessory.slot, {
-                                    goldCost: Math.max(0, v),
-                                })}
-                        />
-                    </div>
-
-
-                </div>
-            </div>
-        {/each}
+            {/each}
+        </div>
     {/if}
 
     <!-- TOTAL -->
-    <div class="mt-4 flex justify-end">
+    <div class="flex justify-end">
         <div class="card px-4 py-3 min-w-55">
             <div class="text-xs text-[#a29e96] mb-1">Total Accessories Cost</div>
             <div class="text-lg font-semibold text-[#f2efe9] tabular-nums">
