@@ -15,7 +15,7 @@
 <section class="space-y-3">
   <div class="flex justify-end">
     <button
-      class="btn btn-primary"
+      class="btn-primary"
       disabled={$planner.roster.length >= 6}
       onclick={() => rosterApi.addCharacter()}
     >
@@ -25,7 +25,7 @@
 
   {#if $planner.roster.length === 0}
     <div class="card p-6 text-center">
-      <div class="text-zinc-500">No characters yet.</div>
+      <div class="text-[#a29e96]">No characters yet.</div>
     </div>
   {:else}
     {#each $planner.roster as char (char.id)}
@@ -56,7 +56,7 @@
           </button>
         </div>
 
-        <div class="grid grid-cols-3 gap-px bg-zinc-100">
+        <div class="grid grid-cols-3 gap-px bg-[#060509]">
           {#each [0, 1, 2] as slot}
             {@const raidId = char.assignedRaids[slot]}
             {@const raid = raidId
@@ -72,7 +72,7 @@
                 />
                 <div>
                   <div class="text-xs font-medium">{raid.name}</div>
-                  <div class="text-xs text-zinc-400">
+                  <div class="text-xs text-[#a29e96]">
                     {raid.rewardGold.toLocaleString()}g
                   </div>
                 </div>
@@ -93,7 +93,7 @@
 
   {#if char}
     <div
-      class="fixed inset-0 bg-black/40 flex items-center justify-center p-4"
+      class="fixed inset-0 bg-black/60 flex items-center justify-center p-4"
       role="button"
       tabindex="0"
       onclick={(e) => e.target === e.currentTarget && closeAssign()}
@@ -108,11 +108,11 @@
     >
       <div class="card w-full max-w-lg">
         <div
-          class="flex items-center justify-between px-4 py-3 bg-zinc-50 border-b border-zinc-100"
+          class="card-header justify-between"
         >
           <div>
             <div class="font-semibold">Assign Raids — {char.name}</div>
-            <div class="text-xs text-zinc-400">
+            <div class="text-xs text-[#a29e96]">
               {char.assignedRaids.length} / 3 slots
             </div>
           </div>
@@ -135,7 +135,7 @@
 
               <div>
                 <div class="text-sm font-medium">{raid.name}</div>
-                <div class="text-xs text-zinc-500">
+                <div class="text-xs text-[#a29e96]">
                   {raid.rewardGold.toLocaleString()}g
                 </div>
               </div>

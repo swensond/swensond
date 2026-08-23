@@ -112,17 +112,17 @@
 </script>
 
 <div class="space-y-6">
-  <h1 class="text-4xl font-bold text-zinc-900">Lost Ark Planner</h1>
+  <h1 class="la-heading text-4xl font-bold la-gold-text">Lost Ark Planner</h1>
   <!-- TOP -->
   <div class="grid lg:grid-cols-3 gap-4">
     <!-- GOLD -->
     <div class="card p-5">
       <div class="flex justify-between items-center mb-4">
         <div>
-          <h2 class="text-sm font-semibold text-zinc-500 uppercase">
+          <h2 class="text-sm font-semibold text-[#a29e96] uppercase">
             Gold Management
           </h2>
-          <p class="text-xs text-zinc-400 mt-1">Current available gold</p>
+          <p class="text-xs text-[#a29e96] mt-1">Current available gold</p>
         </div>
 
         <div class="text-3xl font-bold">
@@ -160,7 +160,7 @@
 
     <!-- RELEASE -->
     <div class="card p-5">
-      <h2 class="text-sm font-semibold text-zinc-500 uppercase">
+      <h2 class="text-sm font-semibold text-[#a29e96] uppercase">
         Release Target
       </h2>
 
@@ -174,7 +174,7 @@
 
     <!-- PRESETS -->
     <div class="card p-5">
-      <h2 class="text-sm font-semibold text-zinc-500 uppercase">Presets</h2>
+      <h2 class="text-sm font-semibold text-[#a29e96] uppercase">Presets</h2>
 
       <button
         class="btn-secondary w-full mt-4"
@@ -225,7 +225,7 @@
     </div>
   </div>
 
-  <nav bind:this={contentEl} class="border-b border-zinc-200 flex gap-1">
+  <nav bind:this={contentEl} class="border-b flex gap-1" style="border-color: rgba(255,255,255,0.12);">
     {#each tabs as tab}
       {@const path = page.url.pathname.replace(/\/$/, "")}
       {@const active = path === tab.href}

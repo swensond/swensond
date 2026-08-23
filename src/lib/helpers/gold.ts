@@ -1,9 +1,5 @@
-import type { Character } from "$lib/stores/planner";
+import type { Character } from "$lib/helpers/character";
 import { raids } from "$lib/data/raids";
-
-export function formatGold(amount: number) {
-  return new Intl.NumberFormat("en-US",).format(amount);
-}
 
 // --------------------
 // BUILD RAID LOOKUP MAP (ONCE)

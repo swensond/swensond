@@ -12,21 +12,21 @@
             {@const target = $planner.karma[track.key].targetLevel}
 
             <div
-                class="bg-white border border-zinc-100 rounded-xl overflow-hidden"
+                class="card"
             >
                 <!-- HEADER -->
-                <div class="px-4 py-3 flex items-center justify-between">
-                    <div class="font-medium text-zinc-900">
+                <div class="card-header justify-between">
+                    <div class="font-medium text-[#f2efe9]">
                         {track.label}
                     </div>
                 </div>
 
                 <!-- CONTROLS -->
-                <div class="px-4 py-3 bg-zinc-50 border-t border-zinc-100">
+                <div class="px-4 py-3 bg-[rgba(255,255,255,0.02)] border-t border-[rgba(255,255,255,0.12)]">
                     <div class="grid grid-cols-3 gap-4 items-stretch">
                         <!-- CURRENT -->
                         <div class="flex flex-col justify-between h-16">
-                            <div class="text-xs text-zinc-500">Current</div>
+                            <div class="text-xs text-[#a29e96]">Current</div>
                             <div class="flex items-center h-9">
                                 <input
                                     class="input-compact w-full"
@@ -43,7 +43,7 @@
 
                         <!-- TARGET -->
                         <div class="flex flex-col justify-between h-16">
-                            <div class="text-xs text-zinc-500">Target</div>
+                            <div class="text-xs text-[#a29e96]">Target</div>
                             <div class="flex items-center h-9">
                                 <input
                                     class="input-compact w-full"
@@ -62,10 +62,10 @@
                         <div
                             class="flex flex-col justify-between h-16 text-right"
                         >
-                            <div class="text-xs text-zinc-500">Cost</div>
+                            <div class="text-xs text-[#a29e96]">Cost</div>
 
                             <div
-                                class="flex items-center justify-end h-9 font-medium tabular-nums text-zinc-900"
+                                class="flex items-center justify-end h-9 font-medium tabular-nums text-[#f2efe9]"
                             >
                                 {getTrackTotal(
                                     current,
@@ -81,13 +81,13 @@
         <!-- TOTAL -->
         <div class="mt-4 flex justify-end">
             <div
-                class="bg-white border border-zinc-200 rounded-xl px-4 py-3 min-w-55"
+                class="card px-4 py-3 min-w-55"
             >
-                <div class="text-xs text-zinc-500 mb-1">
+                <div class="text-xs text-[#a29e96] mb-1">
                     Total Ark Passive Cost
                 </div>
 
-                <div class="text-lg font-semibold text-zinc-900 tabular-nums">
+                <div class="text-lg font-semibold text-[#f2efe9] tabular-nums">
                     {$displayKarmaCost.toLocaleString()}g
                 </div>
             </div>

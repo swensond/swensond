@@ -24,19 +24,19 @@
 
     {#if $planner.engravings.length === 0}
         <div class="card p-6 text-center">
-            <div class="text-zinc-500">No engravings yet.</div>
+            <div class="text-[#a29e96]">No engravings yet.</div>
         </div>
     {:else}
         {#each $planner.engravings as engraving (engraving.id)}
             <div
-                class="bg-white border border-zinc-100 rounded-xl overflow-hidden"
+                class="card"
             >
                 <!-- HEADER -->
                 <div
-                    class="px-4 py-3 flex items-center justify-between bg-zinc-50 border-b border-zinc-100"
+                    class="card-header justify-between"
                 >
                     <input
-                        class="font-medium text-zinc-900 bg-transparent outline-none w-full"
+                        class="font-medium text-[#f2efe9] bg-transparent outline-none w-full"
                         value={engraving.name}
                         oninput={(e) =>
                             plannerApi.updateEngraving(engraving.id, {
@@ -53,11 +53,11 @@
                 </div>
 
                 <!-- BODY -->
-                <div class="px-4 py-3 bg-zinc-50">
+                <div class="px-4 py-3 bg-[rgba(255,255,255,0.02)]">
                     <div class="grid grid-cols-4 gap-4 items-stretch">
                         <!-- OWNED -->
                         <div class="flex flex-col justify-between h-16">
-                            <div class="text-xs text-zinc-500">Owned</div>
+                            <div class="text-xs text-[#a29e96]">Owned</div>
                             <NumberInput
                                 value={engraving.booksOwned}
                                 onchange={(v) =>
@@ -72,7 +72,7 @@
 
                         <!-- REQUIRED -->
                         <div class="flex flex-col justify-between h-16">
-                            <div class="text-xs text-zinc-500">Required</div>
+                            <div class="text-xs text-[#a29e96]">Required</div>
                             <NumberInput
                                 value={engraving.booksRequired}
                                 onchange={(v) =>
@@ -87,7 +87,7 @@
 
                         <!-- MISSING -->
                         <div class="flex flex-col justify-between h-16">
-                            <div class="text-xs text-zinc-500">Missing</div>
+                            <div class="text-xs text-[#a29e96]">Missing</div>
                             <div
                                 class="flex items-center justify-end h-9 font-medium tabular-nums"
                             >
@@ -101,7 +101,7 @@
 
                         <!-- PRICE -->
                         <div class="flex flex-col justify-between h-16">
-                            <div class="text-xs text-zinc-500">Price</div>
+                            <div class="text-xs text-[#a29e96]">Price</div>
                             <div class="flex items-center h-9">
                                 <input
                                     class="input-compact w-full"
@@ -125,7 +125,7 @@
                     <!-- COST -->
                     <div class="mt-3 flex justify-end">
                         <div
-                            class="text-sm font-semibold tabular-nums text-zinc-900"
+                            class="text-sm font-semibold tabular-nums text-[#f2efe9]"
                         >
                             {(
                                 Math.max(
@@ -144,11 +144,11 @@
     <!-- TOTAL -->
     <div class="mt-4 flex justify-end">
         <div
-            class="bg-white border border-zinc-200 rounded-xl px-4 py-3 min-w-55"
+            class="card px-4 py-3 min-w-55"
         >
-            <div class="text-xs text-zinc-500 mb-1">Total Engraving Cost</div>
+            <div class="text-xs text-[#a29e96] mb-1">Total Engraving Cost</div>
 
-            <div class="text-lg font-semibold text-zinc-900 tabular-nums">
+            <div class="text-lg font-semibold text-[#f2efe9] tabular-nums">
                 {$displayEngravingCost.toLocaleString()}g
             </div>
         </div>

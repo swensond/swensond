@@ -8,61 +8,56 @@
     import { page } from "$app/stores";
 </script>
 
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <!-- Header -->
+<div class="min-h-screen flex flex-col">
+    <!-- Header — full width, compact integrated bar -->
     <header
-        class="bg-white border border-zinc-200 rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.06)] p-8 pb-0 mb-6 overflow-hidden"
+        class="sticky top-0 z-40 w-full border-b overflow-hidden"
+        style="background: rgba(14, 12, 18, 0.9); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-color: rgba(255,255,255,0.12);"
     >
-        <div class="flex flex-col md:flex-row items-center gap-8">
-            <div class="shrink-0 relative">
-                <div
-                    class="absolute inset-0 rounded-full bg-white/10 blur-xl scale-110"
-                ></div>
-                <div
-                    class="relative rounded-full p-0.5 bg-linear-to-br from-zinc-200 via-zinc-100 to-zinc-300"
-                >
-                    <div
-                        class="w-48 h-48 rounded-full overflow-hidden flex items-center justify-center"
-                    >
-                        <img
-                            class="h-full w-auto object-contain scale-110 translate-y-[20%]"
-                            src="/avatar.png"
-                            alt="nexhunter"
-                        />
-                    </div>
-                </div>
-            </div>
-            <div class="flex-1 text-center md:text-left">
-                <h1 class="text-4xl font-bold mb-2">
-                    Nex<span class="text-slate-500">hunter</span>
-                </h1>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center gap-3 h-14">
+                <!-- Logo -->
+                <a href="/" class="shrink-0 flex items-center gap-3 group">
+                    <img
+                        class="h-24 w-auto object-contain object-top -mt-3 -mb-14 transition group-hover:brightness-110"
+                        src="/avatar.png"
+                        alt="nexhunter"
+                    />
+                    <h1 class="la-heading text-lg font-bold leading-none">
+                        Nexhunter
+                    </h1>
+                </a>
+
+                <!-- Nav -->
+                <nav class="ml-auto self-stretch">
+                    <ul class="flex h-full gap-1">
+                        {#each navLinks as link}
+                            <li class="h-full flex">
+                                <a
+                                    href={link.href}
+                                    class="h-full flex items-center px-4 text-sm font-medium transition aria-[current=page]:text-[#e8c987] aria-[current=page]:bg-[rgba(208,167,90,0.07)] hover:text-[#e8c987] hover:bg-[rgba(255,255,255,0.04)] border-x border-transparent hover:border-[rgba(255,255,255,0.12)] aria-[current=page]:border-[rgba(208,167,90,0.5)]"
+                                    style="color: #a29e96;"
+                                    aria-current={$page.url.pathname === link.href
+                                        ? "page"
+                                        : undefined}
+                                >
+                                    {link.label}
+                                </a>
+                            </li>
+                        {/each}
+                    </ul>
+                </nav>
             </div>
         </div>
-
-        <!-- Nav -->
-        <nav class="mt-6 -mx-8 border-t border-zinc-100">
-            <ul class="flex h-12 gap-1 px-8 -mx-8">
-                {#each navLinks as link}
-                    <li class="h-full flex">
-                        <a
-                            href={link.href}
-                            class="h-full flex items-center px-4 text-sm font-medium text-zinc-500 hover:text-zinc-900 hover:bg-zinc-100 transition border-x border-transparent hover:border-zinc-200 aria-[current=page]:bg-zinc-100 aria-[current=page]:border-zinc-200 aria-[current=page]:text-zinc-900"
-                            aria-current={$page.url.pathname === link.href
-                                ? "page"
-                                : undefined}
-                        >
-                            {link.label}
-                        </a>
-                    </li>
-                {/each}
-            </ul>
-        </nav>
     </header>
 
-    <!-- Content -->
-    <main
-        class="bg-white border border-zinc-200 rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.06)] p-8"
-    >
-        {@render children()}
+    <!-- Content — centered, max width limited -->
+    <main class="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div
+            class="rounded-sm border p-8"
+            style="background: rgba(14, 12, 18, 0.82); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-color: rgba(255,255,255,0.12);"
+        >
+            {@render children()}
+        </div>
     </main>
 </div>

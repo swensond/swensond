@@ -19,10 +19,10 @@
                     : Math.min(100, (totalOwned / material.required) * 100)}
 
             <div
-                class="bg-white border border-zinc-100 rounded-xl overflow-hidden"
+                class="card"
             >
                 <!-- HEADER -->
-                <div class="px-4 py-3 flex items-center gap-3">
+                <div class="card-header">
                     <img
                         src={material.icon}
                         class="w-5 h-5 shrink-0"
@@ -30,26 +30,26 @@
                     />
 
                     <div class="flex-1 min-w-0">
-                        <div class="font-medium text-zinc-900 truncate">
+                        <div class="font-medium text-[#f2efe9] truncate">
                             {material.name}
                         </div>
 
                         <div
-                            class="mt-1 h-1.5 w-full bg-zinc-200 rounded-full overflow-hidden"
+                            class="mt-1 h-1.5 w-full bg-[#08070b] rounded-none overflow-hidden"
                         >
                             <div
-                                class="h-full bg-emerald-500"
+                                class="h-full bg-[#d0a75a]"
                                 style={`width: ${progress}%`}></div>
                         </div>
                     </div>
                 </div>
 
                 <!-- CONTROLS -->
-                <div class="px-4 py-3 bg-zinc-50 border-t border-zinc-100">
+                <div class="px-4 py-3 bg-[rgba(255,255,255,0.02)] border-t border-[rgba(255,255,255,0.12)]">
                     <div class="grid grid-cols-4 gap-4 items-stretch">
                         <!-- REQUIRED -->
                         <div class="flex flex-col justify-between h-16">
-                            <div class="text-xs text-zinc-500">Required</div>
+                            <div class="text-xs text-[#a29e96]">Required</div>
                             <NumberInput
                                 value={material.required}
                                 onchange={(v) =>
@@ -61,7 +61,7 @@
 
                         <!-- OWNED -->
                         <div class="flex flex-col justify-between h-16">
-                            <div class="text-xs text-zinc-500">Owned</div>
+                            <div class="text-xs text-[#a29e96]">Owned</div>
                             <div class="flex items-center justify-end h-9 font-medium tabular-nums">
                                 {calculateTotalAvailable(material).toLocaleString()}
                             </div>
@@ -69,7 +69,7 @@
 
                         <!-- MISSING -->
                         <div class="flex flex-col justify-between h-16">
-                            <div class="text-xs text-zinc-500">Missing</div>
+                            <div class="text-xs text-[#a29e96]">Missing</div>
                             <div
                                 class="flex items-center justify-end h-9 font-medium tabular-nums"
                             >
@@ -79,7 +79,7 @@
 
                         <!-- MARKET -->
                         <div class="flex flex-col justify-between h-16">
-                            <div class="text-xs text-zinc-500">Market</div>
+                            <div class="text-xs text-[#a29e96]">Market</div>
 
                             <div class="flex flex-col gap-2">
                                 <!-- SELECT OPTION -->
@@ -155,8 +155,8 @@
 
                 <!-- BREAKDOWN -->
                 {#if material.pricingOptions?.length && material.breakdown?.length}
-                    <div class="px-4 pb-3 bg-white border-t border-zinc-100">
-                        <div class="text-xs text-zinc-500 mb-2">
+                    <div class="px-4 pb-3 bg-[rgba(255,255,255,0.02)] border-t border-[rgba(255,255,255,0.12)]">
+                        <div class="text-xs text-[#a29e96] mb-2">
                             Optimal Purchase Plan
                         </div>
 
@@ -183,11 +183,11 @@
     <!-- TOTAL -->
     <div class="mt-4 flex justify-end">
         <div
-            class="bg-white border border-zinc-200 rounded-xl px-4 py-3 min-w-55"
+            class="card px-4 py-3 min-w-55"
         >
-            <div class="text-xs text-zinc-500 mb-1">Total Material Cost</div>
+            <div class="text-xs text-[#a29e96] mb-1">Total Material Cost</div>
 
-            <div class="text-lg font-semibold text-zinc-900 tabular-nums">
+            <div class="text-lg font-semibold text-[#f2efe9] tabular-nums">
                 {$displayMaterialCost.toLocaleString()}g
             </div>
         </div>

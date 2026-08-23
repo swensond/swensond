@@ -3,8 +3,15 @@
 html {
   overflow-y: scroll;
 }
+
+/* =========================================================
+   LOST ARK IN-GAME UI THEME — FLAT COMPONENT CLASSES
+   Sharp corners, translucent near-black panels,
+   gold selection, green completion.
+   ========================================================= */
+
 /* =========================
-   BUTTONS
+   BUTTONS — flat dark like in-game
 ========================= */
 
 button {
@@ -13,34 +20,85 @@ button {
 
 button:disabled {
   cursor: not-allowed;
+  opacity: 0.4;
 }
 
 .btn {
-  @apply text-xs px-2.5 py-1 rounded-md border border-zinc-200 bg-white text-zinc-600 hover:bg-zinc-100 transition;
+  @apply text-xs px-2.5 py-1 rounded-sm border transition;
+  color: var(--la-text);
+  border-color: var(--la-border);
+  background: rgba(38, 36, 44, 0.75);
+}
+
+.btn:hover:not(:disabled) {
+  border-color: var(--la-accent);
+  color: var(--la-accent-bright);
+  background: rgba(52, 48, 56, 0.85);
 }
 
 .btn-danger {
-  @apply text-xs text-red-400 hover:text-red-600 transition;
+  @apply text-xs transition rounded-sm;
+  color: var(--la-red);
+}
+
+.btn-danger:hover {
+  color: var(--la-red-bright);
 }
 
 .btn-primary {
-  @apply px-4 py-2 rounded-xl bg-zinc-900 text-white hover:bg-zinc-800 transition;
+  @apply px-4 py-2 rounded-sm font-semibold transition;
+  color: #1c1508;
+  background-color: var(--la-accent);
+  border: 1px solid transparent;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: var(--la-accent-bright);
 }
 
 .btn-secondary {
-  @apply px-4 py-2 rounded-xl bg-zinc-100 text-zinc-700 hover:bg-zinc-200 transition;
+  @apply px-4 py-2 rounded-sm transition;
+  color: var(--la-text-muted);
+  border: 1px solid var(--la-border);
+  background: rgba(38, 36, 44, 0.75);
+}
+
+.btn-secondary:hover {
+  color: var(--la-text);
+  border-color: var(--la-border-strong);
+  background: rgba(52, 48, 56, 0.85);
 }
 
 /* =========================
-   CARDS / PANELS
+   CARDS / PANELS — flat translucent, sharp corners
 ========================= */
 
 .card {
-  @apply rounded-xl border border-zinc-200 bg-white shadow-sm overflow-hidden;
+  @apply rounded-sm overflow-hidden;
+  background: var(--la-panel);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--la-border);
 }
 
 .card-header {
-  @apply flex items-center gap-3 px-4 py-3 bg-zinc-50 border-b border-zinc-100;
+  @apply flex items-center gap-3 px-4 py-3;
+  background: rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid var(--la-border);
+}
+
+/* In-game serif section titles */
+.card-header h2,
+.card-header h3 {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  font-size: 1.05rem;
+}
+
+/* Gold checkboxes like in-game checkmarks */
+input[type='checkbox'] {
+  accent-color: var(--la-accent);
 }
 
 /* =========================
@@ -48,25 +106,39 @@ button:disabled {
 ========================= */
 
 .input {
-  @apply cursor-text flex-1 px-3 py-2 rounded-xl bg-zinc-50 text-zinc-900 outline-none;
+  @apply cursor-text flex-1 px-3 py-2 outline-none rounded-sm;
+  background: rgba(0, 0, 0, 0.35);
+  color: var(--la-text);
+  border: 1px solid var(--la-border);
+}
+
+.input:focus {
+  border-color: var(--la-accent);
+  box-shadow: 0 0 0 1px var(--la-accent);
 }
 
 .input-compact {
-  @apply w-full h-9 px-2 rounded-md border border-zinc-200 bg-white text-zinc-900;
-  @apply text-sm tabular-nums;
-  @apply transition;
+  @apply w-full h-9 px-2 rounded-sm text-sm tabular-nums transition;
+  background: rgba(0, 0, 0, 0.35);
+  color: var(--la-text);
+  border: 1px solid var(--la-border);
 }
 
 .input-compact:hover {
-  @apply border-zinc-300 bg-zinc-50;
+  border-color: rgba(255, 255, 255, 0.25);
+  background: rgba(0, 0, 0, 0.45);
 }
 
 .input-compact:focus {
-  @apply outline-none border-zinc-400 ring-2 ring-zinc-200 bg-white;
+  @apply outline-none;
+  border-color: var(--la-accent);
+  background: rgba(0, 0, 0, 0.45);
+  box-shadow: 0 0 0 1px var(--la-accent);
 }
 
 .name-input {
-  @apply cursor-text flex-1 bg-transparent outline-none text-zinc-900 font-semibold text-sm;
+  @apply cursor-text flex-1 bg-transparent outline-none font-semibold text-sm;
+  color: var(--la-text);
 }
 
 /* =========================
@@ -74,31 +146,46 @@ button:disabled {
 ========================= */
 
 .table {
-  @apply w-full border border-zinc-200 bg-white font-mono;
+  @apply w-full font-mono rounded-sm;
+  border: 1px solid var(--la-border);
+  background: var(--la-panel);
 }
 
 .table thead tr {
-  @apply bg-zinc-50 text-zinc-600 text-sm;
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--la-text-muted);
+  @apply text-sm;
 }
 
 .table th {
-  @apply py-3 px-4 font-medium text-left;
+  @apply py-3 px-4 font-medium text-left uppercase tracking-wide text-xs;
 }
 
 .table td {
-  @apply py-3 px-4 text-zinc-800;
+  @apply py-3 px-4;
+  color: var(--la-text);
 }
 
 /* =========================
-   TABS
+   TABS — gold underline for active, like in-game selection
 ========================= */
 
 .tab {
-  @apply cursor-pointer px-5 py-2.5 text-sm font-medium border-b-2 border-transparent text-zinc-500 hover:text-zinc-700 transition;
+  @apply cursor-pointer px-5 py-2.5 text-sm font-medium transition;
+  color: var(--la-text-muted);
+  border-bottom: 2px solid transparent;
 }
 
-.tab.active {
-  @apply border-zinc-900 text-zinc-900;
+.tab:hover {
+  color: var(--la-text);
+  background: var(--la-hover);
+}
+
+.tab.active,
+.tab-active {
+  color: var(--la-accent-bright);
+  border-bottom-color: var(--la-accent);
+  background: rgba(208, 167, 90, 0.07);
 }
 
 /* =========================
@@ -106,35 +193,50 @@ button:disabled {
 ========================= */
 
 .raid-slot {
-  @apply flex items-center gap-2 px-3 py-3 bg-white cursor-pointer select-none hover:bg-zinc-50 transition;
+  @apply flex items-center gap-2 px-3 py-3 cursor-pointer select-none transition;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.raid-slot:hover {
+  background: var(--la-hover);
+  box-shadow: inset 0 0 0 1px var(--la-border);
 }
 
 .empty-slot {
-  @apply flex items-center gap-2 px-3 py-3 bg-white text-xs text-zinc-300 italic;
+  @apply flex items-center gap-2 px-3 py-3 italic;
+  background: rgba(0, 0, 0, 0.25);
+  color: var(--la-text-faint);
+  @apply text-xs;
 }
 
 /* =========================
-   STAT CARDS
+   STAT CARDS — flat translucent
 ========================= */
 
 .stat-card {
-  @apply rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm;
+  @apply rounded-sm p-5;
+  background: var(--la-panel-alt);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--la-border);
 }
 
 .stat-label {
-  @apply text-xs text-zinc-500 mb-1 uppercase tracking-wide;
+  @apply text-xs mb-1 uppercase tracking-widest;
+  color: var(--la-text-muted);
 }
 
 .stat-value {
-  @apply text-2xl font-bold text-zinc-900 tabular-nums;
+  @apply text-2xl font-bold tabular-nums;
+  color: var(--la-text);
 }
 
 .stat-value-red {
-  @apply text-red-600;
+  color: var(--la-red);
 }
 
 .stat-value-green {
-  @apply text-green-600;
+  color: var(--la-green);
 }
 
 /* =========================

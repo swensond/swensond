@@ -12,11 +12,11 @@
     <!-- ===================== -->
     <div class="card">
         <div class="card-header">
-            <h2 class="text-sm font-semibold text-zinc-700">Weapon</h2>
+            <h2 class="text-sm font-semibold text-[#a29e96]">Weapon</h2>
         </div>
 
         <!-- HEADER -->
-        <div class="grid grid-cols-4 px-4 py-2 text-xs text-zinc-500">
+        <div class="grid grid-cols-4 px-4 py-2 text-xs text-[#a29e96]">
             <div>Mode</div>
             <div>Current</div>
             <div>Target</div>
@@ -27,9 +27,9 @@
         <div class="px-2 pb-2 space-y-1">
             {#each modes as mode}
                 <div
-                    class="grid grid-cols-4 px-3 py-3 items-center gap-3 rounded-lg hover:bg-zinc-50 transition"
+                    class="grid grid-cols-4 px-3 py-3 items-center gap-3 rounded-sm hover:bg-[rgba(255,255,255,0.05)] transition"
                 >
-                    <div class="capitalize text-sm text-zinc-800">
+                    <div class="capitalize text-sm text-[#f2efe9]">
                         {mode}
                     </div>
 
@@ -68,18 +68,18 @@
     <!-- ARMOR -->
     <!-- ===================== -->
     <div>
-        <h2 class="text-lg font-semibold mb-3 text-zinc-900">Armor</h2>
+        <h2 class="la-heading text-lg font-semibold mb-3 text-[#f2efe9]">Armor</h2>
 
         {#each armorPieces as piece}
             <div class="card mb-4">
                 <div class="card-header">
-                    <h3 class="text-sm font-semibold capitalize text-zinc-700">
+                    <h3 class="text-sm font-semibold capitalize text-[#a29e96]">
                         {piece}
                     </h3>
                 </div>
 
                 <!-- HEADER -->
-                <div class="grid grid-cols-4 px-4 py-2 text-xs text-zinc-500">
+                <div class="grid grid-cols-4 px-4 py-2 text-xs text-[#a29e96]">
                     <div>Mode</div>
                     <div>Current</div>
                     <div>Target</div>
@@ -90,9 +90,9 @@
                 <div class="px-2 pb-2 space-y-1">
                     {#each modes as mode}
                         <div
-                            class="grid grid-cols-4 px-3 py-3 items-center gap-3 rounded-lg hover:bg-zinc-50 transition"
+                            class="grid grid-cols-4 px-3 py-3 items-center gap-3 rounded-sm hover:bg-[rgba(255,255,255,0.05)] transition"
                         >
-                            <div class="capitalize text-sm text-zinc-800">
+                            <div class="capitalize text-sm text-[#f2efe9]">
                                 {mode}
                             </div>
 
@@ -136,11 +136,11 @@
     <!-- TOTAL -->
     <div class="mt-4 flex justify-end">
         <div
-            class="bg-white border border-zinc-200 rounded-xl px-4 py-3 min-w-55"
+            class="card px-4 py-3 min-w-55"
         >
-            <div class="text-xs text-zinc-500 mb-1">Total Honing Cost</div>
+            <div class="text-xs text-[#a29e96] mb-1">Total Honing Cost</div>
 
-            <div class="text-lg font-semibold text-zinc-900 tabular-nums">
+            <div class="text-lg font-semibold text-[#f2efe9] tabular-nums">
                 {$displayHoningCost.toLocaleString()}g
             </div>
         </div>
