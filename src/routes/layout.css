@@ -60,19 +60,6 @@ html {
     outline-offset: 2px;
 }
 
-/* Link styling - professional */
-a {
-    color: #1d4ed8;
-    text-decoration: none;
-    transition: color 0.2s ease;
-}
-
-a:hover {
-    color: #1e40af;
-    text-decoration: underline;
-    text-underline-offset: 2px;
-}
-
 /* Utility classes */
 .text-blue-accent {
     color: #1d4ed8;
