@@ -127,13 +127,13 @@
 </script>
 
 <div class="space-y-6">
-  <h1 class="la-heading text-4xl font-bold la-gold-text">Lost Ark Planner</h1>
+  <h1 class="text-4xl font-bold text-accent">Lost Ark Planner</h1>
 
   <!-- CONTROL BAR -->
   <div class="card px-4 py-3 flex flex-wrap items-center gap-x-5 gap-y-2">
     <div class="flex items-center gap-2">
       <span
-        class="text-lg font-bold tabular-nums la-gold-text"
+        class="text-lg font-bold tabular-nums text-accent"
         title="Tradable gold balance"
       >
         {$planner.currentGold.toLocaleString()}g
@@ -144,11 +144,8 @@
       <button class="btn" onclick={() => openGoldModal("set")}>= Set</button>
     </div>
 
-    <div
-      class="flex items-center gap-2 sm:border-l sm:pl-5"
-      style="border-color: var(--la-border);"
-    >
-      <label class="text-xs text-[#a29e96]" for="release-date">Release</label>
+    <div class="flex items-center gap-2 sm:border-l sm:pl-5 border-l border-border">
+      <label class="text-xs text-muted" for="release-date">Release</label>
 
       <input
         id="release-date"
@@ -160,7 +157,7 @@
       />
     </div>
 
-    <div class="ml-auto sm:border-l sm:pl-5" style="border-color: var(--la-border);">
+    <div class="ml-auto sm:border-l sm:pl-5 border-l border-border">
       <button class="btn-secondary" onclick={() => (plansOpen = true)}>
         Plans
       </button>
@@ -182,8 +179,7 @@
     >
       {#if $displayMarketShortfall > 0}
         <div
-          class="text-xs mt-1"
-          style="color: var(--la-red);"
+          class="text-xs mt-1 text-red"
           title="Market purchases (materials, engravings, accessories) can only use tradable gold - bound gold cannot cover them"
         >
           {$displayMarketShortfall.toLocaleString()}g market cost not covered by tradable gold
@@ -192,7 +188,7 @@
     </StatCard>
   </div>
 
-  <nav bind:this={contentEl} class="border-b flex gap-1" style="border-color: rgba(255,255,255,0.12);">
+  <nav bind:this={contentEl} class="border-b flex gap-1" style="border-color: var(--border);">
     {#each tabs as tab}
       {@const path = page.url.pathname.replace(/\/$/, "")}
       {@const active = path === tab.href}
@@ -225,7 +221,7 @@
   <div use:portal>
     <div
       class="fixed inset-0 z-[9999] flex items-center justify-center p-4"
-      style="background: rgba(0,0,0,0.6);"
+      style="background: rgba(15, 23, 42, 0.5);"
       role="presentation"
       onclick={(e) => {
         if (e.target === e.currentTarget) goldModal = null;
@@ -239,7 +235,7 @@
             ? "Spend Gold"
             : "Set Balance"}
       </h3>
-      <p class="text-xs text-[#a29e96] mb-4">
+      <p class="text-xs text-muted mb-4">
         {goldModal === "add"
           ? "Where did this gold come from?"
           : goldModal === "spend"
@@ -247,7 +243,7 @@
             : "Enter your exact current tradable balance."}
       </p>
 
-      <label class="block text-xs font-medium text-[#a29e96] mb-1" for="gold-modal-amount">
+      <label class="block text-xs font-medium text-muted mb-1" for="gold-modal-amount">
         Amount
       </label>
       <div class="mb-3">
@@ -262,7 +258,7 @@
       </div>
 
       {#if goldModal !== "set"}
-        <label class="block text-xs font-medium text-[#a29e96] mb-1" for="gold-modal-note">
+        <label class="block text-xs font-medium text-muted mb-1" for="gold-modal-note">
           {goldModal === "add" ? "Source" : "Purpose"}
         </label>
         <input
@@ -297,7 +293,7 @@
   <div use:portal>
     <div
       class="fixed inset-0 z-[9999] flex items-center justify-center p-4"
-      style="background: rgba(0,0,0,0.6);"
+      style="background: rgba(15, 23, 42, 0.5);"
       role="presentation"
       onclick={(e) => {
         if (e.target === e.currentTarget) plansOpen = false;

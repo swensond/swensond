@@ -253,11 +253,11 @@
 
         <div class="flex items-center gap-2 ml-auto">
           <label class="flex flex-col gap-1">
-            <span class="text-[10px] uppercase tracking-widest" style="color: var(--la-text-muted);">Name</span>
+            <span class="text-[10px] uppercase tracking-widest" style="color: var(--text-muted);">Name</span>
             <input
               id="infographic-name"
               class="rounded-sm border px-2 py-1 text-sm outline-none w-36"
-              style="color: var(--la-text); border-color: var(--la-border); background: rgba(38,36,44,0.75);"
+              style="color: var(--text); border-color: var(--border); background: var(--bg);"
               placeholder="e.g. David"
               bind:value={name}
               maxlength="24"
@@ -265,10 +265,10 @@
           </label>
 
           <label class="flex flex-col gap-1.5">
-            <span class="text-[10px] uppercase tracking-widest" style="color: var(--la-text-muted);">Theme</span>
+            <span class="text-[10px] uppercase tracking-widest" style="color: var(--text-muted);">Theme</span>
             <select
               class="rounded-sm border px-2 py-1 text-sm outline-none w-28"
-              style="color: var(--la-text); border-color: var(--la-border); background: rgba(38,36,44,0.75);"
+              style="color: var(--text); border-color: var(--border); background: var(--bg);"
               bind:value={theme}
             >
               {#each Object.entries(THEMES) as [key, t] (key)}

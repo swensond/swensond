@@ -10,9 +10,9 @@
   } = $props();
 </script>
 
-<div class="rounded-full overflow-hidden" style="height: {height}; background: rgba(255,255,255,0.08);">
+<div class="rounded-full overflow-hidden" style="height: {height}; background: var(--bg-tertiary);">
   <div
     class="h-full rounded-full transition-all"
-    style="width: {Math.min(100, Math.max(0, percent))}%; background: var(--la-accent);"
+    style="width: {Math.min(100, Math.max(0, percent))}%; background: var(--accent);"
   ></div>
 </div>

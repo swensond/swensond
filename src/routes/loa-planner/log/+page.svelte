@@ -21,7 +21,7 @@
 <section class="space-y-4">
     {#if !$planner.tapLog?.length}
         <div class="card p-6 text-center">
-            <div class="text-[#a29e96]">
+            <div class="text-muted">
                 No successes logged yet. Use the +1 buttons on the Honing and
                 Karma pages.
             </div>
@@ -35,8 +35,8 @@
             </div>
 
             <div
-                class="grid grid-cols-[60px_minmax(0,1fr)_70px_90px_80px] gap-3 px-4 py-2 text-xs uppercase tracking-widest text-[#a29e96] border-b"
-                style="border-color: var(--la-border); background: rgba(255,255,255,0.03);"
+                class="grid grid-cols-[60px_minmax(0,1fr)_70px_90px_80px] gap-3 px-4 py-2 text-xs uppercase tracking-widest text-muted border-b bg-bg-secondary"
+                style="border-color: var(--border);"
             >
                 <div>Time</div>
                 <div>Track</div>
@@ -48,9 +48,9 @@
             {#each recent as entry (entry.id)}
                 <div
                     class="grid grid-cols-[60px_minmax(0,1fr)_70px_90px_80px] gap-3 items-center px-4 py-2 border-b last:border-b-0"
-                    style="border-color: rgba(255,255,255,0.06);"
+                    style="border-color: var(--border);"
                 >
-                    <div class="text-xs text-[#6e6a64] tabular-nums">
+                    <div class="text-xs text-faint tabular-nums">
                         {formatTime(entry.timestamp)}
                     </div>
 

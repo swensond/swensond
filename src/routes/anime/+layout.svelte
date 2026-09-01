@@ -500,9 +500,8 @@
 <svelte:window onkeydown={(e) => { if (e.key === 'Escape') selected = null; }} />
 
 <div class="anime-app min-h-screen flex flex-col">
-    <main class="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div class="rounded-sm border p-8" style="background: rgba(14, 12, 18, 0.82); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-color: rgba(255,255,255,0.12);">
-            <section class="space-y-4">
+    <main class="flex-1">
+        <section class="space-y-4">
   <!-- NAV TABS -->
   <nav bind:this={navRef} class="sticky top-0 z-30 border-b flex gap-1 flex-wrap items-center -mt-8 -mx-8 px-8"
     style="border-color: rgba(255,255,255,0.12);">
@@ -591,8 +590,7 @@
     {/if}
     {@render children()}
   {/if}
-            </section>
-        </div>
+        </section>
     </main>
 </div>
 

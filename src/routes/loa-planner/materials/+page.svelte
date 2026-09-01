@@ -30,26 +30,26 @@
                     />
 
                     <div class="flex-1 min-w-0">
-                        <div class="font-medium text-[#f2efe9] truncate">
+                        <div class="font-medium text truncate">
                             {material.name}
                         </div>
 
                         <div
-                            class="mt-1 h-1.5 w-full bg-[#08070b] rounded-none overflow-hidden"
+                            class="mt-1 h-1.5 w-full bg-bg-tertiary rounded-none overflow-hidden"
                         >
                             <div
-                                class="h-full bg-[#d0a75a]"
+                                class="h-full bg-accent"
                                 style={`width: ${progress}%`}></div>
                         </div>
                     </div>
                 </div>
 
                 <!-- CONTROLS -->
-                <div class="px-4 py-3 bg-[rgba(255,255,255,0.02)] border-t border-[rgba(255,255,255,0.12)]">
+                <div class="px-4 py-3 bg-bg-secondary border-t border-border">
                     <div class="grid grid-cols-4 gap-4 items-stretch">
                         <!-- REQUIRED -->
                         <div class="flex flex-col justify-between h-16">
-                            <div class="text-xs text-[#a29e96]">Required</div>
+                            <div class="text-xs text-muted">Required</div>
                             <NumberInput
                                 value={material.required}
                                 onchange={(v) =>
@@ -61,7 +61,7 @@
 
                         <!-- OWNED -->
                         <div class="flex flex-col justify-between h-16">
-                            <div class="text-xs text-[#a29e96]">Owned</div>
+                            <div class="text-xs text-muted">Owned</div>
                             <div class="flex items-center justify-end h-9 font-medium tabular-nums">
                                 {calculateTotalAvailable(material).toLocaleString()}
                             </div>
@@ -69,7 +69,7 @@
 
                         <!-- MISSING -->
                         <div class="flex flex-col justify-between h-16">
-                            <div class="text-xs text-[#a29e96]">Missing</div>
+                            <div class="text-xs text-muted">Missing</div>
                             <div
                                 class="flex items-center justify-end h-9 font-medium tabular-nums"
                             >
@@ -79,7 +79,7 @@
 
                         <!-- MARKET -->
                         <div class="flex flex-col justify-between h-16">
-                            <div class="text-xs text-[#a29e96]">Market</div>
+                            <div class="text-xs text-muted">Market</div>
 
                             <div class="flex flex-col gap-2">
                                 <!-- SELECT OPTION -->
@@ -155,8 +155,8 @@
 
                 <!-- BREAKDOWN -->
                 {#if material.pricingOptions?.length && material.breakdown?.length}
-                    <div class="px-4 pb-3 bg-[rgba(255,255,255,0.02)] border-t border-[rgba(255,255,255,0.12)]">
-                        <div class="text-xs text-[#a29e96] mb-2">
+                    <div class="px-4 pb-3 bg-bg-secondary border-t border-border">
+                        <div class="text-xs text-muted mb-2">
                             Optimal Purchase Plan
                         </div>
 
@@ -185,9 +185,9 @@
         <div
             class="card px-4 py-3 min-w-55"
         >
-            <div class="text-xs text-[#a29e96] mb-1">Total Material Cost</div>
+            <div class="text-xs text-muted mb-1">Total Material Cost</div>
 
-            <div class="text-lg font-semibold text-[#f2efe9] tabular-nums">
+            <div class="text-lg font-semibold text tabular-nums">
                 {$displayMaterialCost.toLocaleString()}g
             </div>
         </div>

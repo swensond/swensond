@@ -26,17 +26,17 @@
             >
                 <!-- HEADER -->
                 <div class="card-header justify-between">
-                    <div class="font-medium text-[#f2efe9]">
+                    <div class="font-medium text">
                         {track.label}
                     </div>
                 </div>
 
                 <!-- CONTROLS -->
-                <div class="px-4 py-3 bg-[rgba(255,255,255,0.02)] border-t border-[rgba(255,255,255,0.12)]">
+                <div class="px-4 py-3 bg-bg-secondary border-t border-border">
                     <div class="grid grid-cols-4 gap-4 items-stretch">
                         <!-- CURRENT -->
                         <div class="flex flex-col justify-between h-16">
-                            <div class="text-xs text-[#a29e96]">Current</div>
+                            <div class="text-xs text-muted">Current</div>
                             <div class="flex items-center h-9">
                                 <input
                                     class="input-compact w-full"
@@ -53,7 +53,7 @@
 
                         <!-- TARGET -->
                         <div class="flex flex-col justify-between h-16">
-                            <div class="text-xs text-[#a29e96]">Target</div>
+                            <div class="text-xs text-muted">Target</div>
                             <div class="flex items-center h-9">
                                 <input
                                     class="input-compact w-full"
@@ -72,10 +72,10 @@
                         <div
                             class="flex flex-col justify-between h-16 text-right"
                         >
-                            <div class="text-xs text-[#a29e96]">Cost</div>
+                            <div class="text-xs text-muted">Cost</div>
 
                             <div
-                                class="flex items-center justify-end h-9 font-medium tabular-nums text-[#f2efe9]"
+                                class="flex items-center justify-end h-9 font-medium tabular-nums text"
                             >
                                 {getTrackTotal(
                                     current,
@@ -86,7 +86,7 @@
 
                         <!-- TAP -->
                         <div class="flex flex-col justify-between items-end h-16">
-                            <div class="text-xs text-[#a29e96]">Success</div>
+                            <div class="text-xs text-muted">Success</div>
 
                             <button
                                 class="btn px-3 mb-[7px]"
@@ -105,11 +105,11 @@
             <div
                 class="card px-4 py-3 min-w-55"
             >
-                <div class="text-xs text-[#a29e96] mb-1">
+                <div class="text-xs text-muted mb-1">
                     Total Ark Passive Cost
                 </div>
 
-                <div class="text-lg font-semibold text-[#f2efe9] tabular-nums">
+                <div class="text-lg font-semibold text tabular-nums">
                     {$displayKarmaCost.toLocaleString()}g
                 </div>
             </div>

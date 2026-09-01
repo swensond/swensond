@@ -2,8 +2,8 @@
 @plugin '@tailwindcss/typography';
 
 /* =========================================================
-   ANIME SEASON - flat dark cards, gold accents
-   Reuses the shared palette/components from layout.css.
+   ANIME SEASON PAGE - professional white theme
+   Page-specific styles that complement the shared theme.css
    ========================================================= */
 
 /* Sticky season controls: square corners and no side borders when pinned under the header */
@@ -15,9 +15,10 @@
 
 /* Affixed tab bar: translucent so content scrolling underneath stays readable */
 nav.sticky {
-    background: color-mix(in srgb, var(--la-panel) 92%, transparent);
+    background: color-mix(in srgb, var(--panel) 95%, transparent);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
 }
 
 .anime-grid {
@@ -36,16 +37,16 @@ nav.sticky {
 }
 
 .anime-card {
-    @apply relative overflow-hidden rounded-sm border text-left transition duration-150;
-    background: var(--la-panel);
-    border-color: var(--la-border);
+    @apply relative overflow-hidden rounded-lg border text-left transition-all duration-150;
+    background: var(--panel);
+    border-color: var(--border);
     cursor: pointer;
 }
 
 .anime-card:hover {
-    border-color: var(--la-accent);
+    border-color: var(--accent);
     transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.1), 0 4px 6px rgba(15, 23, 42, 0.05);
 }
 
 /* Status badges */
@@ -54,59 +55,59 @@ nav.sticky {
 }
 
 .b-air {
-    background: rgba(11, 10, 14, 0.88);
-    color: var(--la-green-bright);
-    border: 1px solid rgba(74, 222, 128, 0.5);
+    background: var(--green-light);
+    color: #15803d;
+    border: 1px solid var(--green);
 }
 
 .b-new {
-    background: rgba(11, 10, 14, 0.88);
-    color: var(--la-accent-bright);
-    border: 1px solid var(--la-accent);
+    background: var(--accent-light);
+    color: var(--accent-dim);
+    border: 1px solid var(--accent);
 }
 
 .b-done {
-    background: rgba(11, 10, 14, 0.88);
-    color: var(--la-text-muted);
-    border: 1px solid var(--la-border-strong);
+    background: var(--bg-tertiary);
+    color: var(--text-muted);
+    border: 1px solid var(--border-strong);
 }
 
 .b-hold {
-    background: rgba(11, 10, 14, 0.88);
-    color: var(--la-red-bright);
-    border: 1px solid rgba(224, 92, 92, 0.5);
+    background: var(--red-light);
+    color: #b91c1c;
+    border: 1px solid var(--red);
 }
 
 .b-unknown {
-    background: rgba(11, 10, 14, 0.88);
-    color: var(--la-text-faint);
-    border: 1px solid var(--la-border);
+    background: var(--bg-tertiary);
+    color: var(--text-faint);
+    border: 1px solid var(--border);
 }
 
 .b-cont {
-    background: rgba(11, 10, 14, 0.88);
-    color: var(--la-accent-bright);
-    border: 1px solid var(--la-accent);
+    background: var(--accent-light);
+    color: var(--accent-dim);
+    border: 1px solid var(--accent);
 }
 
 .b-progress {
-    background: rgba(11, 10, 14, 0.88);
-    color: #d5d1c9;
-    border: 1px solid var(--la-border-strong);
+    background: var(--bg-tertiary);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-strong);
 }
 
 .score-badge {
     @apply text-[11px] font-bold px-1.5 py-0.5 rounded-sm;
-    background: rgba(11, 10, 14, 0.82);
-    color: var(--la-accent-bright);
-    border: 1px solid var(--la-border);
+    background: var(--bg-secondary);
+    color: var(--accent);
+    border: 1px solid var(--border);
 }
 
 /* Small genre pills */
 .tag {
     @apply inline-block text-[10px] px-1.5 py-0.5 rounded-sm font-medium;
-    background: rgba(255, 255, 255, 0.06);
-    color: var(--la-text-muted);
+    background: var(--bg-tertiary);
+    color: var(--text-muted);
 }
 
 /* Days-left chip in the season controls */
@@ -125,14 +126,14 @@ nav.sticky {
 }
 .stat-card.days-left .stat-range {
     @apply text-[10px] tabular-nums;
-    color: var(--la-text-muted);
+    color: var(--text-muted);
     white-space: nowrap;
 }
 .stat-card.days-left.before .stat-value {
-    color: var(--la-text-muted);
+    color: var(--text-muted);
 }
 .stat-card.days-left.after .stat-value {
-    color: var(--la-text-faint);
+    color: var(--text-faint);
     @apply line-through decoration-2;
 }
 
@@ -140,79 +141,79 @@ nav.sticky {
    SEASON FILTER CHIP - sidebar/row selector with item counts
 ========================= */
 .filter-chip {
-    @apply flex items-center justify-between gap-3 px-3 py-2 text-sm font-medium rounded-sm transition border border-transparent whitespace-nowrap;
-    color: var(--la-text-muted);
+    @apply flex items-center justify-between gap-3 px-3 py-2 text-sm font-medium rounded-lg transition border border-transparent whitespace-nowrap;
+    color: var(--text-muted);
 }
 
 .filter-chip:hover {
-    color: var(--la-text);
-    background: var(--la-hover);
+    color: var(--text);
+    background: var(--bg-secondary);
 }
 
 .filter-chip.active {
-    color: var(--la-accent-bright);
-    border-color: var(--la-border);
-    background: rgba(208, 167, 90, 0.07);
+    color: var(--accent);
+    border-color: var(--border);
+    background: var(--accent-light);
 }
 
 .filter-chip-count {
-    @apply text-xs rounded-sm px-1.5;
-    background: rgba(208, 167, 90, 0.12);
-    color: var(--la-accent-bright);
+    @apply text-xs rounded-full px-1.5;
+    background: var(--accent-light);
+    color: var(--accent-dim);
 }
 
 /* =========================
    SHARE SCOPE CHIP - full list vs one season
 ========================= */
 .scope-chip {
-    @apply flex items-center justify-between gap-2 px-3 py-2.5 rounded-sm border text-left transition;
-    background: var(--la-panel);
-    border-color: var(--la-border);
-    color: var(--la-text-muted);
+    @apply flex items-center justify-between gap-2 px-3 py-2.5 rounded-lg border text-left transition;
+    background: var(--panel);
+    border-color: var(--border);
+    color: var(--text-muted);
 }
 
 .scope-chip:hover {
-    background: var(--la-hover);
+    background: var(--bg-secondary);
 }
 
 .scope-chip.active {
-    border-color: var(--la-accent);
-    background: rgba(208, 167, 90, 0.07);
+    border-color: var(--accent);
+    background: var(--accent-light);
 }
 
 .scope-chip-title {
     @apply text-sm font-semibold;
-    color: var(--la-text);
+    color: var(--text);
 }
 
 .scope-chip-count {
     @apply text-xs tabular-nums;
-    color: var(--la-text-muted);
+    color: var(--text-muted);
 }
 
 .scope-chip.active .scope-chip-title {
-    color: var(--la-accent-bright);
+    color: var(--accent);
 }
 
 /* =========================
    UTIL BUTTONS - compact icon actions in the nav (alerts/share/import/refresh)
 ========================= */
 .util-btn {
-    @apply w-8 h-8 cursor-pointer flex items-center justify-center rounded-sm text-sm transition;
-    color: var(--la-text-muted);
+    @apply w-8 h-8 cursor-pointer flex items-center justify-center rounded-lg text-sm transition;
+    color: var(--text-muted);
     border: 1px solid transparent;
     position: relative;
 }
 
 .util-btn:hover {
-    color: var(--la-text);
-    background: var(--la-hover);
+    color: var(--text);
+    background: var(--bg-tertiary);
 }
 
 .util-btn.on {
-    color: var(--la-accent-bright);
-    border-color: var(--la-accent);
-    background: rgba(208, 167, 90, 0.07);
+    color: var(--accent);
+    border-color: var(--accent);
+    background: var(--accent-light);
 }
 
 /* Tooltip: shows the action label on hover */
@@ -223,13 +224,13 @@ nav.sticky {
     left: 50%;
     transform: translateX(-50%) translateY(-2px);
     white-space: nowrap;
-    padding: 3px 7px;
+    padding: 4px 8px;
     font-size: 11px;
     font-weight: 500;
-    color: var(--la-text);
-    background: rgba(20, 19, 24, 0.95);
-    border: 1px solid var(--la-border);
-    border-radius: 3px;
+    color: var(--text-inverse);
+    background: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 4px;
     pointer-events: none;
     opacity: 0;
     transition: opacity 0.12s ease, transform 0.12s ease;
@@ -253,41 +254,42 @@ nav.sticky {
     @apply absolute right-1.5 top-1.5 z-10 flex items-center justify-center rounded-full border text-sm font-bold leading-none transition;
     width: 26px;
     height: 26px;
-    background: rgba(11, 10, 14, 0.82);
-    color: var(--la-text-muted);
-    border-color: var(--la-border);
+    background: var(--panel);
+    color: var(--text-muted);
+    border-color: var(--border);
+    box-shadow: 0 2px 4px rgba(15, 23, 42, 0.1);
 }
 
 .watch-toggle:hover {
-    color: var(--la-accent-bright);
-    border-color: var(--la-accent);
+    color: var(--accent);
+    border-color: var(--accent);
 }
 
 .watch-toggle.on {
-    color: #1c1508;
-    background: var(--la-accent);
-    border-color: var(--la-accent);
+    color: var(--text-inverse);
+    background: var(--accent);
+    border-color: var(--accent);
 }
 
 .watch-toggle.on:hover {
-    background: var(--la-accent-bright);
+    background: var(--accent-dim);
 }
 
 /* =========================
    SCHEDULE / WATCHLIST ROWS
 ========================= */
 .schedule-row {
-    @apply flex items-center gap-3 px-3 py-2.5 cursor-pointer select-none rounded-sm border transition;
-    background: rgba(255, 255, 255, 0.02);
+    @apply flex items-center gap-3 px-3 py-2.5 cursor-pointer select-none rounded-lg border transition;
+    background: var(--bg-secondary);
     border-color: transparent;
 }
 
 .schedule-row:hover {
-    background: var(--la-hover);
-    border-color: var(--la-border);
+    background: var(--bg-tertiary);
+    border-color: var(--border);
 }
 
 .schedule-cover {
-    @apply w-12 h-16 object-cover rounded-sm shrink-0;
-    border: 1px solid var(--la-border);
+    @apply w-12 h-16 object-cover rounded-lg shrink-0;
+    border: 1px solid var(--border);
 }

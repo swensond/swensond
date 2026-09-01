@@ -19,7 +19,7 @@
 <!-- TOP ROSTER PAGE CONTENT -->
 <section class="space-y-3">
   <div class="flex justify-end items-center gap-4">
-    <span class="text-xs text-[#a29e96]">
+    <span class="text-xs text-muted">
       Gold Earners: {countGoldEarners($planner.roster)} / {MAX_GOLD_EARNERS}
     </span>
 
@@ -30,7 +30,7 @@
 
   {#if $planner.roster.length === 0}
     <div class="card p-6 text-center">
-      <div class="text-[#a29e96]">No characters yet.</div>
+      <div class="text-muted">No characters yet.</div>
     </div>
   {:else}
     {#each $planner.roster as char (char.id)}
@@ -56,13 +56,13 @@
               checked={earner}
               onchange={() => rosterApi.toggleGoldEarner(char.id)}
             />
-            <span class={earner ? "la-gold-text" : "text-[#6e6a64]"}>
+            <span class={earner ? "text-accent" : "text-faint"}>
               Gold Earner
             </span>
           </label>
 
           <label
-            class="flex items-center gap-1 text-xs text-[#6e6a64]"
+            class="flex items-center gap-1 text-xs text-faint"
             title="Item level - used to auto-suggest runnable raids"
           >
             <span>ilvl</span>
@@ -81,11 +81,11 @@
           </label>
 
           <div class="flex items-center gap-2" title="Tradable / Total weekly gold">
-            <span class="text-sm tabular-nums la-gold-text">
+            <span class="text-sm tabular-nums text-accent">
               {gold.tradable.toLocaleString()}g
             </span>
-            <span class="text-xs text-[#6e6a64]">/</span>
-            <span class="text-sm tabular-nums text-[#a29e96]">
+            <span class="text-xs text-faint">/</span>
+            <span class="text-sm tabular-nums text-muted">
               {gold.total.toLocaleString()}g
             </span>
           </div>
@@ -102,7 +102,7 @@
           </button>
         </div>
 
-        <div class="grid grid-cols-3 gap-px bg-[#060509]">
+        <div class="grid grid-cols-3 gap-px bg-border">
           {#each [0, 1, 2] as slot}
             {@const raidId = char.assignedRaids[slot]}
             {@const raid = raidId
@@ -118,7 +118,7 @@
                 />
                 <div>
                   <div class="text-xs font-medium">{raid.name}</div>
-                  <div class="text-xs text-[#a29e96]">
+                  <div class="text-xs text-muted">
                     {raid.rewardGold.toLocaleString()}g
                   </div>
                 </div>
@@ -139,7 +139,7 @@
 
   {#if char}
     <div
-      class="fixed inset-0 bg-black/60 flex items-center justify-center p-4"
+      class="fixed inset-0 bg-[rgba(15,23,42,0.5)] flex items-center justify-center p-4"
       role="button"
       tabindex="0"
       onclick={(e) => e.target === e.currentTarget && closeAssign()}
@@ -158,7 +158,7 @@
         >
           <div>
             <div class="font-semibold">Assign Raids - {char.name}</div>
-            <div class="text-xs text-[#a29e96]">
+            <div class="text-xs text-muted">
               {char.assignedRaids.length} / 3 slots
               {#if char.itemLevel}
                 · ilvl {char.itemLevel.toLocaleString()}
@@ -171,7 +171,7 @@
           {#if !isGoldEarner(char)}
             <div
               class="col-span-2 rounded-md px-3 py-2 text-xs"
-              style="background: rgba(224, 93, 93, 0.08); color: var(--la-red);"
+              style="background: var(--red-light); color: var(--red);"
             >
               {char.name} is not marked as a Gold Earner - assigned raids won't
               earn gold. Mark them as an earner on their roster card (max{" "}
@@ -197,11 +197,11 @@
                 <div class="text-sm font-medium">{raid.name}</div>
                 <div class="text-xs">
                   {#if locked}
-                    <span class="text-[#c9903d]">
+                    <span class="text-amber">
                       Requires {raid.minItemLevel.toLocaleString()}
                     </span>
                   {:else}
-                    <span class="text-[#a29e96]">
+                    <span class="text-muted">
                       {raid.rewardGold.toLocaleString()}g
                     </span>
                   {/if}
@@ -213,7 +213,7 @@
 
         <div
           class="flex gap-2 p-4 border-t"
-          style="border-color: var(--la-border);"
+          style="border-color: var(--border);"
         >
           <button
             class="btn-primary flex-1"

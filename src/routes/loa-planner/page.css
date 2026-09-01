@@ -5,72 +5,109 @@ html {
 }
 
 /* =========================================================
-   LOST ARK IN-GAME UI THEME - FLAT COMPONENT CLASSES
-   Reuses the shared palette/components from layout.css.
+   LOST ARK PLANNER - PROFESSIONAL WHITE THEME
+   Clean light surfaces, dark text, blue accents.
    ========================================================= */
+
+:root {
+    --bg: #ffffff;
+    --bg-secondary: #f8fafc;
+    --bg-tertiary: #f1f5f9;
+    --panel: #ffffff;
+    --panel-hover: #f8fafc;
+
+    --accent: #2563eb;
+    --accent-bright: #3b82f6;
+    --accent-dim: #1d4ed8;
+    --accent-light: #dbeafe;
+
+    --green: #16a34a;
+    --green-bright: #22c55e;
+    --green-light: #dcfce7;
+
+    --red: #dc2626;
+    --red-bright: #ef4444;
+    --red-light: #fee2e2;
+
+    --amber: #d97706;
+    --amber-light: #fef3c7;
+
+    --border: #e2e8f0;
+    --border-strong: #cbd5e1;
+    --border-focus: #2563eb;
+
+    --text: #0f172a;
+    --text-secondary: #334155;
+    --text-muted: #64748b;
+    --text-faint: #94a3b8;
+    --text-inverse: #ffffff;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
 
 /* Full-height danger button matching .input dimensions */
 .btn-danger-solid {
-  @apply rounded-sm transition;
-  padding: 0.5rem 0.75rem;
-  color: var(--la-red);
-  border: 1px solid rgba(224, 93, 93, 0.35);
-  background: rgba(38, 36, 44, 0.75);
+  @apply rounded-lg transition;
+  padding: 0.5rem 1rem;
+  color: var(--text-inverse);
+  border: 1px solid transparent;
+  background: var(--red);
 }
 
 .btn-danger-solid:hover {
-  color: var(--la-red-bright);
-  border-color: var(--la-red);
+  background-color: #b91c1c;
 }
 
-/* In-game serif section titles */
+/* Section titles */
 .card-header h2,
 .card-header h3 {
-  font-family: 'EB Garamond', Georgia, serif;
   font-weight: 600;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.02em;
   font-size: 1.05rem;
+  color: var(--text);
 }
 
-/* Gold checkboxes like in-game checkmarks */
+/* Blue checkboxes */
 input[type='checkbox'] {
-  accent-color: var(--la-accent);
+  accent-color: var(--accent);
 }
 
-/* Replace the native dropdown arrow (pinned to the edge) with one inset */
+/* Custom dropdown arrow inset */
 select.input {
   appearance: none;
   -webkit-appearance: none;
-  padding-right: 2rem;
-  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23a29e96' stroke-width='1.5'/%3E%3C/svg%3E");
+  padding-right: 2.5rem;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
-  background-position: right 0.65rem center;
+  background-position: right 0.75rem center;
 }
 
 /* Full-width input with compact sizing */
 .input-compact {
-  @apply w-full h-9 px-2 rounded-sm text-sm tabular-nums transition;
-  background: rgba(0, 0, 0, 0.35);
-  color: var(--la-text);
-  border: 1px solid var(--la-border);
+  @apply w-full h-9 px-2 rounded-lg text-sm tabular-nums transition;
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--border);
 }
 
 .input-compact:hover {
-  border-color: rgba(255, 255, 255, 0.25);
-  background: rgba(0, 0, 0, 0.45);
+  border-color: var(--border-strong);
+  background: var(--bg-secondary);
 }
 
 .input-compact:focus {
   @apply outline-none;
-  border-color: var(--la-accent);
-  background: rgba(0, 0, 0, 0.45);
-  box-shadow: 0 0 0 1px var(--la-accent);
+  border-color: var(--accent);
+  background: var(--bg);
+  box-shadow: 0 0 0 3px var(--accent-light);
 }
 
 /* Name input (no background, borderless) */
 .name-input {
   @apply cursor-text flex-1 bg-transparent outline-none font-semibold text-sm;
-  color: var(--la-text);
+  color: var(--text);
 }
 
 /* =========================
@@ -78,14 +115,14 @@ select.input {
 ========================= */
 
 .table {
-  @apply w-full font-mono rounded-sm;
-  border: 1px solid var(--la-border);
-  background: var(--la-panel);
+  @apply w-full rounded-lg;
+  border: 1px solid var(--border);
+  background: var(--panel);
 }
 
 .table thead tr {
-  background: rgba(255, 255, 255, 0.03);
-  color: var(--la-text-muted);
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
   @apply text-sm;
 }
 
@@ -95,7 +132,19 @@ select.input {
 
 .table td {
   @apply py-3 px-4;
-  color: var(--la-text);
+  color: var(--text);
+}
+
+.table tbody tr {
+  transition: background-color 0.15s;
+}
+
+.table tbody tr:hover {
+  background: var(--bg-secondary);
+}
+
+.table tbody tr:last-child td {
+  border-bottom: none;
 }
 
 /* =========================
@@ -104,18 +153,18 @@ select.input {
 
 .raid-slot {
   @apply flex items-center gap-2 px-3 py-3 cursor-pointer select-none transition;
-  background: rgba(255, 255, 255, 0.02);
+  background: var(--bg-secondary);
 }
 
 .raid-slot:hover {
-  background: var(--la-hover);
-  box-shadow: inset 0 0 0 1px var(--la-border);
+  background: var(--bg-tertiary);
+  box-shadow: inset 0 0 0 1px var(--border);
 }
 
 .empty-slot {
   @apply flex items-center gap-2 px-3 py-3 italic;
-  background: rgba(0, 0, 0, 0.25);
-  color: var(--la-text-faint);
+  background: var(--bg-tertiary);
+  color: var(--text-faint);
   @apply text-xs;
 }
 
@@ -149,4 +198,37 @@ select.input {
 
 .tabular-nums {
   font-variant-numeric: tabular-nums;
+}
+
+/* =========================
+   BADGES
+========================= */
+
+.badge {
+    @apply inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium;
+}
+
+.badge-primary {
+    background: var(--accent-light);
+    color: var(--accent-dim);
+}
+
+.badge-success {
+    background: var(--green-light);
+    color: #15803d;
+}
+
+.badge-warning {
+    background: var(--amber-light);
+    color: #b45309;
+}
+
+.badge-danger {
+    background: var(--red-light);
+    color: #b91c1c;
+}
+
+.badge-neutral {
+    background: var(--bg-tertiary);
+    color: var(--text-secondary);
 }

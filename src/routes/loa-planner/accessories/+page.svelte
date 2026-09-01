@@ -10,14 +10,14 @@
 <section class="space-y-4">
     {#if $planner.accessories.length === 0}
         <div class="card p-6 text-center">
-            <div class="text-[#a29e96]">No accessories configured.</div>
+            <div class="text-muted">No accessories configured.</div>
         </div>
     {:else}
         <div class="card">
             <!-- HEADER -->
             <div class="card-header justify-between">
                 <h2>Accessories</h2>
-                <div class="text-xs text-[#a29e96]">
+                <div class="text-xs text-muted">
                     {$planner.accessories.filter((a) => a.owned).length}
                     /
                     {$planner.accessories.length} owned
@@ -26,8 +26,8 @@
 
             <!-- COLUMN LABELS -->
             <div
-                class="{rowGrid} px-4 py-2 text-xs uppercase tracking-widest text-[#a29e96] border-b"
-                style="border-color: var(--la-border); background: rgba(255,255,255,0.03);"
+                class="{rowGrid} px-4 py-2 text-xs uppercase tracking-widest text-muted border-b bg-bg-secondary"
+                style="border-color: var(--border);"
             >
                 <div>Name</div>
                 <div class="justify-self-center">Owned</div>
@@ -39,7 +39,7 @@
                 <div
                     class="{rowGrid} px-4 py-2.5 border-b last:border-b-0 transition"
                     class:opacity-50={accessory.owned}
-                    style="border-color: rgba(255,255,255,0.06);"
+                    style="border-color: var(--border);"
                 >
                     <input
                         class="name-input !text-sm"
@@ -78,8 +78,8 @@
     <!-- TOTAL -->
     <div class="flex justify-end">
         <div class="card px-4 py-3 min-w-55">
-            <div class="text-xs text-[#a29e96] mb-1">Total Accessories Cost</div>
-            <div class="text-lg font-semibold text-[#f2efe9] tabular-nums">
+            <div class="text-xs text-muted mb-1">Total Accessories Cost</div>
+            <div class="text-lg font-semibold text tabular-nums">
                 {$displayAccessoriesCost.toLocaleString()}g
             </div>
         </div>

@@ -76,10 +76,10 @@
 
 <div class="space-y-4">
   <div class="card p-5">
-    <h2 class="text-sm font-semibold text-[#a29e96] uppercase">
+    <h2 class="text-sm font-semibold text-muted uppercase">
       Gold Over Time
     </h2>
-    <p class="text-xs text-[#a29e96] mt-1 mb-4">
+    <p class="text-xs text-muted mt-1 mb-4">
       Actual balance history (from your gold log) and projected gold vs.
       total required ({fmt($displayTotalCost)}g) · Weekly income {fmt($weeklyIncome)}g
       {#if scheduledTotals.tradable || scheduledTotals.bound}
@@ -90,7 +90,7 @@
     </p>
 
     {#if $goldProjection.threshold === 0}
-      <p class="text-sm text-[#a29e96]">
+      <p class="text-sm text-muted">
         Set up honing targets or a release date to see a projection.
       </p>
     {:else}
@@ -129,8 +129,8 @@
         <!-- Gridlines -->
         {#each [0.25, 0.5, 0.75, 1] as frac (frac)}
           {@const gy = PAD.top + (H - PAD.top - PAD.bottom) * (1 - frac)}
-          <line x1={PAD.left} x2={W - PAD.right} y1={gy} y2={gy} stroke="rgba(255,255,255,0.08)" stroke-width="1" />
-          <text x={PAD.left - 8} y={gy + 4} text-anchor="end" font-size="11" fill="#a29e96">
+          <line x1={PAD.left} x2={W - PAD.right} y1={gy} y2={gy} stroke="var(--border)" stroke-width="1" />
+          <text x={PAD.left - 8} y={gy + 4} text-anchor="end" font-size="11" fill="var(--text-muted)">
             {fmt(maxGold * frac)}
           </text>
         {/each}
@@ -144,7 +144,7 @@
               y={H - PAD.bottom + 18}
               text-anchor="middle"
               font-size="11"
-              fill={p.week === 0 ? "#f0c14b" : "#a29e96"}
+              fill={p.week === 0 ? "var(--accent)" : "var(--text-muted)"}
             >
               {p.week === 0 ? "Now" : p.week < 0 ? `-${-p.week}w` : `+${p.week}w`}
             </text>
@@ -155,16 +155,16 @@
         <line
           x1={xFor(0, minWeek, maxFutureWeeks)} x2={xFor(0, minWeek, maxFutureWeeks)}
           y1={PAD.top} y2={H - PAD.bottom}
-          stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="3 3"
+          stroke="var(--border)" stroke-width="1" stroke-dasharray="3 3"
         />
 
         <!-- Threshold line -->
         <line
           x1={PAD.left} x2={W - PAD.right}
           y1={yFor(threshold, maxGold)} y2={yFor(threshold, maxGold)}
-          stroke="#e05d5d" stroke-width="2" stroke-dasharray="6 4"
+          stroke="var(--red)" stroke-width="2" stroke-dasharray="6 4"
         />
-        <text x={W - PAD.right} y={yFor(threshold, maxGold) - 8} text-anchor="end" font-size="11" fill="#e05d5d">
+        <text x={W - PAD.right} y={yFor(threshold, maxGold) - 8} text-anchor="end" font-size="11" fill="var(--red)">
           Required: {fmt(threshold)}g
         </text>
 
@@ -172,7 +172,7 @@
         {#if maxPastWeeks > 0}
           {@const hist = points.filter((p) => p.week <= 0)}
           <polyline
-            fill="none" stroke="#7db8e0" stroke-width="2.5" stroke-linejoin="round"
+            fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linejoin="round"
             points={hist.map((p) => `${xFor(p.week, minWeek, maxFutureWeeks)},${yFor(p.gold, maxGold)}`).join(" ")}
           />
         {/if}
@@ -181,7 +181,7 @@
         {#if points.some((p) => p.week >= 0)}
           {@const fut = points.filter((p) => p.week >= 0)}
           <polyline
-            fill="none" stroke="#f0c14b" stroke-width="2.5" stroke-linejoin="round"
+            fill="none" stroke="var(--accent-bright)" stroke-width="2.5" stroke-linejoin="round"
             stroke-dasharray="8 5"
             points={fut.map((p) => `${xFor(p.week, minWeek, maxFutureWeeks)},${yFor(p.gold, maxGold)}`).join(" ")}
           />
@@ -190,7 +190,7 @@
         <!-- Roster-bound gold (scheduled bound events), dashed overlay -->
         {#if boundPoints.some((p) => p.gold > 0)}
           <polyline
-            fill="none" stroke="#b48ce0" stroke-width="2" stroke-linejoin="round"
+            fill="none" stroke="var(--amber)" stroke-width="2" stroke-linejoin="round"
             stroke-dasharray="4 4"
             points={boundPoints.map((p) => `${xFor(p.week, minWeek, maxFutureWeeks)},${yFor(p.gold, maxGold)}`).join(" ")}
           />
@@ -200,31 +200,31 @@
         {#if crossingWeek !== null && crossingWeek <= maxFutureWeeks}
           {@const cx = xFor(crossingWeek, minWeek, maxFutureWeeks)}
           {@const cy = yFor(threshold, maxGold)}
-          <circle cx={cx} cy={cy} r="6" fill="#7ddb8a" stroke="#0f1115" stroke-width="2" />
-          <text x={cx} y={cy - 14} text-anchor="middle" font-size="12" font-weight="600" fill="#7ddb8a">
+          <circle cx={cx} cy={cy} r="6" fill="var(--green)" stroke="var(--bg)" stroke-width="2" />
+          <text x={cx} y={cy - 14} text-anchor="middle" font-size="12" font-weight="600" fill="var(--green)">
             Week {crossingWeek}
           </text>
         {/if}
 
         <!-- Now point -->
-        <circle cx={xFor(0, minWeek, maxFutureWeeks)} cy={yFor(points.find((p) => p.week === 0)!.gold, maxGold)} r="4" fill="#fff" />
+        <circle cx={xFor(0, minWeek, maxFutureWeeks)} cy={yFor(points.find((p) => p.week === 0)!.gold, maxGold)} r="4" fill="var(--bg)" />
       </svg>
 
-      <div class="flex flex-wrap gap-4 mt-2 text-xs text-[#a29e96]">
-        <span><span style="color:#7db8e0;">━</span> Actual (gold log)</span>
-        <span><span style="color:#f0c14b;">╌</span> Projected tradable</span>
-        <span><span style="color:#b48ce0;">╌</span> Roster-bound (events)</span>
-        <span><span style="color:#e05d5d;">╌</span> Required</span>
+      <div class="flex flex-wrap gap-4 mt-2 text-xs text-muted">
+        <span><span style="color:var(--accent);">━</span> Actual (gold log)</span>
+        <span><span style="color:var(--accent-bright);">╌</span> Projected tradable</span>
+        <span><span style="color:var(--amber);">╌</span> Roster-bound (events)</span>
+        <span><span style="color:var(--red);">╌</span> Required</span>
       </div>
     {/if}
   </div>
 
   <!-- SCHEDULED INCOME -->
   <div class="card p-5">
-    <h2 class="text-sm font-semibold text-[#a29e96] uppercase">
+    <h2 class="text-sm font-semibold text-muted uppercase">
       Scheduled Income
     </h2>
-    <p class="text-xs text-[#a29e96] mt-1 mb-4">
+    <p class="text-xs text-muted mt-1 mb-4">
       One-off gold (events, login rewards, carries) included in the projection.
     </p>
 
@@ -272,13 +272,13 @@
     </div>
 
     {#if sortedEvents.length === 0}
-      <p class="text-xs text-[#a29e96]">No scheduled income yet.</p>
+      <p class="text-xs text-muted">No scheduled income yet.</p>
     {:else}
       <div class="flex flex-col gap-1 max-h-64 overflow-y-auto pr-1">
         {#each sortedEvents as e (e.id)}
           <div
-            class="grid gap-2 items-center rounded-md px-3 py-2"
-            style="background: rgba(255,255,255,0.03); grid-template-columns: minmax(120px, 1fr) auto auto auto auto auto;"
+            class="grid gap-2 items-center rounded-md px-3 py-2 bg-bg-secondary"
+            style="grid-template-columns: minmax(120px, 1fr) auto auto auto auto auto;"
           >
             <input
               class="input"
@@ -343,7 +343,7 @@
   <!-- GOLD LOG -->
   <div class="card p-5">
     <div class="flex justify-between items-center mb-3">
-      <h2 class="text-sm font-semibold text-[#a29e96] uppercase">
+      <h2 class="text-sm font-semibold text-muted uppercase">
         Gold Log
       </h2>
       {#if ($planner.goldLog ?? []).length > 0}
@@ -361,23 +361,22 @@
     </div>
 
     {#if ($planner.goldLog ?? []).length === 0}
-      <p class="text-xs text-[#a29e96]">
+      <p class="text-xs text-muted">
         No gold movements recorded yet. Every add/spend and raid clear is logged automatically.
       </p>
     {:else}
       <div class="flex flex-col gap-1 max-h-72 overflow-y-auto pr-1">
         {#each [...$planner.goldLog!].reverse() as entry (entry.id)}
           <div
-            class="flex justify-between items-center rounded-md px-3 py-2 text-sm"
-            style="background: rgba(255,255,255,0.03);"
+            class="flex justify-between items-center rounded-md px-3 py-2 text-sm bg-bg-secondary"
           >
             <div class="min-w-0">
-              <span class={entry.amount >= 0 ? "text-green-400" : "text-red-400"}>
+              <span class={entry.amount >= 0 ? "text-green-600" : "text-red-600"}>
                 {entry.amount >= 0 ? "+" : ""}{fmt(entry.amount)}g
               </span>
-              <span class="text-[#a29e96] ml-2 truncate">{entry.note ?? ""}</span>
+              <span class="text-muted ml-2 truncate">{entry.note ?? ""}</span>
             </div>
-            <div class="text-xs text-[#a29e96] whitespace-nowrap ml-3">
+            <div class="text-xs text-muted whitespace-nowrap ml-3">
               {new Date(entry.timestamp).toLocaleString(undefined, {
                 month: "short",
                 day: "numeric",

@@ -1,6 +1,33 @@
 <script lang="ts">
   let projects = [
     {
+      slug: "loa-planner",
+      name: "Lost Ark Planner",
+      tagline: "A comprehensive character progression planner for Lost Ark",
+      href: "/loa-planner/",
+      description:
+        "A full-featured progression planning tool for Lost Ark. Plan character builds, track raid rosters, calculate material requirements for honing and gear upgrades, manage gold income across multiple characters, and optimize weekly progression. Features a clean professional UI with real-time calculations.",
+      stack: [
+        "SvelteKit",
+        "Svelte 5",
+        "TypeScript",
+        "Tailwind CSS",
+        "IndexedDB",
+        "Vite",
+      ],
+      highlights: [
+        "Character progression planner with honing cost calculations, material tracking, and upgrade probability estimates",
+        "Raid roster management with role assignments, gate progression tracking, and weekly lockout timers",
+        "Gold income calculator across alts with una tasks, raids, events, and rapport rewards",
+        "IndexedDB persistence for offline-first experience with import/export functionality",
+        "Responsive layout with collapsible panels and keyboard shortcuts for power users",
+      ],
+      aiAssisted: true,
+      aiNote:
+        "This project was built with the assistance of AI pair-programming tools. I used AI to design the data models for Lost Ark's complex progression systems, implement the calculation engines for honing and gold tracking, and iterate rapidly on the UI. It demonstrates how I leverage AI for complex domain modeling and state management.",
+      external: false,
+    },
+    {
       slug: "anime",
       name: "Anime Watchlist",
       tagline: "A personal anime tracking and discovery tool",
@@ -25,6 +52,7 @@
       aiAssisted: true,
       aiNote:
         "This project was built with the assistance of AI pair-programming tools. I used AI to scaffold components, iterate rapidly on UI and state management, and refactor across Svelte's runes model. It demonstrates how I blend modern AI-assisted engineering with real product decisions, architecture, and code review.",
+      external: false,
     },
   ];
 </script>
@@ -49,7 +77,7 @@
 
   {#each projects as project}
     <section
-      class="project-card bg-white border border-zinc-200 rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.06)] p-8"
+      class="project-card bg-white border border-zinc-200 rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.06)] p-8 mb-10"
     >
       <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
         <div>
@@ -58,7 +86,7 @@
         </div>
         <a
           href={project.href}
-          target="_blank"
+          target={project.external ? "_blank" : "_self"}
           class="shrink-0 inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-accent text-white text-sm font-semibold hover:bg-zinc-950 hover:text-white transition no-underline"
         >
           Open app

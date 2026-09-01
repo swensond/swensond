@@ -12,7 +12,7 @@
 
 <div class="card p-6 text-center">
   {#if message}
-    <div class="text-[#a29e96]">{message}</div>
+    <div class="text-muted">{message}</div>
   {/if}
   {#if children}
     {@render children()}

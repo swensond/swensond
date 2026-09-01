@@ -74,7 +74,7 @@
     <StatCard label="Tradable Earned">
       <div class="stat-value text-xl">
         {completedTradable.toLocaleString()}
-        <span class="text-sm font-normal text-[#8a857c]">
+        <span class="text-sm font-normal text-muted">
           / {$weeklyIncome.toLocaleString()}g
         </span>
       </div>
@@ -85,7 +85,7 @@
   {#if totalAssigned > 0}
     {@const pct = Math.round((totalCompleted / totalAssigned) * 100)}
     <div class="card p-4">
-      <div class="flex justify-between text-xs text-[#a29e96] mb-2">
+      <div class="flex justify-between text-xs text-muted mb-2">
         <span>Weekly progress</span>
         <span>{pct}%</span>
       </div>
@@ -110,21 +110,21 @@
           <div class="card-header justify-between">
             <div class="font-semibold">{char.name}</div>
             <div class="flex items-center gap-3 text-xs">
-              <span class="text-[#a29e96]">
+              <span class="text-muted">
                 {done.length} / {char.assignedRaids.length} done
               </span>
-              <span class="tabular-nums la-gold-text" title="Tradable gold earned this week">
+              <span class="tabular-nums text-accent" title="Tradable gold earned this week">
                 +{charCompletedTradable(char.id).toLocaleString()}g
               </span>
             </div>
           </div>
 
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-px bg-[#060509]">
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-px bg-border">
             {#each char.assignedRaids as raidId (raidId)}
               {@const raid = raidMap.get(raidId)}
               {@const isDone = ($planner.completedRaids[char.id] ?? []).includes(raidId)}
 
-              <label class="raid-slot" style={isDone ? "background: rgba(74, 222, 128, 0.06);" : ""}>
+              <label class="raid-slot" style={isDone ? "background: var(--green-light);" : ""}>
                 <input
                   type="checkbox"
                   checked={isDone}
@@ -135,11 +135,11 @@
                   <div>
                     <div
                       class="text-xs font-medium"
-                      style={isDone ? "color: var(--la-green);" : ""}
+                      style={isDone ? "color: var(--green);" : ""}
                     >
                       {raid.name}
                     </div>
-                    <div class="text-xs text-[#a29e96]">
+                    <div class="text-xs text-muted">
                       {raid.rewardGold.toLocaleString()}g reward
                       · {raid.tradableGold.toLocaleString()}g tradable
                     </div>
