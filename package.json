@@ -26,6 +26,7 @@
 	},
 	"dependencies": {
 		"@lucide/svelte": "^1.38.0",
+		"@biomejs/biome": "^2.5.2",
 		"@rodneylab/svelte-social-icons": "^0.0.31",
 		"@steeze-ui/heroicons": "^2.4.2",
 		"@steeze-ui/svelte-icon": "^1.6.2",

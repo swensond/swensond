@@ -1,132 +1,530 @@
+import metallurgyBook from "$lib/assets/metallurgyBook.png";
+import metallurgyLvl1 from "$lib/assets/metallurgyLvl1.png";
+import metallurgyLvl2 from "$lib/assets/metallurgyLvl2.png";
+import metallurgyLvl3 from "$lib/assets/metallurgyLvl3.png";
+import metallurgyLvl4 from "$lib/assets/metallurgyLvl4.png";
+import tailoringBook from "$lib/assets/tailoringBook.png";
+import tailoringLvl1 from "$lib/assets/tailoringLvl1.png";
+import tailoringLvl2 from "$lib/assets/tailoringLvl2.png";
+import tailoringLvl3 from "$lib/assets/tailoringLvl3.png";
+import tailoringLvl4 from "$lib/assets/tailoringLvl4.png";
+import { materialSeed } from "$lib/data/materials";
+import type { MaterialPricingOption } from "$lib/types/material";
 import { writable } from "svelte/store";
 
-const STORAGE_KEY = "lostark-planner";
+/* ------------------------------------------------------
+   TYPES
+------------------------------------------------------ */
 
-export interface Character {
-  id: string;
-  name: string;
-  weeklyGold: number;
+export type KarmaKey = "enlightenment" | "evolution" | "leap";
+
+export interface KarmaTrack {
+  key: KarmaKey;
+  label: string;
 }
 
-export interface Goal {
-  id: string;
-  name: string;
-  cost: number;
-}
+export const karmaTracks: KarmaTrack[] = [
+  { key: "enlightenment", label: "Enlightenment" },
+  { key: "evolution", label: "Evolution" },
+  { key: "leap", label: "Leap" },
+];
 
-export interface PlannerState {
-  currentGold: number;
-  releaseDate: string;
-  roster: Character[];
-  goals: Goal[];
-}
-
-const defaultState: PlannerState = {
-  currentGold: 311186,
-  releaseDate: "9/16/2026",
-
-  roster: [
-    { id: "ikusawa", name: "Ikusawa", weeklyGold: 148000 },
-    { id: "manazuru", name: "Manazuru", weeklyGold: 148000 },
-    { id: "yajima", name: "Yajima", weeklyGold: 148000 },
-    { id: "ishimori", name: "Ishimori", weeklyGold: 148000 },
-    { id: "neuschwanstein", name: "Neuschwanstein", weeklyGold: 148000 },
-    { id: "mizunokouji", name: "Mizunokouji", weeklyGold: 148000 },
-  ],
-
-  goals: [
-    {
-      id: crypto.randomUUID(),
-      name: "Ambush Master",
-      cost: 0
-    },
-    {
-      id: crypto.randomUUID(),
-      name: "Keen Blunt Weapon",
-      cost: 0
-    }
-  ]
+export type KarmaState = {
+  currentLevel: number;
+  targetLevel: number;
+  artisan?: number;
 };
-function createStore() {
-  const browser = typeof window !== "undefined";
 
-  const stored = browser ? localStorage.getItem(STORAGE_KEY) : null;
+export type PlannerKarma = Record<KarmaKey, KarmaState>;
 
-  const initial: PlannerState = stored
-    ? JSON.parse(stored)
-    : defaultState;
+export type Material = {
+  id: string;
+  name: string;
+  icon: string;
+  required: number;
+  owned: number;
 
-  const { subscribe, set, update } = writable<PlannerState>(initial);
+  pricing?: MaterialPricingOption;
+  pricingOptions?: MaterialPricingOption[];
 
-  subscribe((value) => {
-    if (!browser) return;
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(value));
-  });
+  overrideUnitPrice?: number;
+  breakdown?: any[];
+  
+  // For box/chest management
+  boxes?: {
+    label: string; // e.g. "Small", "Medium", "Large"
+    size: number; // How many base materials are in one box of this type
+    owned: number; // How many boxes of this type the user owns
+  }[];
+};
 
+export type ArmorSlot = "chest" | "pants" | "gloves" | "shoulder" | "head";
+export type HoningMode = "regular" | "advanced" | "postReset";
+
+export type AccessorySlot = "necklace" | "earring1" | "earring2" | "ring1" | "ring2";
+
+export interface Accessory {
+  slot: AccessorySlot;
+  label: string;
+  owned: boolean;
+  goldCost: number;
+}
+
+/** A dated one-off income entry (event rewards, login bonuses, carries...) */
+export interface PlannedEvent {
+  id: string;
+  label: string;
+  /** ISO date (yyyy-mm-dd) the gold arrives */
+  date: string;
+  amount: number;
+  /** Which balance the gold lands in */
+  kind?: "tradable" | "bound";
+}
+
+export const modes: HoningMode[] = ["regular", "advanced", "postReset"];
+export const armorPieces: ArmorSlot[] = ["head", "shoulder", "chest", "gloves", "pants"];
+
+export interface HoningLevelRange {
+  currentLevel: number;
+  targetLevel: number;
+  artisan?: number;
+}
+
+export type GearHoningTrack = Record<HoningMode, HoningLevelRange>;
+
+export interface GoldEntry {
+  id: string;
+  /** Signed change in gold: positive = gained, negative = spent */
+  amount: number;
+  /** Balance immediately after this movement */
+  balanceAfter: number;
+  note?: string;
+  timestamp: string;
+}
+
+export interface TapEntry {
+  id: string;
+  kind: "honing" | "karma";
+  trackKey: string;
+  trackLabel: string;
+  level: number;
+  artisan: number | null;
+  timestamp: string;
+}
+
+export type Planner = {
+  __version?: string;
+
+  currentGold: number;
+  /** Bound (roster) gold from raids - usable for honing, not market purchases */
+  currentBoundGold?: number;
+  releaseDate: string | null;
+
+  roster: any[];
+  completedRaids: Record<string, string[]>;
+  lastRaidReset?: string;
+
+  materials: Material[];
+  engravings: any[];
+
+  weapon: GearHoningTrack;
+  armor: Record<ArmorSlot, GearHoningTrack>;
+
+  accessories: Accessory[];
+
+  /** Dated one-off income included in projections */
+  events?: PlannedEvent[];
+
+  karma: Record<KarmaKey, KarmaState>;
+
+  tapLog: TapEntry[];
+
+  /** Chronological record of every gold movement */
+  goldLog?: GoldEntry[];
+};
+
+/* ------------------------------------------------------
+   VERSIONING
+------------------------------------------------------ */
+export const STORAGE_VERSION = "3";
+const STORAGE_KEY = `lostark-planner-v0.2.0`;
+
+type Migration = (data: any) => any;
+
+/* ------------------------------------------------------
+   DEFAULTS
+------------------------------------------------------ */
+
+const defaultTrack = (): GearHoningTrack => ({
+  regular: { currentLevel: 0, targetLevel: 0 },
+  advanced: { currentLevel: 0, targetLevel: 0 },
+  postReset: { currentLevel: 0, targetLevel: 0 },
+});
+
+function createDefaultPlanner(): Planner {
   return {
-    subscribe,
+    __version: STORAGE_VERSION,
 
-    // --------------------
-    // GOLD ACTIONS
-    // --------------------
-    setGold: (gold: number) =>
-      update((state) => ({
-        ...state,
-        currentGold: gold,
-      })),
+    currentGold: 0,
+    currentBoundGold: 0,
+    releaseDate: null,
 
-    addGold: (amount: number) =>
-      update((state) => ({
-        ...state,
-        currentGold: state.currentGold + amount,
-      })),
+    roster: [],
+    completedRaids: {},
+    lastRaidReset: undefined,
 
-    spendGold: (amount: number) =>
-      update((state) => ({
-        ...state,
-        currentGold: state.currentGold - amount,
-      })),
+    materials: materialSeed.map((m) => ({
+      id: m.id,
+      name: m.name,
+      icon: m.icon,
+      required: m.amount,
+      owned: 0,
 
-    // --------------------
-    // ROSTER ACTIONS
-    // --------------------
-    addCharacter: (char: Character) =>
-      update((state) => ({
-        ...state,
-        roster: [...state.roster, char],
-      })),
+      pricingOptions: m.pricingOptions,
+      pricing: m.pricing,
+      overrideUnitPrice: undefined,
+      breakdown: [],
+      boxes: undefined,
+    })),
 
-    removeCharacter: (id: string) =>
-      update((state) => ({
-        ...state,
-        roster: state.roster.filter((c) => c.id !== id),
-      })),
+    engravings: [],
 
-    updateCharacter: (id: string, patch: Partial<Character>) =>
-      update((state) => ({
-        ...state,
-        roster: state.roster.map((c) =>
-          c.id === id ? { ...c, ...patch } : c
-        ),
-      })),
-    // --------------------
-    // GOALS ACTIONS
-    // --------------------
-    addGoal: (goal: Goal) =>
-      update((state) => ({
-        ...state,
-        goals: [...state.goals, goal],
-      })),
+    accessories: [
+      { slot: "necklace", label: "Necklace", owned: false, goldCost: 0 },
+      { slot: "earring1", label: "Earring 1", owned: false, goldCost: 0 },
+      { slot: "earring2", label: "Earring 2", owned: false, goldCost: 0 },
+      { slot: "ring1", label: "Ring 1", owned: false, goldCost: 0 },
+      { slot: "ring2", label: "Ring 2", owned: false, goldCost: 0 },
+    ],
 
-    removeGoal: (id: string) =>
-      update((state) => ({
-        ...state,
-        goals: state.goals.filter((g) => g.id !== id),
-      })),
+    events: [],
 
-    set,
-    update,
+    weapon: defaultTrack(),
+
+    armor: {
+      chest: defaultTrack(),
+      pants: defaultTrack(),
+      gloves: defaultTrack(),
+      shoulder: defaultTrack(),
+      head: defaultTrack(),
+    },
+
+    karma: {
+      enlightenment: { currentLevel: 0, targetLevel: 0 },
+      evolution: { currentLevel: 0, targetLevel: 0 },
+      leap: { currentLevel: 0, targetLevel: 0 },
+    },
+
+    tapLog: [],
+
+    goldLog: [],
   };
 }
 
-export const planner = createStore();
+function getCurrentRaidResetKey(): string {
+  const now = new Date();
+
+  // EST/EDT-aware using New York timezone
+  const estNow = new Date(
+    now.toLocaleString("en-US", {
+      timeZone: "America/New_York",
+    })
+  );
+
+  const reset = new Date(estNow);
+
+  // Wednesday = 3
+  const daysSinceWednesday = (estNow.getDay() - 3 + 7) % 7;
+
+  reset.setDate(estNow.getDate() - daysSinceWednesday);
+  reset.setHours(6, 0, 0, 0);
+
+  // Before this week's Wednesday 6am → use previous week's reset
+  if (estNow < reset) {
+    reset.setDate(reset.getDate() - 7);
+  }
+
+  return reset.toISOString();
+}
+
+/* ------------------------------------------------------
+   MIGRATIONS
+------------------------------------------------------ */
+
+const migrations: Record<string, Migration> = {
+  "0->1": (data: any): Planner => {
+    const roster = Array.isArray(data.roster) ? data.roster : [];
+
+    return {
+      __version: STORAGE_VERSION,
+
+      currentGold: data.currentGold ?? 0,
+      releaseDate: data.releaseDate ?? null,
+
+      // roster stays same shape
+      roster,
+
+      // migrate assignedRaids → completedRaids
+      completedRaids: roster.reduce(
+        (acc: Record<string, string[]>, char: any) => {
+          if (char?.id && Array.isArray(char.assignedRaids)) {
+            acc[char.id] = char.assignedRaids;
+          }
+          return acc;
+        },
+        {}
+      ),
+
+      lastRaidReset: undefined,
+
+      // materials migration
+      materials: materialSeed.map((seed) => {
+        const existing = (data.materials ?? []).find((m: any) => m.id === seed.id);
+
+        return {
+          id: seed.id,
+          name: seed.name,
+          icon: seed.icon,
+
+          required: existing?.required ?? seed.amount,
+          owned: existing?.owned ?? 0,
+
+          pricingOptions: seed.pricingOptions,
+          pricing: seed.pricing,
+
+          overrideUnitPrice: undefined,
+          breakdown: [],
+        };
+      }),
+
+      engravings: data.engravings ?? [],
+
+      weapon: data.weapon ?? createDefaultPlanner().weapon,
+      armor: data.armor ?? createDefaultPlanner().armor,
+      accessories: data.accessories ?? createDefaultPlanner().accessories,
+      karma: data.karma ?? createDefaultPlanner().karma,
+      tapLog: data.tapLog ?? [],
+    };
+  },
+  "1->2": (data: Planner): Planner => {
+    const newMaterials = [
+      {
+        id: "metallurgyBook19to20",
+        name: "Metallurgy: Hellfire [19-20]",
+        amount: 0,
+        pricing: {
+          label: "Default",
+          marketSize: 1,
+          marketPrice: 3599,
+        },
+        icon: metallurgyBook, // TODO: add icon
+      },
+      {
+        id: "tailoringBook19to20",
+        name: "Tailoring: Hellfire [19-20]",
+        amount: 0,
+        pricing: {
+          label: "Default",
+          marketSize: 1,
+          marketPrice: 2395,
+        },
+        icon: tailoringBook, // TODO: add icon
+      },
+      {
+        id: "metallurgyScrollLv3",
+        name: "Artisan's Metallurgy: Level 3",
+        amount: 0,
+        pricing: {
+          label: "Default",
+          marketSize: 1,
+          marketPrice: 825,
+        },
+        icon: metallurgyLvl3, // TODO: add icon
+      },
+      {
+        id: "metallurgyScrollLv4",
+        name: "Artisan's Metallurgy: Level 4",
+        amount: 0,
+        pricing: {
+          label: "Default",
+          marketSize: 1,
+          marketPrice: 1100,
+        },
+        icon: metallurgyLvl4, // TODO: add icon
+      },
+      {
+        id: "tailoringScrollLv3",
+        name: "Artisan's Tailoring: Level 3",
+        amount: 0,
+        pricing: {
+          label: "Default",
+          marketSize: 1,
+          marketPrice: 1464,
+        },
+        icon: tailoringLvl3, // TODO: add icon
+      },
+      {
+        id: "tailoringScrollLv4",
+        name: "Artisan's Tailoring: Level 4",
+        amount: 0,
+        pricing: {
+          label: "Default",
+          marketSize: 1,
+          marketPrice: 1443,
+        },
+        icon: tailoringLvl4, // TODO: add icon
+      },
+    ];
+
+    const existingIds = new Set(data.materials.map((m) => m.id));
+
+    return {
+      ...data,
+      __version: STORAGE_VERSION,
+      materials: [
+        ...data.materials,
+        ...newMaterials
+          .filter((m) => !existingIds.has(m.id))
+          .map((m) => ({
+            id: m.id,
+            name: m.name,
+            icon: m.icon,
+            required: m.amount,
+            owned: 0,
+            pricing: m.pricing,
+            breakdown: [],
+          })),
+      ],
+    };
+  },
+  "2->3": (data: Planner): Planner => {
+    const defaults = createDefaultPlanner();
+    const newMaterials = [
+      { id: "tailoringBook11to14", name: "Tailoring: Hellfire [11-14]", amount: 0, pricing: { label: "Default", marketSize: 1, marketPrice: 1850 }, icon: tailoringBook },
+      { id: "tailoringBook15to18", name: "Tailoring: Hellfire [15-18]", amount: 0, pricing: { label: "Default", marketSize: 1, marketPrice: 2100 }, icon: tailoringBook },
+      { id: "metallurgyBook11to14", name: "Metallurgy: Hellfire [11-14]", amount: 0, pricing: { label: "Default", marketSize: 1, marketPrice: 1900 }, icon: metallurgyBook },
+      { id: "metallurgyBook15to18", name: "Metallurgy: Hellfire [15-18]", amount: 0, pricing: { label: "Default", marketSize: 1, marketPrice: 2200 }, icon: metallurgyBook },
+      { id: "tailoringScrollLv1", name: "Artisan's Tailoring: Level 1", amount: 0, pricing: { label: "Default", marketSize: 1, marketPrice: 450 }, icon: tailoringLvl1 },
+      { id: "tailoringScrollLv2", name: "Artisan's Tailoring: Level 2", amount: 0, pricing: { label: "Default", marketSize: 1, marketPrice: 650 }, icon: tailoringLvl2 },
+      { id: "metallurgyScrollLv1", name: "Artisan's Metallurgy: Level 1", amount: 0, pricing: { label: "Default", marketSize: 1, marketPrice: 480 }, icon: metallurgyLvl1 },
+      { id: "metallurgyScrollLv2", name: "Artisan's Metallurgy: Level 2", amount: 0, pricing: { label: "Default", marketSize: 1, marketPrice: 680 }, icon: metallurgyLvl2 },
+    ];
+
+    const existingIds = new Set(data.materials.map((m) => m.id));
+
+    return {
+      ...data,
+      __version: STORAGE_VERSION,
+      accessories: data.accessories ?? defaults.accessories,
+      materials: [
+        ...data.materials,
+        ...newMaterials
+          .filter((m) => !existingIds.has(m.id))
+          .map((m) => ({
+            id: m.id,
+            name: m.name,
+            icon: m.icon,
+            required: m.amount,
+            owned: 0,
+            pricing: m.pricing,
+            breakdown: [],
+          })),
+      ],
+    };
+  },
+};
+
+function migratePlanner(data: any, fromVersion: string, toVersion: string): Planner {
+  let migrated = data;
+
+  let current = Number(fromVersion);
+  const target = Number(toVersion);
+
+  while (current < target) {
+    const key = `${current}->${current + 1}`;
+    const migration = migrations[key];
+
+    if (migration) {
+      migrated = migration(migrated);
+    } else {
+      console.warn(`Missing migration: ${key}`);
+    }
+
+    current++;
+  }
+
+  return migrated as Planner;
+}
+
+/* ------------------------------------------------------
+   STORE
+------------------------------------------------------ */
+
+function createPlannerStore() {
+  const defaults = createDefaultPlanner();
+  let initial: Planner = defaults;
+
+  if (typeof window !== "undefined") {
+    const raw = localStorage.getItem(STORAGE_KEY);
+
+    if (raw) {
+      try {
+        const parsed = JSON.parse(raw);
+
+        const version = parsed?.__version ?? "0";
+
+        initial = migratePlanner(parsed, version, STORAGE_VERSION);
+
+        initial = {
+          ...initial,
+          __version: STORAGE_VERSION,
+        };
+      } catch {
+        initial = defaults;
+      }
+    }
+  }
+
+  // Ensure accessories defaults exist for existing stored data
+  if (!initial.accessories || initial.accessories.length === 0) {
+    initial = {
+      ...initial,
+      accessories: defaults.accessories,
+    };
+  }
+
+  if (!initial.events) {
+    initial = {
+      ...initial,
+      events: [],
+    };
+  }
+
+  const currentResetKey = getCurrentRaidResetKey();
+
+  if (initial.lastRaidReset !== currentResetKey) {
+    initial = {
+      ...initial,
+      completedRaids: {},
+      lastRaidReset: currentResetKey,
+    };
+  }
+
+  const store = writable<Planner>(initial);
+
+  if (typeof window !== "undefined") {
+    store.subscribe((value) => {
+      localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify({
+          ...value,
+          __version: STORAGE_VERSION,
+        })
+      );
+    });
+  }
+
+  return store;
+}
+
+export const planner = createPlannerStore();

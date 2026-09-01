@@ -1,16 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500;600;700&display=swap');
 @import 'tailwindcss';
 @plugin '@tailwindcss/typography';
 
-/* Global styles */
+/* =========================================================
+   LOST ARK IN-GAME UI THEME - FLAT DARK PANELS
+   Near-black translucent surfaces, serif headings,
+   gold selection accents, green completion states.
+   ========================================================= */
 :root {
-    font-family: Inter, sans-serif;
+    /* Core palette */
+    --la-bg: #0b0a0e;
+    --la-panel: rgba(14, 12, 18, 0.82);
+    --la-panel-alt: rgba(22, 20, 28, 0.6);
+    --la-hover: rgba(255, 255, 255, 0.05);
+
+    /* Gold - selection / highlight / progress */
+    --la-accent: #d0a75a;
+    --la-accent-bright: #e8c987;
+    --la-accent-dim: #7a6337;
+
+    /* Green - completed / positive */
+    --la-green: #8fce46;
+    --la-green-bright: #a8e05f;
+
+    /* Red - warnings / danger */
+    --la-red: #e05c5c;
+    --la-red-bright: #ff7a7a;
+
+    /* Borders */
+    --la-border: rgba(255, 255, 255, 0.12);
+    --la-border-strong: rgba(208, 167, 90, 0.65);
+
+    /* Text */
+    --la-text: #f2efe9;
+    --la-text-muted: #a29e96;
+    --la-text-faint: #6e6a64;
+
+    font-family: 'Inter', 'Helvetica Neue', Arial, 'Segoe UI', Roboto, sans-serif;
     font-feature-settings: 'liga' 1, 'calt' 1;
-    /* fix for Chrome */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
 }
 
 @supports (font-variation-settings: normal) {
     :root {
-        font-family: InterVariable, sans-serif;
+        font-family: 'InterVariable', 'Inter', 'Helvetica Neue', Arial, 'Segoe UI', Roboto, sans-serif;
     }
 }
 
@@ -22,7 +57,8 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 
-    @apply bg-zinc-100 text-zinc-900;
+    background-color: var(--la-bg);
+    color: var(--la-text);
 }
 
 /* Smooth scrolling */
@@ -30,33 +66,33 @@ html {
     scroll-behavior: smooth;
 }
 
-/* Custom scrollbar styling - subtle */
+/* Custom scrollbar - flat dark, gold hover */
 ::-webkit-scrollbar {
-    width: 6px;
+    width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-    background: transparent;
+    background: var(--la-bg);
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #cbd5e1;
-    border-radius: 3px;
+    background: #2e2b33;
+    border-radius: 0;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #94a3b8;
+    background: var(--la-accent-dim);
 }
 
-/* Selection styling - muted blue */
+/* Selection - warm highlight */
 ::selection {
-    background-color: #bfdbfe;
-    color: #1e293b;
+    background-color: rgba(208, 167, 90, 0.35);
+    color: #fdf9ef;
 }
 
 /* Focus styles for accessibility */
 *:focus-visible {
-    outline: 2px solid #3b82f6;
+    outline: 2px solid var(--la-accent);
     outline-offset: 2px;
 }
 
@@ -97,187 +133,201 @@ html {
 }
 
 /* Utility classes */
-.text-blue-accent {
-    color: #1d4ed8;
+.text-gold-accent {
+    color: var(--la-accent);
 }
 
-.bg-blue-accent {
-    background-color: #2563eb;
+.bg-gold-accent {
+    background-color: var(--la-accent);
 }
 
-.blue-gradient {
-    background: linear-gradient(135deg, #1e40af, #2563eb);
-}
-
-.shadow-blue {
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(37, 99, 235, 0.06);
-}
-
-.shadow-blue-lg {
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(37, 99, 235, 0.06);
-}
-
-.hover-blue:hover {
-    color: #1d4ed8;
-}
-
-.border-blue-light {
-    border-color: #e2e8f0;
+.hover-gold:hover {
+    color: var(--la-accent-bright);
 }
 
 .accent-line {
-    height: 2px;
-    background-color: #2563eb;
-}
-
-.blue-card-hover {
-    transition: box-shadow 0.2s ease;
-}
-
-.blue-card-hover:hover {
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(37, 99, 235, 0.06);
-}
-
-.blue-badge {
-    background-color: #eff6ff;
-    color: #1d4ed8;
-    border: 1px solid #dbeafe;
-}
-
-.blue-icon {
-    color: #2563eb;
-}
-
-.blue-divider {
-    border: none;
     height: 1px;
-    background-color: #e2e8f0;
+    background-color: var(--la-accent-dim);
 }
 
-/* Resume specific styles */
-.resume-container {
-    max-width: 7xl;
-    margin: 0 auto;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    padding-top: 3rem;
-    padding-bottom: 3rem;
+/* =========================================================
+   SHARED COMPONENT STYLES
+   Used by both the anime and loa-planner sections.
+   ========================================================= */
+
+/* Cards / panels - flat translucent, sharp corners */
+.card {
+    @apply rounded-sm overflow-hidden;
+    background: var(--la-panel);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--la-border);
 }
 
-@media (min-width: 640px) {
-    .resume-container {
-        padding-left: 1.5rem;
-        padding-right: 1.5rem;
+.card-header {
+    @apply flex items-center gap-3 px-4 py-3;
+    background: rgba(255, 255, 255, 0.03);
+    border-bottom: 1px solid var(--la-border);
+}
+
+/* Buttons */
+.btn {
+    @apply text-xs px-2.5 py-1 rounded-sm border transition;
+    color: var(--la-text);
+    border-color: var(--la-border);
+    background: rgba(38, 36, 44, 0.75);
+}
+
+.btn:hover:not(:disabled) {
+    border-color: var(--la-accent);
+    color: var(--la-accent-bright);
+    background: rgba(52, 48, 56, 0.85);
+}
+
+.btn:disabled {
+    opacity: 0.45;
+    cursor: default;
+}
+
+.btn-primary {
+    @apply px-3.5 py-1.5 rounded-sm text-xs font-semibold transition;
+    color: #1c1508;
+    background-color: var(--la-accent);
+    border: 1px solid transparent;
+}
+
+.btn-primary:hover:not(:disabled) {
+    background-color: var(--la-accent-bright);
+}
+
+.btn-secondary {
+    @apply px-4 py-2 rounded-sm transition;
+    color: var(--la-text-muted);
+    border: 1px solid var(--la-border);
+    background: rgba(38, 36, 44, 0.75);
+}
+
+.btn-secondary:hover {
+    color: var(--la-text);
+    border-color: var(--la-border-strong);
+    background: rgba(52, 48, 56, 0.85);
+}
+
+.btn-danger {
+    @apply text-xs transition rounded-sm;
+    color: var(--la-red);
+}
+
+.btn-danger:hover {
+    color: var(--la-red-bright);
+}
+
+.btn-danger-solid {
+    @apply rounded-sm transition;
+    padding: 0.5rem 0.75rem;
+    color: var(--la-red);
+    border: 1px solid rgba(224, 93, 93, 0.35);
+    background: rgba(38, 36, 44, 0.75);
+}
+
+.btn-danger-solid:hover {
+    color: var(--la-red-bright);
+    border-color: var(--la-red);
+}
+
+/* Stat cards */
+.stat-card {
+    @apply rounded-sm p-5;
+    background: var(--la-panel-alt);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--la-border);
+}
+
+.stat-label {
+    @apply text-xs mb-1 uppercase tracking-widest;
+    color: var(--la-text-muted);
+}
+
+.stat-value {
+    @apply text-2xl font-bold tabular-nums;
+    color: var(--la-text);
+}
+
+.stat-value-red {
+    color: var(--la-red);
+}
+
+.stat-value-green {
+    color: var(--la-green);
+}
+
+/* Inputs */
+.input {
+    @apply cursor-text px-3 py-2 outline-none rounded-sm;
+    background: rgba(0, 0, 0, 0.35);
+    color: var(--la-text);
+    border: 1px solid var(--la-border);
+}
+
+.input:focus {
+    border-color: var(--la-accent);
+    box-shadow: 0 0 0 1px var(--la-accent);
+}
+
+select.input {
+    appearance: none;
+    -webkit-appearance: none;
+    padding-right: 2rem;
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23a29e96' stroke-width='1.5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.65rem center;
+}
+
+/* Tabs - gold underline for active */
+.tab {
+    @apply cursor-pointer px-4 py-2.5 text-sm font-medium transition border-b-2 border-transparent;
+    color: var(--la-text-muted);
+}
+
+.tab:hover {
+    color: var(--la-text);
+    background: var(--la-hover);
+}
+
+.tab.active,
+.tab-active {
+    color: var(--la-accent-bright);
+    border-bottom-color: var(--la-accent);
+    background: rgba(208, 167, 90, 0.07);
+}
+
+/* Loading skeleton */
+.skeleton {
+    background-color: rgba(255, 255, 255, 0.04);
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    0%, 100% {
+        background-color: rgba(255, 255, 255, 0.04);
+    }
+    50% {
+        background-color: rgba(255, 255, 255, 0.1);
     }
 }
 
-@media (min-width: 1024px) {
-    .resume-container {
-        padding-left: 2rem;
-        padding-right: 2rem;
-    }
+/* Spinner */
+.spinner {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid rgba(163, 158, 150, 0.35);
+    border-top-color: var(--la-accent-bright);
+    animation: spin 0.7s linear infinite;
+    display: inline-block;
 }
 
-/* Increase padding between sections */
-.resume-container>section {
-    margin-bottom: 2rem;
-}
-
-/* Make job title and company name appear on same line with emphasis */
-.experience-entry {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 1px solid #e2e8f0;
-    margin-bottom: 1.5rem;
-}
-
-.company-title-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-}
-
-.company-name {
-    font-weight: 700;
-    font-size: 1.125rem;
-    /* text-lg */
-    color: #1e293b;
-}
-
-.job-title {
-    font-weight: 600;
-    font-size: 1rem;
-    color: #1d4ed8;
-    text-decoration: none;
-}
-
-/* For the experience grid layout - ensure proper alignment */
-.experience-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 1rem;
-    align-items: center;
-}
-
-/* Ensure company and period are properly aligned */
-.company-period-container {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-}
-
-/* Increase spacing between experience entries */
-.experience-item {
-    margin-bottom: 1.5rem;
-}
-
-/* Skills section - tags and chips */
-.skills-chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-top: 0.5rem;
-}
-
-.skill-chip {
-    background-color: #eff6ff;
-    color: #1d4ed8;
-    border: 1px solid #dbeafe;
-    padding: 0.25rem 0.75rem;
-    border-radius: 9999px;
-    font-size: 0.875rem;
-    font-weight: 500;
-    transition: all 0.2s ease;
-}
-
-.skill-chip:hover {
-    background-color: #dbeafe;
-    transform: translateY(-1px);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.skill-category {
-    margin-top: 1rem;
-}
-
-.skill-category-title {
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-    color: #1e293b;
-}
-
-/* Responsive adjustments for smaller screens */
-@media (max-width: 768px) {
-    .skill-chip {
-        padding: 0.25rem 0.5rem;
-        font-size: 0.75rem;
-    }
-
-    .skills-chips {
-        gap: 0.25rem;
-    }
+@keyframes spin {
+    to { transform: rotate(360deg); }
 }

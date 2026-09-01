@@ -1,0 +1,464 @@
+{
+    "armor": {
+        "21": {
+            "Gold": 8665,
+            "Honor Shards": 30328,
+            "Abidos Fusion Material": 74,
+            "Destiny Destruction Stone": 0,
+            "Destiny Guardian Stone": 4333,
+            "Destiny Leapstone": 78,
+            "Other Materials": {
+                "Artisan's Tailoring: Level 3": 4
+            }
+        },
+        "22": {
+            "Gold": 8665,
+            "Honor Shards": 30328,
+            "Abidos Fusion Material": 74,
+            "Destiny Destruction Stone": 0,
+            "Destiny Guardian Stone": 4333,
+            "Destiny Leapstone": 78,
+            "Other Materials": {
+                "Artisan's Tailoring: Level 3": 4
+            }
+        },
+        "23": {
+            "Gold": 8665,
+            "Honor Shards": 30328,
+            "Abidos Fusion Material": 74,
+            "Destiny Destruction Stone": 0,
+            "Destiny Guardian Stone": 4333,
+            "Destiny Leapstone": 78,
+            "Other Materials": {
+                "Artisan's Tailoring: Level 3": 4
+            }
+        },
+        "24": {
+            "Gold": 8665,
+            "Honor Shards": 30328,
+            "Abidos Fusion Material": 74,
+            "Destiny Destruction Stone": 0,
+            "Destiny Guardian Stone": 4333,
+            "Destiny Leapstone": 78,
+            "Other Materials": {
+                "Artisan's Tailoring: Level 3": 4
+            }
+        },
+        "25": {
+            "Gold": 8665,
+            "Honor Shards": 30328,
+            "Abidos Fusion Material": 74,
+            "Destiny Destruction Stone": 0,
+            "Destiny Guardian Stone": 4333,
+            "Destiny Leapstone": 78,
+            "Other Materials": {
+                "Artisan's Tailoring: Level 3": 4
+            }
+        },
+        "26": {
+            "Gold": 8665,
+            "Honor Shards": 30328,
+            "Abidos Fusion Material": 74,
+            "Destiny Destruction Stone": 0,
+            "Destiny Guardian Stone": 4333,
+            "Destiny Leapstone": 78,
+            "Other Materials": {
+                "Artisan's Tailoring: Level 3": 4
+            }
+        },
+        "27": {
+            "Gold": 8665,
+            "Honor Shards": 30328,
+            "Abidos Fusion Material": 74,
+            "Destiny Destruction Stone": 0,
+            "Destiny Guardian Stone": 4333,
+            "Destiny Leapstone": 78,
+            "Other Materials": {
+                "Artisan's Tailoring: Level 3": 4
+            }
+        },
+        "28": {
+            "Gold": 8665,
+            "Honor Shards": 30328,
+            "Abidos Fusion Material": 74,
+            "Destiny Destruction Stone": 0,
+            "Destiny Guardian Stone": 4333,
+            "Destiny Leapstone": 78,
+            "Other Materials": {
+                "Artisan's Tailoring: Level 3": 4
+            }
+        },
+        "29": {
+            "Gold": 8665,
+            "Honor Shards": 30328,
+            "Abidos Fusion Material": 74,
+            "Destiny Destruction Stone": 0,
+            "Destiny Guardian Stone": 4333,
+            "Destiny Leapstone": 78,
+            "Other Materials": {
+                "Artisan's Tailoring: Level 3": 4
+            }
+        },
+        "30": {
+            "Gold": 8665,
+            "Honor Shards": 30328,
+            "Abidos Fusion Material": 74,
+            "Destiny Destruction Stone": 0,
+            "Destiny Guardian Stone": 4333,
+            "Destiny Leapstone": 78,
+            "Other Materials": {
+                "Artisan's Tailoring: Level 3": 4
+            }
+        },
+        "31": {
+            "Gold": 10398,
+            "Honor Shards": 34661,
+            "Abidos Fusion Material": 83,
+            "Destiny Destruction Stone": 0,
+            "Destiny Guardian Stone": 5199,
+            "Destiny Leapstone": 100,
+            "Other Materials": {
+                "Artisan's Tailoring: Level 4": 4
+            }
+        },
+        "32": {
+            "Gold": 10398,
+            "Honor Shards": 34661,
+            "Abidos Fusion Material": 83,
+            "Destiny Destruction Stone": 0,
+            "Destiny Guardian Stone": 5199,
+            "Destiny Leapstone": 100,
+            "Other Materials": {
+                "Artisan's Tailoring: Level 4": 4
+            }
+        },
+        "33": {
+            "Gold": 10398,
+            "Honor Shards": 34661,
+            "Abidos Fusion Material": 83,
+            "Destiny Destruction Stone": 0,
+            "Destiny Guardian Stone": 5199,
+            "Destiny Leapstone": 100,
+            "Other Materials": {
+                "Artisan's Tailoring: Level 4": 4
+            }
+        },
+        "34": {
+            "Gold": 10398,
+            "Honor Shards": 34661,
+            "Abidos Fusion Material": 83,
+            "Destiny Destruction Stone": 0,
+            "Destiny Guardian Stone": 5199,
+            "Destiny Leapstone": 100,
+            "Other Materials": {
+                "Artisan's Tailoring: Level 4": 4
+            }
+        },
+        "35": {
+            "Gold": 10398,
+            "Honor Shards": 34661,
+            "Abidos Fusion Material": 83,
+            "Destiny Destruction Stone": 0,
+            "Destiny Guardian Stone": 5199,
+            "Destiny Leapstone": 100,
+            "Other Materials": {
+                "Artisan's Tailoring: Level 4": 4
+            }
+        },
+        "36": {
+            "Gold": 10398,
+            "Honor Shards": 34661,
+            "Abidos Fusion Material": 83,
+            "Destiny Destruction Stone": 0,
+            "Destiny Guardian Stone": 5199,
+            "Destiny Leapstone": 100,
+            "Other Materials": {
+                "Artisan's Tailoring: Level 4": 4
+            }
+        },
+        "37": {
+            "Gold": 10398,
+            "Honor Shards": 34661,
+            "Abidos Fusion Material": 83,
+            "Destiny Destruction Stone": 0,
+            "Destiny Guardian Stone": 5199,
+            "Destiny Leapstone": 100,
+            "Other Materials": {
+                "Artisan's Tailoring: Level 4": 4
+            }
+        },
+        "38": {
+            "Gold": 10398,
+            "Honor Shards": 34661,
+            "Abidos Fusion Material": 83,
+            "Destiny Destruction Stone": 0,
+            "Destiny Guardian Stone": 5199,
+            "Destiny Leapstone": 100,
+            "Other Materials": {
+                "Artisan's Tailoring: Level 4": 4
+            }
+        },
+        "39": {
+            "Gold": 10398,
+            "Honor Shards": 34661,
+            "Abidos Fusion Material": 83,
+            "Destiny Destruction Stone": 0,
+            "Destiny Guardian Stone": 5199,
+            "Destiny Leapstone": 100,
+            "Other Materials": {
+                "Artisan's Tailoring: Level 4": 4
+            }
+        },
+        "40": {
+            "Gold": 10398,
+            "Honor Shards": 34661,
+            "Abidos Fusion Material": 83,
+            "Destiny Destruction Stone": 0,
+            "Destiny Guardian Stone": 5199,
+            "Destiny Leapstone": 100,
+            "Other Materials": {
+                "Artisan's Tailoring: Level 4": 4
+            }
+        }
+    },
+    "weapon": {
+        "21": {
+            "Gold": 13001,
+            "Honor Shards": 49813,
+            "Abidos Fusion Material": 121,
+            "Destiny Destruction Stone": 5198,
+            "Destiny Guardian Stone": 109,
+            "Destiny Leapstone": 0,
+            "Other Materials": {
+                "Lava's Breath": 1,
+                "Artisan's Metallurgy: Level 3": 4
+            }
+        },
+        "22": {
+            "Gold": 13001,
+            "Honor Shards": 49813,
+            "Abidos Fusion Material": 121,
+            "Destiny Destruction Stone": 5198,
+            "Destiny Guardian Stone": 109,
+            "Destiny Leapstone": 0,
+            "Other Materials": {
+                "Lava's Breath": 1,
+                "Artisan's Metallurgy: Level 3": 4
+            }
+        },
+        "23": {
+            "Gold": 13001,
+            "Honor Shards": 49813,
+            "Abidos Fusion Material": 121,
+            "Destiny Destruction Stone": 5198,
+            "Destiny Guardian Stone": 109,
+            "Destiny Leapstone": 0,
+            "Other Materials": {
+                "Lava's Breath": 1,
+                "Artisan's Metallurgy: Level 3": 4
+            }
+        },
+        "24": {
+            "Gold": 13001,
+            "Honor Shards": 49813,
+            "Abidos Fusion Material": 121,
+            "Destiny Destruction Stone": 5198,
+            "Destiny Guardian Stone": 109,
+            "Destiny Leapstone": 0,
+            "Other Materials": {
+                "Lava's Breath": 1,
+                "Artisan's Metallurgy: Level 3": 4
+            }
+        },
+        "25": {
+            "Gold": 13001,
+            "Honor Shards": 49813,
+            "Abidos Fusion Material": 121,
+            "Destiny Destruction Stone": 5198,
+            "Destiny Guardian Stone": 109,
+            "Destiny Leapstone": 0,
+            "Other Materials": {
+                "Lava's Breath": 1,
+                "Artisan's Metallurgy: Level 3": 4
+            }
+        },
+        "26": {
+            "Gold": 13001,
+            "Honor Shards": 49813,
+            "Abidos Fusion Material": 121,
+            "Destiny Destruction Stone": 5198,
+            "Destiny Guardian Stone": 109,
+            "Destiny Leapstone": 0,
+            "Other Materials": {
+                "Lava's Breath": 1,
+                "Artisan's Metallurgy: Level 3": 4
+            }
+        },
+        "27": {
+            "Gold": 13001,
+            "Honor Shards": 49813,
+            "Abidos Fusion Material": 121,
+            "Destiny Destruction Stone": 5198,
+            "Destiny Guardian Stone": 109,
+            "Destiny Leapstone": 0,
+            "Other Materials": {
+                "Lava's Breath": 1,
+                "Artisan's Metallurgy: Level 3": 4
+            }
+        },
+        "28": {
+            "Gold": 13001,
+            "Honor Shards": 49813,
+            "Abidos Fusion Material": 121,
+            "Destiny Destruction Stone": 5198,
+            "Destiny Guardian Stone": 109,
+            "Destiny Leapstone": 0,
+            "Other Materials": {
+                "Lava's Breath": 1,
+                "Artisan's Metallurgy: Level 3": 4
+            }
+        },
+        "29": {
+            "Gold": 13001,
+            "Honor Shards": 49813,
+            "Abidos Fusion Material": 121,
+            "Destiny Destruction Stone": 5198,
+            "Destiny Guardian Stone": 109,
+            "Destiny Leapstone": 0,
+            "Other Materials": {
+                "Lava's Breath": 2,
+                "Artisan's Metallurgy: Level 3": 4
+            }
+        },
+        "30": {
+            "Gold": 13001,
+            "Honor Shards": 49813,
+            "Abidos Fusion Material": 121,
+            "Destiny Destruction Stone": 5198,
+            "Destiny Guardian Stone": 109,
+            "Destiny Leapstone": 0,
+            "Other Materials": {
+                "Artisan's Metallurgy: Level 3": 4
+            }
+        },
+        "31": {
+            "Gold": 17326,
+            "Honor Shards": 56310,
+            "Abidos Fusion Material": 130,
+            "Destiny Destruction Stone": 6065,
+            "Destiny Guardian Stone": 139,
+            "Destiny Leapstone": 0,
+            "Other Materials": {
+                "Lava's Breath": 1,
+                "Artisan's Metallurgy: Level 4": 4
+            }
+        },
+        "32": {
+            "Gold": 17326,
+            "Honor Shards": 56310,
+            "Abidos Fusion Material": 130,
+            "Destiny Destruction Stone": 6065,
+            "Destiny Guardian Stone": 139,
+            "Destiny Leapstone": 0,
+            "Other Materials": {
+                "Lava's Breath": 1,
+                "Artisan's Metallurgy: Level 4": 4
+            }
+        },
+        "33": {
+            "Gold": 17326,
+            "Honor Shards": 56310,
+            "Abidos Fusion Material": 130,
+            "Destiny Destruction Stone": 6065,
+            "Destiny Guardian Stone": 139,
+            "Destiny Leapstone": 0,
+            "Other Materials": {
+                "Lava's Breath": 1,
+                "Artisan's Metallurgy: Level 4": 4
+            }
+        },
+        "34": {
+            "Gold": 17326,
+            "Honor Shards": 56310,
+            "Abidos Fusion Material": 130,
+            "Destiny Destruction Stone": 6065,
+            "Destiny Guardian Stone": 139,
+            "Destiny Leapstone": 0,
+            "Other Materials": {
+                "Lava's Breath": 1,
+                "Artisan's Metallurgy: Level 4": 4
+            }
+        },
+        "35": {
+            "Gold": 17326,
+            "Honor Shards": 56310,
+            "Abidos Fusion Material": 130,
+            "Destiny Destruction Stone": 6065,
+            "Destiny Guardian Stone": 139,
+            "Destiny Leapstone": 0,
+            "Other Materials": {
+                "Lava's Breath": 1,
+                "Artisan's Metallurgy: Level 4": 4
+            }
+        },
+        "36": {
+            "Gold": 17326,
+            "Honor Shards": 56310,
+            "Abidos Fusion Material": 130,
+            "Destiny Destruction Stone": 6065,
+            "Destiny Guardian Stone": 139,
+            "Destiny Leapstone": 0,
+            "Other Materials": {
+                "Lava's Breath": 1,
+                "Artisan's Metallurgy: Level 4": 4
+            }
+        },
+        "37": {
+            "Gold": 17326,
+            "Honor Shards": 56310,
+            "Abidos Fusion Material": 130,
+            "Destiny Destruction Stone": 6065,
+            "Destiny Guardian Stone": 139,
+            "Destiny Leapstone": 0,
+            "Other Materials": {
+                "Lava's Breath": 1,
+                "Artisan's Metallurgy: Level 4": 4
+            }
+        },
+        "38": {
+            "Gold": 17326,
+            "Honor Shards": 56310,
+            "Abidos Fusion Material": 130,
+            "Destiny Destruction Stone": 6065,
+            "Destiny Guardian Stone": 139,
+            "Destiny Leapstone": 0,
+            "Other Materials": {
+                "Lava's Breath": 1,
+                "Artisan's Metallurgy: Level 4": 4
+            }
+        },
+        "39": {
+            "Gold": 17326,
+            "Honor Shards": 56310,
+            "Abidos Fusion Material": 130,
+            "Destiny Destruction Stone": 6065,
+            "Destiny Guardian Stone": 139,
+            "Destiny Leapstone": 0,
+            "Other Materials": {
+                "Lava's Breath": 3,
+                "Artisan's Metallurgy: Level 4": 4
+            }
+        },
+        "40": {
+            "Gold": 17326,
+            "Honor Shards": 56310,
+            "Abidos Fusion Material": 130,
+            "Destiny Destruction Stone": 6065,
+            "Destiny Guardian Stone": 139,
+            "Destiny Leapstone": 0,
+            "Other Materials": {
+                "Artisan's Metallurgy: Level 4": 4
+            }
+        }
+    }
+}

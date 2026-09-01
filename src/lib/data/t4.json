@@ -1,0 +1,535 @@
+{
+  "armor": {
+    "1": {
+      "Gold": 376,
+      "Honor Shards": 10800,
+      "Abidos Fusion Material": 3,
+      "Destiny Destruction Stone": 0,
+      "Destiny Guardian Stone": 210,
+      "Destiny Leapstone": 7,
+      "Other Materials": {}
+    },
+    "2": {
+      "Gold": 384,
+      "Honor Shards": 10860,
+      "Abidos Fusion Material": 3,
+      "Destiny Destruction Stone": 0,
+      "Destiny Guardian Stone": 270,
+      "Destiny Leapstone": 8,
+      "Other Materials": {}
+    },
+    "3": {
+      "Gold": 392,
+      "Honor Shards": 10920,
+      "Abidos Fusion Material": 3,
+      "Destiny Destruction Stone": 0,
+      "Destiny Guardian Stone": 330,
+      "Destiny Leapstone": 8,
+      "Other Materials": {}
+    },
+    "4": {
+      "Gold": 844,
+      "Honor Shards": 13016,
+      "Abidos Fusion Material": 9,
+      "Destiny Destruction Stone": 0,
+      "Destiny Guardian Stone": 791,
+      "Destiny Leapstone": 19,
+      "Other Materials": {}
+    },
+    "5": {
+      "Gold": 893,
+      "Honor Shards": 13260,
+      "Abidos Fusion Material": 9,
+      "Destiny Destruction Stone": 0,
+      "Destiny Guardian Stone": 913,
+      "Destiny Leapstone": 19,
+      "Other Materials": {}
+    },
+    "6": {
+      "Gold": 958,
+      "Honor Shards": 13503,
+      "Abidos Fusion Material": 9,
+      "Destiny Destruction Stone": 0,
+      "Destiny Guardian Stone": 974,
+      "Destiny Leapstone": 19,
+      "Other Materials": {}
+    },
+    "7": {
+      "Gold": 1465,
+      "Honor Shards": 16592,
+      "Abidos Fusion Material": 15,
+      "Destiny Destruction Stone": 0,
+      "Destiny Guardian Stone": 1522,
+      "Destiny Leapstone": 29,
+      "Other Materials": {}
+    },
+    "8": {
+      "Gold": 1600,
+      "Honor Shards": 17099,
+      "Abidos Fusion Material": 15,
+      "Destiny Destruction Stone": 0,
+      "Destiny Guardian Stone": 1691,
+      "Destiny Leapstone": 29,
+      "Other Materials": {}
+    },
+    "9": {
+      "Gold": 3066,
+      "Honor Shards": 22807,
+      "Abidos Fusion Material": 30,
+      "Destiny Destruction Stone": 0,
+      "Destiny Guardian Stone": 3057,
+      "Destiny Leapstone": 54,
+      "Other Materials": {}
+    },
+    "10": {
+      "Gold": 3416,
+      "Honor Shards": 25680,
+      "Abidos Fusion Material": 30,
+      "Destiny Destruction Stone": 0,
+      "Destiny Guardian Stone": 3348,
+      "Destiny Leapstone": 54,
+      "Other Materials": {}
+    },
+    "11": {
+      "Gold": 3237,
+      "Honor Shards": 24512,
+      "Abidos Fusion Material": 30,
+      "Destiny Destruction Stone": 0,
+      "Destiny Guardian Stone": 3128,
+      "Destiny Leapstone": 46,
+      "Other Materials": {
+        "Tailoring: Hellfire [11-14]": 5
+      }
+    },
+    "12": {
+      "Gold": 3570,
+      "Honor Shards": 26263,
+      "Abidos Fusion Material": 30,
+      "Destiny Destruction Stone": 0,
+      "Destiny Guardian Stone": 3254,
+      "Destiny Leapstone": 55,
+      "Other Materials": {
+        "Tailoring: Hellfire [11-14]": 5
+      }
+    },
+    "13": {
+      "Gold": 7163,
+      "Honor Shards": 53308,
+      "Abidos Fusion Material": 68,
+      "Destiny Destruction Stone": 0,
+      "Destiny Guardian Stone": 6320,
+      "Destiny Leapstone": 106,
+      "Other Materials": {
+        "Tailoring: Hellfire [11-14]": 8
+      }
+    },
+    "14": {
+      "Gold": 7945,
+      "Honor Shards": 59017,
+      "Abidos Fusion Material": 68,
+      "Destiny Destruction Stone": 0,
+      "Destiny Guardian Stone": 6997,
+      "Destiny Leapstone": 121,
+      "Other Materials": {
+        "Tailoring: Hellfire [11-14]": 8
+      }
+    },
+    "15": {
+      "Gold": 10552,
+      "Honor Shards": 72701,
+      "Abidos Fusion Material": 100,
+      "Destiny Destruction Stone": 0,
+      "Destiny Guardian Stone": 9215,
+      "Destiny Leapstone": 163,
+      "Other Materials": {
+        "Tailoring: Hellfire [15-18]": 9
+      }
+    },
+    "16": {
+      "Gold": 11564,
+      "Honor Shards": 79953,
+      "Abidos Fusion Material": 100,
+      "Destiny Destruction Stone": 0,
+      "Destiny Guardian Stone": 10570,
+      "Destiny Leapstone": 181,
+      "Other Materials": {
+        "Tailoring: Hellfire [15-18]": 9
+      }
+    },
+    "17": {
+      "Gold": 16313,
+      "Honor Shards": 122417,
+      "Abidos Fusion Material": 174,
+      "Destiny Destruction Stone": 0,
+      "Destiny Guardian Stone": 15294,
+      "Destiny Leapstone": 255,
+      "Other Materials": {
+        "Tailoring: Hellfire [15-18]": 12
+      }
+    },
+    "18": {
+      "Gold": 17889,
+      "Honor Shards": 134674,
+      "Abidos Fusion Material": 174,
+      "Destiny Destruction Stone": 0,
+      "Destiny Guardian Stone": 17031,
+      "Destiny Leapstone": 267,
+      "Other Materials": {
+        "Tailoring: Hellfire [15-18]": 12
+      }
+    },
+    "19": {
+      "Gold": 24452,
+      "Honor Shards": 146257,
+      "Abidos Fusion Material": 174,
+      "Destiny Destruction Stone": 0,
+      "Destiny Guardian Stone": 18774,
+      "Destiny Leapstone": 290,
+      "Other Materials": {
+        "Lava Breath": 1,
+        "Tailoring: Hellfire [19-20]": 12
+      }
+    },
+    "20": {
+      "Gold": 49621,
+      "Honor Shards": 270114,
+      "Abidos Fusion Material": 454,
+      "Destiny Destruction Stone": 0,
+      "Destiny Guardian Stone": 38187,
+      "Destiny Leapstone": 583,
+      "Other Materials": {
+        "Tailoring: Hellfire [19-20]": 22
+      }
+    },
+    "21": {
+      "Gold": 80613,
+      "Honor Shards": 402835,
+      "Abidos Fusion Material": 678,
+      "Destiny Destruction Stone": 0,
+      "Destiny Guardian Stone": 61911,
+      "Destiny Leapstone": 936,
+      "Other Materials": {
+        "Lava Breath": 3
+      }
+    },
+    "22": {
+      "Gold": 127473,
+      "Honor Shards": 594655,
+      "Abidos Fusion Material": 988,
+      "Destiny Destruction Stone": 0,
+      "Destiny Guardian Stone": 104425,
+      "Destiny Leapstone": 1459,
+      "Other Materials": {
+        "Lava Breath": 2
+      }
+    },
+    "23": {
+      "Gold": 137351,
+      "Honor Shards": 632878,
+      "Abidos Fusion Material": 988,
+      "Destiny Destruction Stone": 0,
+      "Destiny Guardian Stone": 112892,
+      "Destiny Leapstone": 1600,
+      "Other Materials": {
+        "Lava Breath": 2
+      }
+    },
+    "24": {
+      "Gold": 287662,
+      "Honor Shards": 1219769,
+      "Abidos Fusion Material": 2740,
+      "Destiny Destruction Stone": 0,
+      "Destiny Guardian Stone": 230129,
+      "Destiny Leapstone": 3288,
+      "Other Materials": {}
+    },
+    "25": {
+      "Gold": 309579,
+      "Honor Shards": 1292041,
+      "Abidos Fusion Material": 2740,
+      "Destiny Destruction Stone": 0,
+      "Destiny Guardian Stone": 246567,
+      "Destiny Leapstone": 3653,
+      "Other Materials": {}
+    }
+  },
+  "weapon": {
+    "1": {
+      "Gold": 624,
+      "Honor Shards": 18000,
+      "Abidos Fusion Material": 5,
+      "Destiny Destruction Stone": 18000,
+      "Destiny Guardian Stone": 0,
+      "Destiny Leapstone": 12,
+      "Other Materials": {}
+    },
+    "2": {
+      "Gold": 632,
+      "Honor Shards": 18100,
+      "Abidos Fusion Material": 5,
+      "Destiny Destruction Stone": 18100,
+      "Destiny Guardian Stone": 0,
+      "Destiny Leapstone": 13,
+      "Other Materials": {}
+    },
+    "3": {
+      "Gold": 648,
+      "Honor Shards": 18200,
+      "Abidos Fusion Material": 5,
+      "Destiny Destruction Stone": 18200,
+      "Destiny Guardian Stone": 0,
+      "Destiny Leapstone": 14,
+      "Other Materials": {}
+    },
+    "4": {
+      "Gold": 1374,
+      "Honor Shards": 21591,
+      "Abidos Fusion Material": 12,
+      "Destiny Destruction Stone": 21591,
+      "Destiny Guardian Stone": 0,
+      "Destiny Leapstone": 30,
+      "Other Materials": {
+        "Metallurgy: Hellfire [11-14]": 1
+      }
+    },
+    "5": {
+      "Gold": 1399,
+      "Honor Shards": 21723,
+      "Abidos Fusion Material": 12,
+      "Destiny Destruction Stone": 21723,
+      "Destiny Guardian Stone": 0,
+      "Destiny Leapstone": 29,
+      "Other Materials": {
+        "Metallurgy: Hellfire [11-14]": 3
+      }
+    },
+    "6": {
+      "Gold": 1461,
+      "Honor Shards": 22821,
+      "Abidos Fusion Material": 12,
+      "Destiny Destruction Stone": 22821,
+      "Destiny Guardian Stone": 0,
+      "Destiny Leapstone": 28,
+      "Other Materials": {
+        "Metallurgy: Hellfire [11-14]": 4
+      }
+    },
+    "7": {
+      "Gold": 1686,
+      "Honor Shards": 24608,
+      "Abidos Fusion Material": 16,
+      "Destiny Destruction Stone": 24608,
+      "Destiny Guardian Stone": 0,
+      "Destiny Leapstone": 32,
+      "Other Materials": {
+        "Metallurgy: Hellfire [11-14]": 22
+      }
+    },
+    "8": {
+      "Gold": 1583,
+      "Honor Shards": 23983,
+      "Abidos Fusion Material": 14,
+      "Destiny Destruction Stone": 23983,
+      "Destiny Guardian Stone": 0,
+      "Destiny Leapstone": 27,
+      "Other Materials": {
+        "Metallurgy: Hellfire [11-14]": 30
+      }
+    },
+    "9": {
+      "Gold": 3403,
+      "Honor Shards": 32287,
+      "Abidos Fusion Material": 33,
+      "Destiny Destruction Stone": 32287,
+      "Destiny Guardian Stone": 0,
+      "Destiny Leapstone": 59,
+      "Other Materials": {
+        "Metallurgy: Hellfire [11-14]": 48
+      }
+    },
+    "10": {
+      "Gold": 3536,
+      "Honor Shards": 34228,
+      "Abidos Fusion Material": 31,
+      "Destiny Destruction Stone": 34228,
+      "Destiny Guardian Stone": 0,
+      "Destiny Leapstone": 55,
+      "Other Materials": {
+        "Metallurgy: Hellfire [11-14]": 5
+      }
+    },
+    "11": {
+      "Gold": 5405,
+      "Honor Shards": 41853,
+      "Abidos Fusion Material": 51,
+      "Destiny Destruction Stone": 41853,
+      "Destiny Guardian Stone": 0,
+      "Destiny Leapstone": 76,
+      "Other Materials": {
+        "Metallurgy: Hellfire [11-14]": 5
+      }
+    },
+    "12": {
+      "Gold": 5973,
+      "Honor Shards": 45104,
+      "Abidos Fusion Material": 51,
+      "Destiny Destruction Stone": 45104,
+      "Destiny Guardian Stone": 0,
+      "Destiny Leapstone": 88,
+      "Other Materials": {
+        "Metallurgy: Hellfire [11-14]": 5
+      }
+    },
+    "13": {
+      "Gold": 11835,
+      "Honor Shards": 89499,
+      "Abidos Fusion Material": 112,
+      "Destiny Destruction Stone": 10408,
+      "Destiny Guardian Stone": 0,
+      "Destiny Leapstone": 179,
+      "Other Materials": {
+        "Glacier Breath": 2,
+        "Metallurgy: Hellfire [11-14]": 8
+      }
+    },
+    "14": {
+      "Gold": 12775,
+      "Honor Shards": 97517,
+      "Abidos Fusion Material": 109,
+      "Destiny Destruction Stone": 11251,
+      "Destiny Guardian Stone": 0,
+      "Destiny Leapstone": 196,
+      "Other Materials": {
+        "Glacier Breath": 10,
+        "Metallurgy: Hellfire [11-14]": 8
+      }
+    },
+    "15": {
+      "Gold": 16009,
+      "Honor Shards": 115469,
+      "Abidos Fusion Material": 149,
+      "Destiny Destruction Stone": 14000,
+      "Destiny Guardian Stone": 0,
+      "Destiny Leapstone": 248,
+      "Other Materials": {
+        "Glacier Breath": 42,
+        "Metallurgy: Hellfire [15-18]": 9
+      }
+    },
+    "16": {
+      "Gold": 15206,
+      "Honor Shards": 115917,
+      "Abidos Fusion Material": 129,
+      "Destiny Destruction Stone": 13882,
+      "Destiny Guardian Stone": 0,
+      "Destiny Leapstone": 235,
+      "Other Materials": {
+        "Glacier Breath": 106,
+        "Metallurgy: Hellfire [15-18]": 8
+      }
+    },
+    "17": {
+      "Gold": 20500,
+      "Honor Shards": 170588,
+      "Abidos Fusion Material": 218,
+      "Destiny Destruction Stone": 19175,
+      "Destiny Guardian Stone": 0,
+      "Destiny Leapstone": 314,
+      "Other Materials": {
+        "Glacier Breath": 166,
+        "Metallurgy: Hellfire [15-18]": 9
+      }
+    },
+    "18": {
+      "Gold": 22452,
+      "Honor Shards": 187432,
+      "Abidos Fusion Material": 218,
+      "Destiny Destruction Stone": 21354,
+      "Destiny Guardian Stone": 0,
+      "Destiny Leapstone": 340,
+      "Other Materials": {
+        "Glacier Breath": 166,
+        "Metallurgy: Hellfire [15-18]": 9
+      }
+    },
+    "19": {
+      "Gold": 30592,
+      "Honor Shards": 204405,
+      "Abidos Fusion Material": 218,
+      "Destiny Destruction Stone": 23533,
+      "Destiny Guardian Stone": 0,
+      "Destiny Leapstone": 367,
+      "Other Materials": {
+        "Glacier Breath": 166,
+        "Metallurgy: Hellfire [19-20]": 9
+      }
+    },
+    "20": {
+      "Gold": 62220,
+      "Honor Shards": 365927,
+      "Abidos Fusion Material": 569,
+      "Destiny Destruction Stone": 47925,
+      "Destiny Guardian Stone": 0,
+      "Destiny Leapstone": 732,
+      "Other Materials": {
+        "Glacier Breath": 394,
+        "Metallurgy: Hellfire [19-20]": 17
+      }
+    },
+    "21": {
+      "Gold": 89752,
+      "Honor Shards": 488930,
+      "Abidos Fusion Material": 756,
+      "Destiny Destruction Stone": 69040,
+      "Destiny Guardian Stone": 0,
+      "Destiny Leapstone": 1036,
+      "Other Materials": {
+        "Glacier Breath": 534
+      }
+    },
+    "22": {
+      "Gold": 141893,
+      "Honor Shards": 707604,
+      "Abidos Fusion Material": 1102,
+      "Destiny Destruction Stone": 116409,
+      "Destiny Guardian Stone": 0,
+      "Destiny Leapstone": 1637,
+      "Other Materials": {
+        "Glacier Breath": 780
+      }
+    },
+    "23": {
+      "Gold": 153219,
+      "Honor Shards": 756066,
+      "Abidos Fusion Material": 1102,
+      "Destiny Destruction Stone": 125847,
+      "Destiny Guardian Stone": 0,
+      "Destiny Leapstone": 1762,
+      "Other Materials": {
+        "Glacier Breath": 780
+      }
+    },
+    "24": {
+      "Gold": 240133,
+      "Honor Shards": 1103087,
+      "Abidos Fusion Material": 2287,
+      "Destiny Destruction Stone": 192107,
+      "Destiny Guardian Stone": 0,
+      "Destiny Leapstone": 2745,
+      "Other Materials": {
+        "Glacier Breath": 2280
+      }
+    },
+    "25": {
+      "Gold": 258429,
+      "Honor Shards": 1173401,
+      "Abidos Fusion Material": 2287,
+      "Destiny Destruction Stone": 205828,
+      "Destiny Guardian Stone": 0,
+      "Destiny Leapstone": 2974,
+      "Other Materials": {
+        "Glacier Breath": 2280
+      }
+    }
+  }
+}
