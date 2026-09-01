@@ -34,7 +34,7 @@ export const karmaCosts: KarmaCost[] = [
   { from: 18, to: 19, gold: 7333 },
   { from: 19, to: 20, gold: 11000 },
   { from: 20, to: 21, gold: 15714 },
-  // Rank 6 levels — same pattern for 21-24, then sharp spike at 25
+  // Rank 6 levels - same pattern for 21-24, then sharp spike at 25
   { from: 21, to: 22, gold: 5500 },   // 20% success
   { from: 22, to: 23, gold: 7333 },   // 15% success
   { from: 23, to: 24, gold: 11000 },  // 10% success

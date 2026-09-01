@@ -2,6 +2,7 @@ import { raids } from "$lib/data/raids";
 import { rosterWeeklyGold } from "$lib/helpers/gold";
 import { calculateHoningCost, calculateMaterialRequirements } from "$lib/helpers/honing";
 import { getTrackTotal } from "$lib/helpers/karma";
+import type { Planner } from "$lib/stores/planner";
 import { planner } from "$lib/stores/planner";
 import { derived, type Readable } from "svelte/store";
 
@@ -11,6 +12,37 @@ import { derived, type Readable } from "svelte/store";
 
 const ceil = <T extends number>(store: Readable<T>) =>
   derived(store, ($v) => Math.ceil($v));
+
+const WEEK_MS = 7 * 24 * 60 * 60 * 1000;
+
+/**
+ * Which future projection week an event date lands in.
+ * Returns null for past dates (they no longer count as income).
+ */
+function eventWeek(dateStr: string, nowMs: number): number | null {
+  const diff = new Date(dateStr).getTime() - nowMs;
+
+  if (!(diff > 0)) return null;
+
+  return Math.max(1, Math.ceil(diff / WEEK_MS));
+}
+
+/** Sum of scheduled events of a kind, optionally only up to a release date. */
+export function sumEvents(
+  $p: Planner,
+  kind: "tradable" | "bound",
+  untilDate?: string | null
+): number {
+  let sum = 0;
+
+  for (const e of $p.events ?? []) {
+    if ((e.kind ?? "tradable") !== kind) continue;
+    if (untilDate && e.date > untilDate) continue;
+    sum += e.amount || 0;
+  }
+
+  return sum;
+}
 
 // Exported for the honing page
 export { calculateHoningCost };
@@ -136,8 +168,35 @@ export const projectedGold = derived(
 
     const futureWeeks = Math.max(0, $weeks - 1);
 
-    return $p.currentGold + $r + futureWeeks * $w;
+    return (
+      $p.currentGold +
+      $r +
+      futureWeeks * $w +
+      sumEvents($p, "tradable", $p.releaseDate)
+    );
   }
+);
+
+// ======================================================
+// BOUND (ROSTER) GOLD PROJECTION
+// Raid gold is character-bound and can't be pooled, so the
+// planner's bound pool only grows via scheduled events.
+// ======================================================
+
+export const projectedBoundGold = derived(planner, ($p) => {
+  if (!$p.releaseDate || new Date() >= new Date($p.releaseDate)) {
+    return $p.currentBoundGold ?? 0;
+  }
+
+  return (
+    ($p.currentBoundGold ?? 0) + sumEvents($p, "bound", $p.releaseDate)
+  );
+});
+
+/** Tradable + roster-bound combined - bound covers honing/karma gold costs. */
+export const projectedCombinedGold = derived(
+  [projectedGold, projectedBoundGold],
+  ([$t, $b]) => $t + $b
 );
 
 // ======================================================
@@ -284,8 +343,22 @@ export const totalCost = derived(
 // FUNDING GAP
 // ======================================================
 
+/**
+ * Market-only costs (materials, engravings, accessories) must be covered
+ * by tradable gold alone.
+ */
+export const marketOnlyCost = derived(
+  [totalMaterialCost, totalEngravingCost, totalAccessoriesCost],
+  ([$m, $e, $a]) => $m + $e + $a
+);
+
+export const marketShortfall = derived(
+  [marketOnlyCost, projectedGold],
+  ([$cost, $tradable]) => Math.max(0, $cost - $tradable)
+);
+
 export const fundingGap = derived(
-  [totalCost, projectedGold],
+  [totalCost, projectedCombinedGold],
   ([total, projected]) => total - projected
 );
 
@@ -297,4 +370,144 @@ export const displayAccessoriesCost = ceil(totalAccessoriesCost);
 export const displayTotalCost = ceil(totalCost);
 
 export const displayProjectedGold = ceil(projectedGold);
+export const displayProjectedBoundGold = ceil(projectedBoundGold);
+export const displayMarketShortfall = ceil(marketShortfall);
 export const displayFundingGap = ceil(fundingGap);
+
+// ======================================================
+// GOLD HISTORY & PROJECTION OVER TIME
+// ======================================================
+
+export interface GoldPoint {
+  /** Negative = historical week offset from now; 0 = now; positive = projected */
+  week: number;
+  gold: number;
+  actual: boolean;
+}
+
+function weeksRemainingOf($p: any): number {
+  if (!$p.releaseDate) return 0;
+
+  const diff = new Date($p.releaseDate).getTime() - Date.now();
+  return Math.max(0, Math.ceil(diff / (1000 * 60 * 60 * 24 * 7)));
+}
+
+/**
+ * Historical balance per week (from the gold log), then a forward
+ * projection based on weekly income and scheduled events. Week 0 is "now".
+ * The crossing detection counts roster-bound event gold toward coverage.
+ */
+export const goldProjection = derived(
+  [planner, weeklyIncome, remainingWeeklyIncome, totalCost],
+  ([$p, $w, $r, $cost]): {
+    points: GoldPoint[];
+    /** Roster-bound gold pool over time (from scheduled bound events) */
+    boundPoints: GoldPoint[];
+    threshold: number;
+    crossingWeek: number | null;
+    maxPastWeeks: number;
+    maxFutureWeeks: number;
+  } => {
+    // ---- History: bucket gold log entries into weekly balances ----
+    const entries = [...($p.goldLog ?? [])].sort(
+      (a, b) => +new Date(a.timestamp) - +new Date(b.timestamp)
+    );
+
+    const nowMs = Date.now();
+
+    // Map each entry to a negative week index relative to now
+    const byWeek = new Map<number, number>();
+    let maxPastWeeks = 0;
+
+    for (const e of entries) {
+      const weeksAgo = Math.floor((nowMs - +new Date(e.timestamp)) / WEEK_MS);
+      byWeek.set(weeksAgo, e.balanceAfter);
+      maxPastWeeks = Math.max(maxPastWeeks, weeksAgo);
+    }
+
+    // Fill gaps backwards: weeks without entries carry the next known balance
+    const history: GoldPoint[] = [];
+    let carry = $p.currentGold;
+
+    for (let w = maxPastWeeks; w >= 1; w--) {
+      if (byWeek.has(w)) carry = byWeek.get(w)!;
+      history.push({ week: -w, gold: carry, actual: true });
+    }
+
+    // ---- Scheduled events bucketed by projection week ----
+    const evTradable = new Map<number, number>();
+    const evBound = new Map<number, number>();
+    let maxEventWeek = 0;
+
+    for (const e of $p.events ?? []) {
+      const wk = eventWeek(e.date, nowMs);
+      if (wk === null) continue;
+
+      const map =
+        (e.kind ?? "tradable") === "bound" ? evBound : evTradable;
+
+      map.set(wk, (map.get(wk) ?? 0) + (e.amount || 0));
+      maxEventWeek = Math.max(maxEventWeek, wk);
+    }
+
+    const cumEvents = (map: Map<number, number>, week: number): number => {
+      let sum = 0;
+      for (const [wk, amount] of map) {
+        if (wk <= week) sum += amount;
+      }
+      return sum;
+    };
+
+    // ---- Projection forward ----
+    const tradableAt = (week: number): number =>
+      week <= 0
+        ? $p.currentGold
+        : $p.currentGold + $r + (week - 1) * $w + cumEvents(evTradable, week);
+
+    const boundAt = (week: number): number =>
+      week <= 0
+        ? ($p.currentBoundGold ?? 0)
+        : ($p.currentBoundGold ?? 0) + cumEvents(evBound, week);
+
+    // First week where tradable + roster-bound covers the required gold
+    let crossingWeek: number | null = null;
+
+    if ($cost > 0) {
+      for (let week = 1; week <= 520; week++) {
+        if (tradableAt(week) + boundAt(week) >= $cost) {
+          crossingWeek = week;
+          break;
+        }
+      }
+    }
+
+    const maxFutureWeeks = Math.max(
+      4,
+      weeksRemainingOf($p),
+      crossingWeek ?? 0,
+      maxEventWeek
+    );
+
+    const future: GoldPoint[] = [];
+    const boundPoints: GoldPoint[] = [];
+
+    for (let week = 0; week <= maxFutureWeeks; week++) {
+      future.push({
+        week,
+        gold: tradableAt(week),
+        actual: week === 0,
+      });
+
+      boundPoints.push({ week, gold: boundAt(week), actual: false });
+    }
+
+    return {
+      points: [...history, ...future],
+      boundPoints,
+      threshold: $cost,
+      crossingWeek,
+      maxPastWeeks,
+      maxFutureWeeks,
+    };
+  }
+);

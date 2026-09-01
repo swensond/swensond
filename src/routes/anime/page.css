@@ -1,0 +1,293 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
+
+/* =========================================================
+   ANIME SEASON - flat dark cards, gold accents
+   Reuses the shared palette/components from layout.css.
+   ========================================================= */
+
+/* Sticky season controls: square corners and no side borders when pinned under the header */
+.card.affixed {
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+}
+
+/* Affixed tab bar: translucent so content scrolling underneath stays readable */
+nav.sticky {
+    background: color-mix(in srgb, var(--la-panel) 92%, transparent);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.anime-grid {
+    @apply grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4;
+}
+
+/* Shared list with a season sidebar on wide screens; single column otherwise. */
+.sidebar-layout {
+    grid-template-columns: 1fr;
+}
+
+@media (min-width: 1024px) {
+    .sidebar-layout {
+        grid-template-columns: 14rem 1fr;
+    }
+}
+
+.anime-card {
+    @apply relative overflow-hidden rounded-sm border text-left transition duration-150;
+    background: var(--la-panel);
+    border-color: var(--la-border);
+    cursor: pointer;
+}
+
+.anime-card:hover {
+    border-color: var(--la-accent);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+}
+
+/* Status badges */
+.badge {
+    @apply text-[10px] font-semibold px-1.5 py-0.5 rounded-sm;
+}
+
+.b-air {
+    background: rgba(11, 10, 14, 0.88);
+    color: var(--la-green-bright);
+    border: 1px solid rgba(74, 222, 128, 0.5);
+}
+
+.b-new {
+    background: rgba(11, 10, 14, 0.88);
+    color: var(--la-accent-bright);
+    border: 1px solid var(--la-accent);
+}
+
+.b-done {
+    background: rgba(11, 10, 14, 0.88);
+    color: var(--la-text-muted);
+    border: 1px solid var(--la-border-strong);
+}
+
+.b-hold {
+    background: rgba(11, 10, 14, 0.88);
+    color: var(--la-red-bright);
+    border: 1px solid rgba(224, 92, 92, 0.5);
+}
+
+.b-unknown {
+    background: rgba(11, 10, 14, 0.88);
+    color: var(--la-text-faint);
+    border: 1px solid var(--la-border);
+}
+
+.b-cont {
+    background: rgba(11, 10, 14, 0.88);
+    color: var(--la-accent-bright);
+    border: 1px solid var(--la-accent);
+}
+
+.b-progress {
+    background: rgba(11, 10, 14, 0.88);
+    color: #d5d1c9;
+    border: 1px solid var(--la-border-strong);
+}
+
+.score-badge {
+    @apply text-[11px] font-bold px-1.5 py-0.5 rounded-sm;
+    background: rgba(11, 10, 14, 0.82);
+    color: var(--la-accent-bright);
+    border: 1px solid var(--la-border);
+}
+
+/* Small genre pills */
+.tag {
+    @apply inline-block text-[10px] px-1.5 py-0.5 rounded-sm font-medium;
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--la-text-muted);
+}
+
+/* Days-left chip in the season controls */
+.stat-card.days-left {
+    @apply px-2.5 py-1 ml-auto;
+    display: flex;
+    align-items: baseline;
+    gap: 0.45rem;
+}
+.stat-card.days-left .stat-label {
+    @apply mb-0;
+}
+.stat-card.days-left .stat-value {
+    @apply text-base;
+    white-space: nowrap;
+}
+.stat-card.days-left .stat-range {
+    @apply text-[10px] tabular-nums;
+    color: var(--la-text-muted);
+    white-space: nowrap;
+}
+.stat-card.days-left.before .stat-value {
+    color: var(--la-text-muted);
+}
+.stat-card.days-left.after .stat-value {
+    color: var(--la-text-faint);
+    @apply line-through decoration-2;
+}
+
+/* =========================
+   SEASON FILTER CHIP - sidebar/row selector with item counts
+========================= */
+.filter-chip {
+    @apply flex items-center justify-between gap-3 px-3 py-2 text-sm font-medium rounded-sm transition border border-transparent whitespace-nowrap;
+    color: var(--la-text-muted);
+}
+
+.filter-chip:hover {
+    color: var(--la-text);
+    background: var(--la-hover);
+}
+
+.filter-chip.active {
+    color: var(--la-accent-bright);
+    border-color: var(--la-border);
+    background: rgba(208, 167, 90, 0.07);
+}
+
+.filter-chip-count {
+    @apply text-xs rounded-sm px-1.5;
+    background: rgba(208, 167, 90, 0.12);
+    color: var(--la-accent-bright);
+}
+
+/* =========================
+   SHARE SCOPE CHIP - full list vs one season
+========================= */
+.scope-chip {
+    @apply flex items-center justify-between gap-2 px-3 py-2.5 rounded-sm border text-left transition;
+    background: var(--la-panel);
+    border-color: var(--la-border);
+    color: var(--la-text-muted);
+}
+
+.scope-chip:hover {
+    background: var(--la-hover);
+}
+
+.scope-chip.active {
+    border-color: var(--la-accent);
+    background: rgba(208, 167, 90, 0.07);
+}
+
+.scope-chip-title {
+    @apply text-sm font-semibold;
+    color: var(--la-text);
+}
+
+.scope-chip-count {
+    @apply text-xs tabular-nums;
+    color: var(--la-text-muted);
+}
+
+.scope-chip.active .scope-chip-title {
+    color: var(--la-accent-bright);
+}
+
+/* =========================
+   UTIL BUTTONS - compact icon actions in the nav (alerts/share/import/refresh)
+========================= */
+.util-btn {
+    @apply w-8 h-8 cursor-pointer flex items-center justify-center rounded-sm text-sm transition;
+    color: var(--la-text-muted);
+    border: 1px solid transparent;
+    position: relative;
+}
+
+.util-btn:hover {
+    color: var(--la-text);
+    background: var(--la-hover);
+}
+
+.util-btn.on {
+    color: var(--la-accent-bright);
+    border-color: var(--la-accent);
+    background: rgba(208, 167, 90, 0.07);
+}
+
+/* Tooltip: shows the action label on hover */
+.util-btn[data-tip]::after {
+    content: attr(data-tip);
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%) translateY(-2px);
+    white-space: nowrap;
+    padding: 3px 7px;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--la-text);
+    background: rgba(20, 19, 24, 0.95);
+    border: 1px solid var(--la-border);
+    border-radius: 3px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.12s ease, transform 0.12s ease;
+    z-index: 3000;
+}
+
+/* Let tooltips escape their (overflow-hidden) container card */
+.card.inf-tooltips {
+    overflow: visible;
+}
+
+.util-btn[data-tip]:hover::after {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* =========================
+   WATCH TOGGLE - circular +/✓ on the cover
+========================= */
+.watch-toggle {
+    @apply absolute right-1.5 top-1.5 z-10 flex items-center justify-center rounded-full border text-sm font-bold leading-none transition;
+    width: 26px;
+    height: 26px;
+    background: rgba(11, 10, 14, 0.82);
+    color: var(--la-text-muted);
+    border-color: var(--la-border);
+}
+
+.watch-toggle:hover {
+    color: var(--la-accent-bright);
+    border-color: var(--la-accent);
+}
+
+.watch-toggle.on {
+    color: #1c1508;
+    background: var(--la-accent);
+    border-color: var(--la-accent);
+}
+
+.watch-toggle.on:hover {
+    background: var(--la-accent-bright);
+}
+
+/* =========================
+   SCHEDULE / WATCHLIST ROWS
+========================= */
+.schedule-row {
+    @apply flex items-center gap-3 px-3 py-2.5 cursor-pointer select-none rounded-sm border transition;
+    background: rgba(255, 255, 255, 0.02);
+    border-color: transparent;
+}
+
+.schedule-row:hover {
+    background: var(--la-hover);
+    border-color: var(--la-border);
+}
+
+.schedule-cover {
+    @apply w-12 h-16 object-cover rounded-sm shrink-0;
+    border: 1px solid var(--la-border);
+}

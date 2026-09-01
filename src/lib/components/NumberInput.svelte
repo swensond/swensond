@@ -7,6 +7,7 @@
     max?: number;
     class?: string;
     onchange?: (value: number) => void;
+    onkeydown?: (event: KeyboardEvent) => void;
   }
 
   let {
@@ -17,6 +18,7 @@
     class: className = "",
     id,
     onchange,
+    onkeydown,
   }: Props = $props();
 
   let focused = $state(false);
@@ -50,6 +52,7 @@
     onfocus={() => (focused = true)}
     onblur={() => (focused = false)}
     oninput={handleInput}
+    {onkeydown}
     class="
       input-compact
       text-right

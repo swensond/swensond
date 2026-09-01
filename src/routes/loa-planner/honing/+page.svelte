@@ -1,9 +1,30 @@
 <script>
-    import { plannerApi } from "$lib/api/planner";
+    import { logApi, plannerApi } from "$lib/api/planner";
+    import { requestArtisan } from "$lib/stores/artisan-prompt";
     import { displayHoningCost } from "$lib/derived/planner";
     import { calculateHoningCost } from "$lib/helpers/honing";
     import { armorPieces, modes, planner } from "$lib/stores/planner";
 
+    const rowGrid =
+        "grid grid-cols-[100px_1fr_1fr_110px_84px] gap-3 items-center";
+
+    async function tapWeapon(mode) {
+        const artisan =
+            mode === "advanced"
+                ? null
+                : await requestArtisan(`Weapon · ${mode}`);
+
+        if (artisan !== undefined) logApi.logWeaponTap(mode, artisan);
+    }
+
+    async function tapArmor(piece, mode) {
+        const artisan =
+            mode === "advanced"
+                ? null
+                : await requestArtisan(`${piece} · ${mode}`);
+
+        if (artisan !== undefined) logApi.logArmorTap(piece, mode, artisan);
+    }
 </script>
 
 <section class="space-y-6">
@@ -16,18 +37,19 @@
         </div>
 
         <!-- HEADER -->
-        <div class="grid grid-cols-4 px-4 py-2 text-xs text-[#a29e96]">
+        <div class="{rowGrid} px-4 py-2 text-xs text-[#a29e96]">
             <div>Mode</div>
             <div>Current</div>
             <div>Target</div>
             <div class="text-right">Cost</div>
+            <div class="text-center">Success</div>
         </div>
 
         <!-- ROWS -->
         <div class="px-2 pb-2 space-y-1">
             {#each modes as mode}
                 <div
-                    class="grid grid-cols-4 px-3 py-3 items-center gap-3 rounded-sm hover:bg-[rgba(255,255,255,0.05)] transition"
+                    class="{rowGrid} px-3 py-3 rounded-sm hover:bg-[rgba(255,255,255,0.05)] transition"
                 >
                     <div class="capitalize text-sm text-[#f2efe9]">
                         {mode}
@@ -59,6 +81,15 @@
                             mode,
                         ).toLocaleString()}g
                     </div>
+
+                    <div class="flex flex-col items-center gap-0.5">
+                        <button
+                            class="btn px-3"
+                            onclick={() => tapWeapon(mode)}
+                        >
+                            +1
+                        </button>
+                    </div>
                 </div>
             {/each}
         </div>
@@ -79,18 +110,19 @@
                 </div>
 
                 <!-- HEADER -->
-                <div class="grid grid-cols-4 px-4 py-2 text-xs text-[#a29e96]">
+                <div class="{rowGrid} px-4 py-2 text-xs text-[#a29e96]">
                     <div>Mode</div>
                     <div>Current</div>
                     <div>Target</div>
                     <div class="text-right">Cost</div>
+                    <div class="text-center">Success</div>
                 </div>
 
                 <!-- ROWS -->
                 <div class="px-2 pb-2 space-y-1">
                     {#each modes as mode}
                         <div
-                            class="grid grid-cols-4 px-3 py-3 items-center gap-3 rounded-sm hover:bg-[rgba(255,255,255,0.05)] transition"
+                            class="{rowGrid} px-3 py-3 rounded-sm hover:bg-[rgba(255,255,255,0.05)] transition"
                         >
                             <div class="capitalize text-sm text-[#f2efe9]">
                                 {mode}
@@ -125,6 +157,15 @@
                                     $planner.armor[piece][mode].targetLevel,
                                     mode,
                                 ).toLocaleString()}g
+                            </div>
+
+                            <div class="flex flex-col items-center gap-0.5">
+                                <button
+                                    class="btn px-3"
+                                    onclick={() => tapArmor(piece, mode)}
+                                >
+                                    +1
+                                </button>
                             </div>
                         </div>
                     {/each}

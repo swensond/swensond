@@ -32,6 +32,7 @@ export const karmaTracks: KarmaTrack[] = [
 export type KarmaState = {
   currentLevel: number;
   targetLevel: number;
+  artisan?: number;
 };
 
 export type PlannerKarma = Record<KarmaKey, KarmaState>;
@@ -69,20 +70,54 @@ export interface Accessory {
   goldCost: number;
 }
 
+/** A dated one-off income entry (event rewards, login bonuses, carries...) */
+export interface PlannedEvent {
+  id: string;
+  label: string;
+  /** ISO date (yyyy-mm-dd) the gold arrives */
+  date: string;
+  amount: number;
+  /** Which balance the gold lands in */
+  kind?: "tradable" | "bound";
+}
+
 export const modes: HoningMode[] = ["regular", "advanced", "postReset"];
 export const armorPieces: ArmorSlot[] = ["head", "shoulder", "chest", "gloves", "pants"];
 
 export interface HoningLevelRange {
   currentLevel: number;
   targetLevel: number;
+  artisan?: number;
 }
 
 export type GearHoningTrack = Record<HoningMode, HoningLevelRange>;
+
+export interface GoldEntry {
+  id: string;
+  /** Signed change in gold: positive = gained, negative = spent */
+  amount: number;
+  /** Balance immediately after this movement */
+  balanceAfter: number;
+  note?: string;
+  timestamp: string;
+}
+
+export interface TapEntry {
+  id: string;
+  kind: "honing" | "karma";
+  trackKey: string;
+  trackLabel: string;
+  level: number;
+  artisan: number | null;
+  timestamp: string;
+}
 
 export type Planner = {
   __version?: string;
 
   currentGold: number;
+  /** Bound (roster) gold from raids - usable for honing, not market purchases */
+  currentBoundGold?: number;
   releaseDate: string | null;
 
   roster: any[];
@@ -97,13 +132,21 @@ export type Planner = {
 
   accessories: Accessory[];
 
+  /** Dated one-off income included in projections */
+  events?: PlannedEvent[];
+
   karma: Record<KarmaKey, KarmaState>;
+
+  tapLog: TapEntry[];
+
+  /** Chronological record of every gold movement */
+  goldLog?: GoldEntry[];
 };
 
 /* ------------------------------------------------------
    VERSIONING
 ------------------------------------------------------ */
-const STORAGE_VERSION = "3";
+export const STORAGE_VERSION = "3";
 const STORAGE_KEY = `lostark-planner-v0.2.0`;
 
 type Migration = (data: any) => any;
@@ -123,6 +166,7 @@ function createDefaultPlanner(): Planner {
     __version: STORAGE_VERSION,
 
     currentGold: 0,
+    currentBoundGold: 0,
     releaseDate: null,
 
     roster: [],
@@ -153,6 +197,8 @@ function createDefaultPlanner(): Planner {
       { slot: "ring2", label: "Ring 2", owned: false, goldCost: 0 },
     ],
 
+    events: [],
+
     weapon: defaultTrack(),
 
     armor: {
@@ -168,6 +214,10 @@ function createDefaultPlanner(): Planner {
       evolution: { currentLevel: 0, targetLevel: 0 },
       leap: { currentLevel: 0, targetLevel: 0 },
     },
+
+    tapLog: [],
+
+    goldLog: [],
   };
 }
 
@@ -253,6 +303,7 @@ const migrations: Record<string, Migration> = {
       armor: data.armor ?? createDefaultPlanner().armor,
       accessories: data.accessories ?? createDefaultPlanner().accessories,
       karma: data.karma ?? createDefaultPlanner().karma,
+      tapLog: data.tapLog ?? [],
     };
   },
   "1->2": (data: Planner): Planner => {
@@ -439,6 +490,13 @@ function createPlannerStore() {
     initial = {
       ...initial,
       accessories: defaults.accessories,
+    };
+  }
+
+  if (!initial.events) {
+    initial = {
+      ...initial,
+      events: [],
     };
   }
 

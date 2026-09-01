@@ -11,6 +11,37 @@ export function raidFamily(raidId: string): string {
   return raidId.replace(/-(nm|hm|nmr|stage-\d+)$/, "");
 }
 
+/**
+ * Best-paying raids an item level can run: one per raid family,
+ * ranked by tradable gold, capped at `limit` (gold slots per week).
+ */
+export function suggestRaids(itemLevel: number, limit = 3): Raid[] {
+  if (!itemLevel || itemLevel <= 0) return [];
+
+  const eligible = raids
+    .filter((r) => r.minItemLevel <= itemLevel)
+    .sort(
+      (a, b) =>
+        b.tradableGold - a.tradableGold || b.rewardGold - a.rewardGold,
+    );
+
+  const seenFamilies = new Set<string>();
+  const picks: Raid[] = [];
+
+  for (const raid of eligible) {
+    const family = raidFamily(raid.id);
+
+    if (seenFamilies.has(family)) continue;
+
+    seenFamilies.add(family);
+    picks.push(raid);
+
+    if (picks.length >= limit) break;
+  }
+
+  return picks;
+}
+
 export const raids: Raid[] = [
   {
     id: "belgardin-nm",

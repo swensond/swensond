@@ -1,9 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500;600;700&display=swap');
 @import 'tailwindcss';
 @plugin '@tailwindcss/typography';
-@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap');
 
 /* =========================================================
-   LOST ARK IN-GAME UI THEME — FLAT DARK PANELS
+   LOST ARK IN-GAME UI THEME - FLAT DARK PANELS
    Near-black translucent surfaces, serif headings,
    gold selection accents, green completion states.
    ========================================================= */
@@ -14,16 +14,16 @@
     --la-panel-alt: rgba(22, 20, 28, 0.6);
     --la-hover: rgba(255, 255, 255, 0.05);
 
-    /* Gold — selection / highlight / progress */
+    /* Gold - selection / highlight / progress */
     --la-accent: #d0a75a;
     --la-accent-bright: #e8c987;
     --la-accent-dim: #7a6337;
 
-    /* Green — completed / positive */
+    /* Green - completed / positive */
     --la-green: #8fce46;
     --la-green-bright: #a8e05f;
 
-    /* Red — warnings / danger */
+    /* Red - warnings / danger */
     --la-red: #e05c5c;
     --la-red-bright: #ff7a7a;
 
@@ -36,13 +36,16 @@
     --la-text-muted: #a29e96;
     --la-text-faint: #6e6a64;
 
-    font-family: Inter, sans-serif;
+    font-family: 'Inter', 'Helvetica Neue', Arial, 'Segoe UI', Roboto, sans-serif;
     font-feature-settings: 'liga' 1, 'calt' 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
 }
 
 @supports (font-variation-settings: normal) {
     :root {
-        font-family: InterVariable, sans-serif;
+        font-family: 'InterVariable', 'Inter', 'Helvetica Neue', Arial, 'Segoe UI', Roboto, sans-serif;
     }
 }
 
@@ -63,7 +66,7 @@ html {
     scroll-behavior: smooth;
 }
 
-/* Custom scrollbar — flat dark, gold hover */
+/* Custom scrollbar - flat dark, gold hover */
 ::-webkit-scrollbar {
     width: 8px;
 }
@@ -81,7 +84,7 @@ html {
     background: var(--la-accent-dim);
 }
 
-/* Selection — warm highlight */
+/* Selection - warm highlight */
 ::selection {
     background-color: rgba(208, 167, 90, 0.35);
     color: #fdf9ef;
@@ -121,4 +124,186 @@ html {
 .accent-line {
     height: 1px;
     background-color: var(--la-accent-dim);
+}
+
+/* =========================================================
+   SHARED COMPONENT STYLES
+   Used by both the anime and loa-planner sections.
+   ========================================================= */
+
+/* Cards / panels - flat translucent, sharp corners */
+.card {
+    @apply rounded-sm overflow-hidden;
+    background: var(--la-panel);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--la-border);
+}
+
+.card-header {
+    @apply flex items-center gap-3 px-4 py-3;
+    background: rgba(255, 255, 255, 0.03);
+    border-bottom: 1px solid var(--la-border);
+}
+
+/* Buttons */
+.btn {
+    @apply text-xs px-2.5 py-1 rounded-sm border transition;
+    color: var(--la-text);
+    border-color: var(--la-border);
+    background: rgba(38, 36, 44, 0.75);
+}
+
+.btn:hover:not(:disabled) {
+    border-color: var(--la-accent);
+    color: var(--la-accent-bright);
+    background: rgba(52, 48, 56, 0.85);
+}
+
+.btn:disabled {
+    opacity: 0.45;
+    cursor: default;
+}
+
+.btn-primary {
+    @apply px-3.5 py-1.5 rounded-sm text-xs font-semibold transition;
+    color: #1c1508;
+    background-color: var(--la-accent);
+    border: 1px solid transparent;
+}
+
+.btn-primary:hover:not(:disabled) {
+    background-color: var(--la-accent-bright);
+}
+
+.btn-secondary {
+    @apply px-4 py-2 rounded-sm transition;
+    color: var(--la-text-muted);
+    border: 1px solid var(--la-border);
+    background: rgba(38, 36, 44, 0.75);
+}
+
+.btn-secondary:hover {
+    color: var(--la-text);
+    border-color: var(--la-border-strong);
+    background: rgba(52, 48, 56, 0.85);
+}
+
+.btn-danger {
+    @apply text-xs transition rounded-sm;
+    color: var(--la-red);
+}
+
+.btn-danger:hover {
+    color: var(--la-red-bright);
+}
+
+.btn-danger-solid {
+    @apply rounded-sm transition;
+    padding: 0.5rem 0.75rem;
+    color: var(--la-red);
+    border: 1px solid rgba(224, 93, 93, 0.35);
+    background: rgba(38, 36, 44, 0.75);
+}
+
+.btn-danger-solid:hover {
+    color: var(--la-red-bright);
+    border-color: var(--la-red);
+}
+
+/* Stat cards */
+.stat-card {
+    @apply rounded-sm p-5;
+    background: var(--la-panel-alt);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--la-border);
+}
+
+.stat-label {
+    @apply text-xs mb-1 uppercase tracking-widest;
+    color: var(--la-text-muted);
+}
+
+.stat-value {
+    @apply text-2xl font-bold tabular-nums;
+    color: var(--la-text);
+}
+
+.stat-value-red {
+    color: var(--la-red);
+}
+
+.stat-value-green {
+    color: var(--la-green);
+}
+
+/* Inputs */
+.input {
+    @apply cursor-text px-3 py-2 outline-none rounded-sm;
+    background: rgba(0, 0, 0, 0.35);
+    color: var(--la-text);
+    border: 1px solid var(--la-border);
+}
+
+.input:focus {
+    border-color: var(--la-accent);
+    box-shadow: 0 0 0 1px var(--la-accent);
+}
+
+select.input {
+    appearance: none;
+    -webkit-appearance: none;
+    padding-right: 2rem;
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23a29e96' stroke-width='1.5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.65rem center;
+}
+
+/* Tabs - gold underline for active */
+.tab {
+    @apply cursor-pointer px-4 py-2.5 text-sm font-medium transition border-b-2 border-transparent;
+    color: var(--la-text-muted);
+}
+
+.tab:hover {
+    color: var(--la-text);
+    background: var(--la-hover);
+}
+
+.tab.active,
+.tab-active {
+    color: var(--la-accent-bright);
+    border-bottom-color: var(--la-accent);
+    background: rgba(208, 167, 90, 0.07);
+}
+
+/* Loading skeleton */
+.skeleton {
+    background-color: rgba(255, 255, 255, 0.04);
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    0%, 100% {
+        background-color: rgba(255, 255, 255, 0.04);
+    }
+    50% {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+}
+
+/* Spinner */
+.spinner {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid rgba(163, 158, 150, 0.35);
+    border-top-color: var(--la-accent-bright);
+    animation: spin 0.7s linear infinite;
+    display: inline-block;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
 }

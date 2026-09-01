@@ -5,86 +5,22 @@ html {
 }
 
 /* =========================================================
-   LOST ARK IN-GAME UI THEME — FLAT COMPONENT CLASSES
-   Sharp corners, translucent near-black panels,
-   gold selection, green completion.
+   LOST ARK IN-GAME UI THEME - FLAT COMPONENT CLASSES
+   Reuses the shared palette/components from layout.css.
    ========================================================= */
 
-/* =========================
-   BUTTONS — flat dark like in-game
-========================= */
-
-button {
-  cursor: pointer;
-}
-
-button:disabled {
-  cursor: not-allowed;
-  opacity: 0.4;
-}
-
-.btn {
-  @apply text-xs px-2.5 py-1 rounded-sm border transition;
-  color: var(--la-text);
-  border-color: var(--la-border);
-  background: rgba(38, 36, 44, 0.75);
-}
-
-.btn:hover:not(:disabled) {
-  border-color: var(--la-accent);
-  color: var(--la-accent-bright);
-  background: rgba(52, 48, 56, 0.85);
-}
-
-.btn-danger {
-  @apply text-xs transition rounded-sm;
+/* Full-height danger button matching .input dimensions */
+.btn-danger-solid {
+  @apply rounded-sm transition;
+  padding: 0.5rem 0.75rem;
   color: var(--la-red);
-}
-
-.btn-danger:hover {
-  color: var(--la-red-bright);
-}
-
-.btn-primary {
-  @apply px-4 py-2 rounded-sm font-semibold transition;
-  color: #1c1508;
-  background-color: var(--la-accent);
-  border: 1px solid transparent;
-}
-
-.btn-primary:hover:not(:disabled) {
-  background-color: var(--la-accent-bright);
-}
-
-.btn-secondary {
-  @apply px-4 py-2 rounded-sm transition;
-  color: var(--la-text-muted);
-  border: 1px solid var(--la-border);
+  border: 1px solid rgba(224, 93, 93, 0.35);
   background: rgba(38, 36, 44, 0.75);
 }
 
-.btn-secondary:hover {
-  color: var(--la-text);
-  border-color: var(--la-border-strong);
-  background: rgba(52, 48, 56, 0.85);
-}
-
-/* =========================
-   CARDS / PANELS — flat translucent, sharp corners
-========================= */
-
-.card {
-  @apply rounded-sm overflow-hidden;
-  background: var(--la-panel);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid var(--la-border);
-}
-
-.card-header {
-  @apply flex items-center gap-3 px-4 py-3;
-  background: rgba(255, 255, 255, 0.03);
-  border-bottom: 1px solid var(--la-border);
+.btn-danger-solid:hover {
+  color: var(--la-red-bright);
+  border-color: var(--la-red);
 }
 
 /* In-game serif section titles */
@@ -101,22 +37,17 @@ input[type='checkbox'] {
   accent-color: var(--la-accent);
 }
 
-/* =========================
-   INPUTS
-========================= */
-
-.input {
-  @apply cursor-text flex-1 px-3 py-2 outline-none rounded-sm;
-  background: rgba(0, 0, 0, 0.35);
-  color: var(--la-text);
-  border: 1px solid var(--la-border);
+/* Replace the native dropdown arrow (pinned to the edge) with one inset */
+select.input {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 2rem;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23a29e96' stroke-width='1.5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.65rem center;
 }
 
-.input:focus {
-  border-color: var(--la-accent);
-  box-shadow: 0 0 0 1px var(--la-accent);
-}
-
+/* Full-width input with compact sizing */
 .input-compact {
   @apply w-full h-9 px-2 rounded-sm text-sm tabular-nums transition;
   background: rgba(0, 0, 0, 0.35);
@@ -136,6 +67,7 @@ input[type='checkbox'] {
   box-shadow: 0 0 0 1px var(--la-accent);
 }
 
+/* Name input (no background, borderless) */
 .name-input {
   @apply cursor-text flex-1 bg-transparent outline-none font-semibold text-sm;
   color: var(--la-text);
@@ -167,28 +99,6 @@ input[type='checkbox'] {
 }
 
 /* =========================
-   TABS — gold underline for active, like in-game selection
-========================= */
-
-.tab {
-  @apply cursor-pointer px-5 py-2.5 text-sm font-medium transition;
-  color: var(--la-text-muted);
-  border-bottom: 2px solid transparent;
-}
-
-.tab:hover {
-  color: var(--la-text);
-  background: var(--la-hover);
-}
-
-.tab.active,
-.tab-active {
-  color: var(--la-accent-bright);
-  border-bottom-color: var(--la-accent);
-  background: rgba(208, 167, 90, 0.07);
-}
-
-/* =========================
    ROSTER / RAID UI
 ========================= */
 
@@ -207,36 +117,6 @@ input[type='checkbox'] {
   background: rgba(0, 0, 0, 0.25);
   color: var(--la-text-faint);
   @apply text-xs;
-}
-
-/* =========================
-   STAT CARDS — flat translucent
-========================= */
-
-.stat-card {
-  @apply rounded-sm p-5;
-  background: var(--la-panel-alt);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid var(--la-border);
-}
-
-.stat-label {
-  @apply text-xs mb-1 uppercase tracking-widest;
-  color: var(--la-text-muted);
-}
-
-.stat-value {
-  @apply text-2xl font-bold tabular-nums;
-  color: var(--la-text);
-}
-
-.stat-value-red {
-  color: var(--la-red);
-}
-
-.stat-value-green {
-  color: var(--la-green);
 }
 
 /* =========================

@@ -13,32 +13,67 @@
 
   import {
     displayFundingGap,
+    displayMarketShortfall,
     displayProjectedGold,
     weeklyIncome,
     weeksRemaining,
   } from "$lib/derived/planner";
 
+  import { nextWednesdayReset } from "$lib/helpers/reset";
+
   import { planner } from "$lib/stores/planner";
 
-  import { plannerApi, progressionApi } from "$lib/api/planner";
+  import { plannerApi } from "$lib/api/planner";
+  import SavedPlans from "$lib/components/SavedPlans.svelte";
+  import NumberInput from "$lib/components/NumberInput.svelte";
+  import StatCard from "$lib/components/StatCard.svelte";
+  import { portal } from "$lib/actions/portal";
 
   // --------------------
   // Tabs (UI config)
   // --------------------
   const tabs = [
-    { href: "/loa-planner", label: "Roster" },
+    { href: "/loa-planner", label: "This Week" },
+    { href: "/loa-planner/roster", label: "Roster" },
     { href: "/loa-planner/materials", label: "Materials" },
     { href: "/loa-planner/owned-materials", label: "Owned Materials" },
     { href: "/loa-planner/honing", label: "Honing" },
     { href: "/loa-planner/karma", label: "Karma" },
     { href: "/loa-planner/engravings", label: "Engravings" },
     { href: "/loa-planner/accessories", label: "Accessories" },
+    { href: "/loa-planner/log", label: "Log" },
+    { href: "/loa-planner/projection", label: "Projection" },
   ];
 
   // --------------------
   // State
   // --------------------
-  let goldInput = $state(0);
+  let goldModal = $state<"add" | "spend" | "set" | null>(null);
+  let goldModalAmount = $state(0);
+  let goldModalNote = $state("");
+  let plansOpen = $state(false);
+
+  function openGoldModal(kind: "add" | "spend" | "set") {
+    goldModalAmount = kind === "set" ? $planner.currentGold : 0;
+    goldModalNote = "";
+    goldModal = kind;
+  }
+
+  function confirmGoldModal() {
+    const amount = Math.abs(Number(goldModalAmount) || 0);
+    const note = goldModalNote.trim() || undefined;
+
+    if (amount <= 0 || goldModal === null) {
+      goldModal = null;
+      return;
+    }
+
+    if (goldModal === "add") plannerApi.addGold(amount, note);
+    else if (goldModal === "spend") plannerApi.spendGold(amount, note);
+    else if (goldModal === "set") plannerApi.setGold(amount);
+
+    goldModal = null;
+  }
   let now = $state(new Date());
   let nextReset = $state(nextWednesdayReset());
 
@@ -57,26 +92,6 @@
   // --------------------
   // Helpers
   // --------------------
-  function nextWednesdayReset(): Date {
-    const ET = 5 * 60 * 60 * 1000;
-    const nowMs = Date.now();
-    const nowET = nowMs - ET;
-
-    const d = new Date(nowET);
-
-    const daysUntil = (3 - d.getUTCDay() + 7) % 7 || 7;
-
-    const midnightET =
-      nowET +
-      daysUntil * 86_400_000 -
-      (d.getUTCHours() * 3_600_000 +
-        d.getUTCMinutes() * 60_000 +
-        d.getUTCSeconds() * 1_000 +
-        d.getUTCMilliseconds());
-
-    return new Date(midnightET + 6 * 3_600_000 + ET);
-  }
-
   let contentEl: HTMLElement;
 
   let raf1: number;
@@ -113,116 +128,68 @@
 
 <div class="space-y-6">
   <h1 class="la-heading text-4xl font-bold la-gold-text">Lost Ark Planner</h1>
-  <!-- TOP -->
-  <div class="grid lg:grid-cols-3 gap-4">
-    <!-- GOLD -->
-    <div class="card p-5">
-      <div class="flex justify-between items-center mb-4">
-        <div>
-          <h2 class="text-sm font-semibold text-[#a29e96] uppercase">
-            Gold Management
-          </h2>
-          <p class="text-xs text-[#a29e96] mt-1">Current available gold</p>
-        </div>
 
-        <div class="text-3xl font-bold">
-          {$planner.currentGold.toLocaleString()}
-        </div>
-      </div>
+  <!-- CONTROL BAR -->
+  <div class="card px-4 py-3 flex flex-wrap items-center gap-x-5 gap-y-2">
+    <div class="flex items-center gap-2">
+      <span
+        class="text-lg font-bold tabular-nums la-gold-text"
+        title="Tradable gold balance"
+      >
+        {$planner.currentGold.toLocaleString()}g
+      </span>
 
-      <div class="flex flex-col gap-3">
-        <input class="input w-full" type="number" bind:value={goldInput} />
-
-        <div class="flex gap-2">
-          <button
-            class="btn"
-            onclick={() => plannerApi.addGold(Number(goldInput))}
-          >
-            Add
-          </button>
-
-          <button
-            class="btn"
-            onclick={() => plannerApi.spendGold(Number(goldInput))}
-          >
-            Spend
-          </button>
-
-          <button
-            class="btn-primary"
-            onclick={() => plannerApi.setGold(Number(goldInput))}
-          >
-            Set
-          </button>
-        </div>
-      </div>
+      <button class="btn" onclick={() => openGoldModal("add")}>+ Add</button>
+      <button class="btn" onclick={() => openGoldModal("spend")}>− Spend</button>
+      <button class="btn" onclick={() => openGoldModal("set")}>= Set</button>
     </div>
 
-    <!-- RELEASE -->
-    <div class="card p-5">
-      <h2 class="text-sm font-semibold text-[#a29e96] uppercase">
-        Release Target
-      </h2>
+    <div
+      class="flex items-center gap-2 sm:border-l sm:pl-5"
+      style="border-color: var(--la-border);"
+    >
+      <label class="text-xs text-[#a29e96]" for="release-date">Release</label>
 
       <input
+        id="release-date"
         type="date"
-        class="input mt-3"
+        class="input w-40"
+        style="padding: 0.35rem 0.5rem;"
         value={$planner.releaseDate}
         onchange={(e) => plannerApi.setReleaseDate(e.currentTarget.value)}
       />
     </div>
 
-    <!-- PRESETS -->
-    <div class="card p-5">
-      <h2 class="text-sm font-semibold text-[#a29e96] uppercase">Presets</h2>
-
-      <button
-        class="btn-secondary w-full mt-4"
-        onclick={() => {
-          if (
-            confirm(
-              "Replace your current planner with the Chronomancer preset?",
-            )
-          ) {
-            progressionApi.prefillChronomancer();
-          }
-        }}
-      >
-        Chronomancer
+    <div class="ml-auto sm:border-l sm:pl-5" style="border-color: var(--la-border);">
+      <button class="btn-secondary" onclick={() => (plansOpen = true)}>
+        Plans
       </button>
     </div>
   </div>
 
   <!-- STATS -->
   <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-    <div class="stat-card">
-      <div class="stat-label">Weekly Income</div>
-      <div class="stat-value">{$weeklyIncome.toLocaleString()}</div>
-    </div>
+    <StatCard label="Weekly Income" value={$weeklyIncome.toLocaleString()} />
 
-    <div class="stat-card">
-      <div class="stat-label">Weeks Left</div>
-      <div class="stat-value">{$weeksRemaining}</div>
-    </div>
+    <StatCard label="Weeks Left" value={$weeksRemaining} />
 
-    <div class="stat-card">
-      <div class="stat-label">Gold At Release</div>
-      <div class="stat-value">{$displayProjectedGold.toLocaleString()}</div>
-    </div>
+    <StatCard label="Gold At Release" value={$displayProjectedGold.toLocaleString()} />
 
-    <div class="stat-card">
-      <div class="stat-label">
-        {$displayFundingGap > 0 ? "Still Needed" : "Surplus"}
-      </div>
-
-      <div
-        class="stat-value"
-        class:stat-value-red={$displayFundingGap > 0}
-        class:stat-value-green={$displayFundingGap <= 0}
-      >
-        {Math.abs($displayFundingGap).toLocaleString()}
-      </div>
-    </div>
+    <StatCard
+      label={$displayFundingGap > 0 ? "Still Needed" : "Surplus"}
+      value={Math.abs($displayFundingGap).toLocaleString()}
+      valueClass={$displayFundingGap > 0 ? "stat-value-red" : "stat-value-green"}
+    >
+      {#if $displayMarketShortfall > 0}
+        <div
+          class="text-xs mt-1"
+          style="color: var(--la-red);"
+          title="Market purchases (materials, engravings, accessories) can only use tradable gold - bound gold cannot cover them"
+        >
+          {$displayMarketShortfall.toLocaleString()}g market cost not covered by tradable gold
+        </div>
+      {/if}
+    </StatCard>
   </div>
 
   <nav bind:this={contentEl} class="border-b flex gap-1" style="border-color: rgba(255,255,255,0.12);">
@@ -243,3 +210,113 @@
 
   {@render children()}
 </div>
+
+<svelte:window
+  onkeydown={(e) => {
+    if (e.key !== "Escape") return;
+
+    if (goldModal) goldModal = null;
+    else if (plansOpen) plansOpen = false;
+  }}
+/>
+
+{#if goldModal}
+  <!-- Gold movement popup (ported to body so it centers on the browser viewport) -->
+  <div use:portal>
+    <div
+      class="fixed inset-0 z-[9999] flex items-center justify-center p-4"
+      style="background: rgba(0,0,0,0.6);"
+      role="presentation"
+      onclick={(e) => {
+        if (e.target === e.currentTarget) goldModal = null;
+      }}
+    >
+      <div class="card p-5 w-full max-w-sm" role="dialog" aria-modal="true">
+      <h3 class="text-lg font-bold mb-1">
+        {goldModal === "add"
+          ? "Add Gold"
+          : goldModal === "spend"
+            ? "Spend Gold"
+            : "Set Balance"}
+      </h3>
+      <p class="text-xs text-[#a29e96] mb-4">
+        {goldModal === "add"
+          ? "Where did this gold come from?"
+          : goldModal === "spend"
+            ? "What was this gold spent on?"
+            : "Enter your exact current tradable balance."}
+      </p>
+
+      <label class="block text-xs font-medium text-[#a29e96] mb-1" for="gold-modal-amount">
+        Amount
+      </label>
+      <div class="mb-3">
+        <NumberInput
+          id="gold-modal-amount"
+          class="w-full"
+          value={goldModalAmount}
+          min={0}
+          onchange={(v) => (goldModalAmount = v)}
+          onkeydown={(e) => e.key === "Enter" && confirmGoldModal()}
+        />
+      </div>
+
+      {#if goldModal !== "set"}
+        <label class="block text-xs font-medium text-[#a29e96] mb-1" for="gold-modal-note">
+          {goldModal === "add" ? "Source" : "Purpose"}
+        </label>
+        <input
+          id="gold-modal-note"
+          class="input w-full mb-4"
+          type="text"
+          placeholder={goldModal === "add"
+            ? "e.g. Weekly raids, bus carry..."
+            : "e.g. Honing materials, accessory..."}
+          bind:value={goldModalNote}
+          onkeydown={(e) => e.key === "Enter" && confirmGoldModal()}
+        />
+      {:else}
+        <div class="mb-4"></div>
+      {/if}
+
+      <div class="flex gap-2 justify-end">
+        <button class="btn" onclick={() => (goldModal = null)}>
+          Cancel
+        </button>
+        <button class="btn-primary" onclick={confirmGoldModal}>
+          {goldModal === "add" ? "Add" : goldModal === "spend" ? "Spend" : "Set"}
+        </button>
+        </div>
+      </div>
+    </div>
+  </div>
+{/if}
+
+{#if plansOpen}
+  <!-- Saved plans popup (ported to body so it centers on the browser viewport) -->
+  <div use:portal>
+    <div
+      class="fixed inset-0 z-[9999] flex items-center justify-center p-4"
+      style="background: rgba(0,0,0,0.6);"
+      role="presentation"
+      onclick={(e) => {
+        if (e.target === e.currentTarget) plansOpen = false;
+      }}
+    >
+      <div
+        class="card p-5 w-full max-w-md max-h-[85vh] overflow-y-auto"
+        role="dialog"
+        aria-modal="true"
+      >
+        <div class="flex justify-between items-center mb-3">
+          <h3 class="text-lg font-bold">Saved Plans</h3>
+          <button class="btn" onclick={() => (plansOpen = false)}>
+            Close
+          </button>
+        </div>
+
+        <SavedPlans />
+      </div>
+    </div>
+  </div>
+{/if}

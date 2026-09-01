@@ -1,8 +1,18 @@
 <script>
     import { karmaTracks, planner } from "$lib/stores/planner";
-    import { plannerApi } from "$lib/api/planner";
+    import { logApi, plannerApi } from "$lib/api/planner";
+    import { requestArtisan } from "$lib/stores/artisan-prompt";
     import { getTrackTotal } from "$lib/helpers/karma";
     import { displayKarmaCost } from "$lib/derived/planner";
+
+    async function tapKarma(key) {
+        const label =
+            karmaTracks.find((t) => t.key === key)?.label ?? key;
+
+        const artisan = await requestArtisan(label);
+
+        if (artisan !== undefined) logApi.logKarmaTap(key, artisan);
+    }
 </script>
 
 <section class="space-y-4">
@@ -23,7 +33,7 @@
 
                 <!-- CONTROLS -->
                 <div class="px-4 py-3 bg-[rgba(255,255,255,0.02)] border-t border-[rgba(255,255,255,0.12)]">
-                    <div class="grid grid-cols-3 gap-4 items-stretch">
+                    <div class="grid grid-cols-4 gap-4 items-stretch">
                         <!-- CURRENT -->
                         <div class="flex flex-col justify-between h-16">
                             <div class="text-xs text-[#a29e96]">Current</div>
@@ -72,6 +82,18 @@
                                     target,
                                 ).toLocaleString()}g
                             </div>
+                        </div>
+
+                        <!-- TAP -->
+                        <div class="flex flex-col justify-between items-end h-16">
+                            <div class="text-xs text-[#a29e96]">Success</div>
+
+                            <button
+                                class="btn px-3 mb-[7px]"
+                                onclick={() => tapKarma(track.key)}
+                            >
+                                +1
+                            </button>
                         </div>
                     </div>
                 </div>
