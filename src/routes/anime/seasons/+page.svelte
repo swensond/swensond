@@ -11,7 +11,7 @@
 </script>
 
 <div class="card p-6 text-center">
-  <div class="text-[#a29e96]">Loading seasons…</div>
+  <div style="color: var(--text-muted);">Loading seasons…</div>
 </div>
 
 <svelte:head>

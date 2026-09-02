@@ -309,7 +309,7 @@
       </div>
 
       {#if exportError}
-        <div class="card p-3 mb-3 text-xs" style="color: var(--la-red);">{exportError}</div>
+        <div class="card p-3 mb-3 text-xs" style="color: var(--red);">{exportError}</div>
       {/if}
 
       <!-- EXPORT AREA: the card keeps full width; html-to-image gets transparent margins via canvasWidth/Height. -->

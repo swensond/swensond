@@ -542,7 +542,7 @@
     <!-- SHARED LIST VIEW -->
     <div class="card px-4 py-3 flex items-center gap-3">
       <div>
-        <div class="text-xs uppercase tracking-widest" style="color: var(--la-text-muted);">Shared List</div>
+        <div class="text-xs uppercase tracking-widest" style="color: var(--text-muted);">Shared List</div>
         <div class="la-heading text-lg font-bold la-gold-text">
           {pendingShare.ids.length} show{pendingShare.ids.length === 1 ? '' : 's'}
           {#if pendingShare.from}<span class="text-sm font-normal">- shared by {pendingShare.from}</span>{/if}
@@ -579,13 +579,13 @@
   {:else}
     {#if importOpen}
       <div class="card px-4 py-3 space-y-2">
-        <div class="text-xs" style="color: var(--la-text-muted);">Paste a share link to replace your current list.</div>
+        <div class="text-xs" style="color: var(--text-muted);">Paste a share link to replace your current list.</div>
         <div class="flex flex-wrap gap-2">
           <input class="input flex-1 min-w-48" placeholder="https://…/?list=210031,184951:12" bind:value={importText}
             onkeydown={(e) => { if (e.key === 'Enter') runImport(); }} />
           <button class="btn" onclick={runImport}>Apply</button>
         </div>
-        {#if importError}<div class="text-xs" style="color: var(--la-red);">{importError}</div>{/if}
+        {#if importError}<div class="text-xs" style="color: var(--red);">{importError}</div>{/if}
       </div>
     {/if}
     {@render children()}
@@ -605,39 +605,39 @@
           <div class="relative h-40 sm:h-52 shrink-0">
             <img class="h-full w-full object-cover" style="background: {coverGradient(selected.coverImage.color)};"
               src={selected.bannerImage} alt="" />
-            <div class="absolute inset-0" style="background: linear-gradient(to top, var(--la-panel), transparent);"></div>
+            <div class="absolute inset-0" style="background: linear-gradient(to top, var(--panel), transparent);"></div>
           </div>
         {/if}
         <div class="px-5 pt-6 pb-4 space-y-4 overflow-y-auto flex-1 min-h-0">
           <div class="flex gap-4">
             <img class="w-24 h-36 rounded-sm object-cover border shrink-0"
-              style="background: {coverGradient(selected.coverImage.color)}; border-color: var(--la-border-strong); box-shadow: 0 8px 24px rgba(0,0,0,0.6);"
+              style="background: {coverGradient(selected.coverImage.color)}; border-color: var(--border-strong); box-shadow: 0 8px 24px rgba(0,0,0,0.6);"
               src={selected.coverImage.extraLarge ?? selected.coverImage.large} alt="" />
             <div class="min-w-0 pt-1">
               <h2 class="la-heading text-2xl font-bold leading-tight">{selected.title.english ?? mainTitle(selected)}</h2>
               {#if selected.title.romaji && selected.title.romaji !== (selected.title.english ?? mainTitle(selected))}
-                <div class="text-sm mt-0.5" style="color: var(--la-text-muted);">{selected.title.romaji}</div>
+                <div class="text-sm mt-0.5" style="color: var(--text-muted);">{selected.title.romaji}</div>
               {/if}
               {#if selected.title.native}
-                <div class="text-xs mt-0.5" style="color: var(--la-text-faint);">{selected.title.native}</div>
+                <div class="text-xs mt-0.5" style="color: var(--text-faint);">{selected.title.native}</div>
               {/if}
             </div>
           </div>
-          <div class="flex flex-wrap gap-x-4 gap-y-1 text-xs" style="color: var(--la-text-muted);">
+          <div class="flex flex-wrap gap-x-4 gap-y-1 text-xs" style="color: var(--text-muted);">
             <span>{formatLabel(selected.format)}{#if selected.episodes} · {selected.episodes} eps{/if}{#if selected.duration} · {selected.duration}m{/if}</span>
             <span>{selected.startDate?.year ? dateLabel(selected.startDate) : '-'}{#if selected.endDate?.year} → {dateLabel(selected.endDate)}{/if}</span>
             <span>Score: <span class="la-gold-text font-semibold">{selected.averageScore ?? '-'}</span> · Pop: {selected.popularity?.toLocaleString() ?? '-'}</span>
             <span>Studio: {studioNames(selected)}</span>
             <span>Source: {sourceLabel(selected.source)}</span>
           </div>
-          {#if detailPending}<div class="text-xs" style="color: var(--la-text-faint);">Loading full details…</div>{/if}
+          {#if detailPending}<div class="text-xs" style="color: var(--text-faint);">Loading full details…</div>{/if}
           {#if selected.nextAiringEpisode}
             {@const air = formatAiring(selected)}
-            <div class="text-xs font-semibold" style="color: var(--la-accent-bright);">{air.text} {#if air.at}· airs {air.at}{/if}</div>
+            <div class="text-xs font-semibold" style="color: var(--accent-bright);">{air.text} {#if air.at}· airs {air.at}{/if}</div>
           {/if}
           {#if selectedRelations.length > 0}
             <div class="space-y-1.5">
-              <div class="text-xs uppercase tracking-widest" style="color: var(--la-text-muted);">Prequels & Sequels</div>
+              <div class="text-xs uppercase tracking-widest" style="color: var(--text-muted);">Prequels & Sequels</div>
               <div class="space-y-2">
                 {#each selectedRelations as e (e.node.id)}
                   {@const n = e.node}
@@ -647,7 +647,7 @@
                       src={n.coverImage?.large ?? ''} alt="" loading="lazy" />
                     <div class="flex-1 min-w-0">
                       <div class="text-sm font-medium line-clamp-1">{n.title.english ?? n.title.romaji}</div>
-                      <div class="text-xs mt-0.5 flex items-center gap-2" style="color: var(--la-text-muted);">
+                      <div class="text-xs mt-0.5 flex items-center gap-2" style="color: var(--text-muted);">
                         <span class="la-gold-text">{e.relationType === 'PREQUEL' ? 'Prequel' : 'Sequel'}</span>
                         <span class="badge {rn.className}">{rn.text}</span>
                         {#if progressMap[n.id]}<span class="badge b-progress">{progressMap[n.id]}ep</span>{/if}
@@ -668,7 +668,7 @@
             {@const pct = total === Number.POSITIVE_INFINITY ? 0 : Math.min(100, Math.round((seen / total) * 100))}
             <div class="space-y-1.5">
               <div class="flex flex-wrap items-center gap-2">
-                <span class="text-xs uppercase tracking-widest" style="color: var(--la-text-muted);">Progress</span>
+                <span class="text-xs uppercase tracking-widest" style="color: var(--text-muted);">Progress</span>
                 <span class="text-sm font-semibold tabular-nums">{seen}{#if total !== Number.POSITIVE_INFINITY} <span class="opacity-60">/ {total}</span>{/if}</span>
                 <button class="btn px-2 py-0.5" disabled={atCap} onclick={() => setProgress(selected.id, Math.min(seen + 1, cap))}>+1</button>
                 <button class="btn px-2 py-0.5" onclick={() => setProgress(selected.id, seen - 1)}>−1</button>
@@ -679,8 +679,8 @@
                 {/if}
               </div>
               {#if total !== Number.POSITIVE_INFINITY}
-                <div class="h-1 rounded-full overflow-hidden" style="background: rgba(255,255,255,0.08);">
-                  <div class="h-full rounded-full transition-all" style="width: {pct}%; background: var(--la-accent);"></div>
+                <div class="h-1 rounded-full overflow-hidden" style="background: var(--bg-tertiary);">
+                  <div class="h-full rounded-full transition-all" style="width: {pct}%; background: var(--accent);"></div>
                 </div>
               {/if}
             </div>
@@ -689,11 +689,11 @@
             <div class="flex flex-wrap gap-1.5">{#each selected.genres as g}<span class="tag">{g}</span>{/each}</div>
           {/if}
           {#if selected.descriptionHtml}
-            <div class="text-sm leading-relaxed whitespace-pre-line [&_a]:text-[#e8c987] [&_a]:underline"
-              style="color: #d5d1c9;">{@html selected.descriptionHtml}</div>
+            <div class="text-sm leading-relaxed whitespace-pre-line [&_a]:text-[var(--accent)] [&_a]:underline"
+              style="color: var(--text-secondary);">{@html selected.descriptionHtml}</div>
           {/if}
           {#if selected.trailer?.site === 'youtube' && selected.trailer.id}
-            <div class="aspect-video overflow-hidden rounded-sm border" style="border-color: var(--la-border);">
+            <div class="aspect-video overflow-hidden rounded-sm border" style="border-color: var(--border);">
               <iframe class="h-full w-full" src={`https://www.youtube-nocookie.com/embed/${selected.trailer.id}`}
                 title="Trailer" loading="lazy" frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -701,9 +701,9 @@
             </div>
           {/if}
         </div>
-        <div class="px-5 py-3 border-t flex flex-wrap items-center gap-2 shrink-0" style="border-color: var(--la-border);">
+        <div class="px-5 py-3 border-t flex flex-wrap items-center gap-2 shrink-0" style="border-color: var(--border);">
           <button class="btn" class:on={watchedSet.has(selected.id)}
-            style={watchedSet.has(selected.id) ? 'color: var(--la-accent-bright); border-color: var(--la-accent);' : ''}
+            style={watchedSet.has(selected.id) ? 'color: var(--accent-bright); border-color: var(--accent);' : ''}
             onclick={() => toggleWatch(selected.id)}>
             {watchedSet.has(selected.id) ? '✓ Watching' : '+ Watch'}
           </button>
@@ -730,7 +730,7 @@
       onclick={(e) => { if (e.target === e.currentTarget) { shareOpen = false; shareCopied = false; } }}>
       <div class="card w-full max-w-lg my-4 flex flex-col" role="dialog" aria-modal="true">
         <div class="flex items-center gap-2 px-5 pt-4 pb-3">
-          <div class="text-xs uppercase tracking-widest" style="color: var(--la-text-muted);">Share your list</div>
+          <div class="text-xs uppercase tracking-widest" style="color: var(--text-muted);">Share your list</div>
           <button class="util-btn ml-auto" onclick={() => { shareOpen = false; shareCopied = false; }} aria-label="Close"><X size={15} /></button>
         </div>
         <div class="flex gap-2 px-5 pb-3">
@@ -756,7 +756,7 @@
                   src={m.coverImage.extraLarge ?? m.coverImage.large} alt="" loading="lazy" />
                 <div class="flex-1 min-w-0">
                   <div class="text-sm font-medium line-clamp-1">{m.title.english ?? mainTitle(m)}</div>
-                  <div class="text-xs" style="color: var(--la-text-muted);">
+                  <div class="text-xs" style="color: var(--text-muted);">
                     <span class="badge {statusLabel(m.status).className}">{statusLabel(m.status).text}</span>
                   </div>
                 </div>
@@ -764,9 +764,9 @@
             {/each}
           </div>
         {/if}
-        {#if shareCopied}<div class="px-5 pb-2 text-xs" style="color: var(--la-green-bright);">Link copied!</div>{/if}
+        {#if shareCopied}<div class="px-5 pb-2 text-xs" style="color: var(--green-bright);">Link copied!</div>{/if}
         <div class="px-5 pb-3">
-          <label class="block text-xs uppercase tracking-widest pb-1.5" for="shareNameInput" style="color: var(--la-text-muted);">Your name</label>
+          <label class="block text-xs uppercase tracking-widest pb-1.5" for="shareNameInput" style="color: var(--text-muted);">Your name</label>
           <input id="shareNameInput" type="text" maxlength="40" placeholder="Optional" class="input w-full" bind:value={shareName} oninput={() => (shareCopied = false)} />
         </div>
         <div class="px-5 pb-5 pt-1">

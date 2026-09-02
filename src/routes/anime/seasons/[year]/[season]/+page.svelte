@@ -176,7 +176,7 @@
   <div class="h-px" aria-hidden="true"></div>
   <div class="card p-8 text-center space-y-3">
     <div class="la-heading text-lg font-bold la-gold-text">Season not found</div>
-    <div class="text-sm max-w-md mx-auto" style="color: var(--la-text-muted);">
+    <div class="text-sm max-w-md mx-auto" style="color: var(--text-muted);">
       {#if invalidSeason}
         "<strong>{$page.params.season}</strong>" isn't a valid season — use
         <span class="la-gold-text">winter</span>, <span class="la-gold-text">spring</span>,
@@ -208,7 +208,7 @@
   style="top: 56px;"
 >
   <div>
-    <div class="text-xs uppercase tracking-widest" style="color: var(--la-text-muted);">Season</div>
+    <div class="text-xs uppercase tracking-widest" style="color: var(--text-muted);">Season</div>
     <div class="la-heading text-lg font-bold la-gold-text">
       {seasonLabel(season.season, season.seasonYear)}
     </div>
@@ -248,13 +248,13 @@
   </div>
 {:else if error}
   <div class="card p-6 text-center space-y-3">
-    <div class="text-[#a29e96]">Could not load season data.</div>
-    <div class="text-xs" style="color: var(--la-red);">{error}</div>
+    <div style="color: var(--text-muted);">Could not load season data.</div>
+    <div class="text-xs" style="color: var(--red);">{error}</div>
     <button class="btn" onclick={refetchSeason}>Retry</button>
   </div>
 {:else if media.length === 0}
   <div class="card p-6 text-center">
-    <div class="text-[#a29e96]">No titles found for this season.</div>
+    <div style="color: var(--text-muted);">No titles found for this season.</div>
   </div>
 {:else}
   <div class="anime-grid">
@@ -269,16 +269,16 @@
 
   <div use:scrollMore class="h-2" aria-hidden="true"></div>
   {#if loadingMore}
-    <div class="text-center text-xs py-4" style="color: var(--la-text-muted);">Loading more…</div>
+    <div class="text-center text-xs py-4" style="color: var(--text-muted);">Loading more…</div>
   {:else if loadMoreError}
     <div class="flex items-center justify-center gap-3 py-4">
-      <div class="text-xs" style="color: var(--la-red);">Could not load more.</div>
+      <div class="text-xs" style="color: var(--red);">Could not load more.</div>
       <button class="btn" onclick={loadMoreSeason}>Retry</button>
     </div>
   {:else if !seasonHasMore}
-    <div class="text-center text-xs py-4" style="color: var(--la-text-faint);">You've reached the end of this season.</div>
+    <div class="text-center text-xs py-4" style="color: var(--text-faint);">You've reached the end of this season.</div>
   {:else if media.length > 50}
-    <div class="text-center text-xs py-4" style="color: var(--la-text-faint);">Scroll for more titles…</div>
+    <div class="text-center text-xs py-4" style="color: var(--text-faint);">Scroll for more titles…</div>
   {/if}
 {/if}
 {/if}

@@ -80,9 +80,9 @@
 
     {#if air.text}
       <div
-        class="absolute inset-x-0 bottom-0 px-2 py-1 text-[10px] font-medium text-left"
+        class="absolute inset-x-0 bottom-0 text-[10px] font-medium text-left"
         title={air.at ? `Airs ${air.at}` : undefined}
-        style="color: var(--la-accent-bright); background: linear-gradient(to top, rgba(11,10,14,0.95), rgba(11,10,14,0.35), transparent);"
+        style="color: #fff; padding: 0.375rem 0.5rem; background: rgba(11,10,14,0.35); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-top: 1px solid rgba(255,255,255,0.18);"
       >
         {air.text}
       </div>
@@ -91,7 +91,7 @@
 
   <div class="p-2.5 space-y-1.5">
     <div class="text-sm font-medium leading-tight line-clamp-2">{title}</div>
-    <div class="text-[11px] line-clamp-1" style="color: var(--la-text-muted);">
+    <div class="text-[11px] line-clamp-1" style="color: var(--text-muted);">
       {studioNames(m)}
     </div>
     <div class="flex flex-wrap gap-1">

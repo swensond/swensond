@@ -138,8 +138,8 @@
   </div>
 {:else if error}
   <div class="card p-6 text-center space-y-3">
-    <div class="text-[#a29e96]">Could not load this anime.</div>
-    <div class="text-xs" style="color: var(--la-red);">{error}</div>
+    <div style="color: var(--text-muted);">Could not load this anime.</div>
+    <div class="text-xs" style="color: var(--red);">{error}</div>
     <a class="btn" href={`https://anilist.co/anime/${id}`} target="_blank" rel="noopener noreferrer">
       Open on AniList ↗
     </a>
@@ -164,7 +164,7 @@
       <div class="relative h-40 sm:h-56 lg:h-64">
         <img class="h-full w-full object-cover" style="background: {coverGradient(m.coverImage.color)};"
           src={m.bannerImage} alt="" />
-        <div class="absolute inset-0" style="background: linear-gradient(to top, var(--la-panel), transparent);"></div>
+        <div class="absolute inset-0" style="background: linear-gradient(to top, var(--panel), transparent);"></div>
       </div>
     {/if}
 
@@ -173,58 +173,58 @@
         <!-- LEFT SIDEBAR -->
         <div class="lg:max-w-[280px]">
           <img class="w-full max-w-[220px] lg:max-w-none mx-auto lg:mx-0 rounded-sm object-cover border"
-            style="background: {coverGradient(m.coverImage.color)}; border-color: var(--la-border); {m.bannerImage ? 'margin-top: -7rem; position: relative; z-index: 1; box-shadow: 0 12px 32px rgba(0,0,0,0.65);' : 'box-shadow: 0 8px 24px rgba(0,0,0,0.5);'}"
+            style="background: {coverGradient(m.coverImage.color)}; border-color: var(--border); {m.bannerImage ? 'margin-top: -7rem; position: relative; z-index: 1; box-shadow: 0 12px 32px rgba(0,0,0,0.65);' : 'box-shadow: 0 8px 24px rgba(0,0,0,0.5);'}"
             src={m.coverImage.extraLarge ?? m.coverImage.large} alt={title} />
 
           <!-- QUICK FACTS -->
           <div class="mt-6 space-y-2.5 text-sm">
             <div class="flex justify-between items-center gap-4">
-              <span class="text-xs uppercase tracking-widest shrink-0" style="color: var(--la-text-muted);">Status</span>
+              <span class="text-xs uppercase tracking-widest shrink-0" style="color: var(--text-muted);">Status</span>
               <span class="badge {s.className} shrink-0">{s.text}</span>
             </div>
             <div class="flex justify-between items-baseline gap-4">
-              <span class="text-xs uppercase tracking-widest shrink-0" style="color: var(--la-text-muted);">Format</span>
-              <span class="text-right tabular-nums" style="color: #d5d1c9;">
+              <span class="text-xs uppercase tracking-widest shrink-0" style="color: var(--text-muted);">Format</span>
+              <span class="text-right tabular-nums" style="color: var(--text-secondary);">
                 {formatLabel(m.format)}
                 {#if m.episodes}· {m.episodes} eps{/if}
                 {#if m.duration}· {m.duration}m{/if}
               </span>
             </div>
             <div class="flex justify-between items-baseline gap-4">
-              <span class="text-xs uppercase tracking-widest shrink-0" style="color: var(--la-text-muted);">Aired</span>
-              <span class="text-right tabular-nums" style="color: #d5d1c9;">
+              <span class="text-xs uppercase tracking-widest shrink-0" style="color: var(--text-muted);">Aired</span>
+              <span class="text-right tabular-nums" style="color: var(--text-secondary);">
                 {m.startDate?.year ? dateLabel(m.startDate) : '-'}
                 {#if m.endDate?.year}→ {dateLabel(m.endDate)}{/if}
               </span>
             </div>
             {#if seasonUrl && seasonName}
               <div class="flex justify-between items-center gap-4">
-                <span class="text-xs uppercase tracking-widest shrink-0" style="color: var(--la-text-muted);">Season</span>
+                <span class="text-xs uppercase tracking-widest shrink-0" style="color: var(--text-muted);">Season</span>
                 <a class="la-gold-text underline text-right" href={seasonUrl} title="Browse the season this aired in">
                   {seasonLabel(seasonName, m.startDate?.year ?? 0)}
                 </a>
               </div>
             {/if}
             <div class="flex justify-between items-baseline gap-4">
-              <span class="text-xs uppercase tracking-widest shrink-0" style="color: var(--la-text-muted);">Score</span>
+              <span class="text-xs uppercase tracking-widest shrink-0" style="color: var(--text-muted);">Score</span>
               <span class="text-right">
                 <span class="la-gold-text font-semibold tabular-nums">{m.averageScore ?? '-'}</span>
                 <span class="text-xs opacity-60">/100 · {m.popularity?.toLocaleString() ?? '-'} pop</span>
               </span>
             </div>
             <div class="flex justify-between items-baseline gap-4">
-              <span class="text-xs uppercase tracking-widest shrink-0" style="color: var(--la-text-muted);">Studio</span>
-              <span class="text-right line-clamp-2" style="color: #d5d1c9;">{studioNames(m)}</span>
+              <span class="text-xs uppercase tracking-widest shrink-0" style="color: var(--text-muted);">Studio</span>
+              <span class="text-right line-clamp-2" style="color: var(--text-secondary);">{studioNames(m)}</span>
             </div>
             <div class="flex justify-between items-baseline gap-4">
-              <span class="text-xs uppercase tracking-widest shrink-0" style="color: var(--la-text-muted);">Source</span>
-              <span class="text-right" style="color: #d5d1c9;">{sourceLabel(m.source)}</span>
+              <span class="text-xs uppercase tracking-widest shrink-0" style="color: var(--text-muted);">Source</span>
+              <span class="text-right" style="color: var(--text-secondary);">{sourceLabel(m.source)}</span>
             </div>
           </div>
 
           <!-- NEXT AIRING -->
           {#if m.nextAiringEpisode}
-            <div class="mt-5 text-sm font-semibold" style="color: var(--la-accent-bright);">
+            <div class="mt-5 text-sm font-semibold" style="color: var(--accent-bright);">
               {air.text} {#if air.at}· airs {air.at}{/if}
             </div>
           {/if}
@@ -240,7 +240,7 @@
           {#if inList}
             <div class="space-y-1.5 mt-5">
               <div class="flex flex-wrap items-center gap-2">
-                <span class="text-xs uppercase tracking-widest" style="color: var(--la-text-muted);">Progress</span>
+                <span class="text-xs uppercase tracking-widest" style="color: var(--text-muted);">Progress</span>
                 <span class="text-sm font-semibold tabular-nums ml-auto">
                   {seen}{#if total !== Number.POSITIVE_INFINITY} <span class="opacity-60">/ {total}</span>{/if}
                 </span>
@@ -257,8 +257,8 @@
                 {/if}
               </div>
               {#if total !== Number.POSITIVE_INFINITY}
-                <div class="h-1 rounded-full overflow-hidden" style="background: rgba(255,255,255,0.08);">
-                  <div class="h-full rounded-full transition-all" style="width: {pct}%; background: var(--la-accent);"></div>
+                <div class="h-1 rounded-full overflow-hidden" style="background: var(--bg-tertiary);">
+                  <div class="h-full rounded-full transition-all" style="width: {pct}%; background: var(--accent);"></div>
                 </div>
               {/if}
             </div>
@@ -287,18 +287,18 @@
         <div class="mt-6 lg:mt-0">
           <h1 class="la-heading text-3xl font-bold leading-tight">{title}</h1>
           {#if m.title.romaji && m.title.romaji !== title}
-            <div class="text-base mt-1" style="color: var(--la-text-muted);">{m.title.romaji}</div>
+            <div class="text-base mt-1" style="color: var(--text-muted);">{m.title.romaji}</div>
           {/if}
           {#if m.title.native}
-            <div class="text-sm mt-0.5" style="color: var(--la-text-faint);">{m.title.native}</div>
+            <div class="text-sm mt-0.5" style="color: var(--text-faint);">{m.title.native}</div>
           {/if}
 
           <!-- SYNOPSIS -->
           {#if m.descriptionHtml}
             <div class="mt-6 max-w-prose">
-              <div class="text-xs uppercase tracking-widest mb-2" style="color: var(--la-text-muted);">Synopsis</div>
-              <div class="text-[15px] leading-relaxed whitespace-pre-line [&_a]:text-[#e8c987] [&_a]:underline"
-                style="color: #d5d1c9;">
+              <div class="text-xs uppercase tracking-widest mb-2" style="color: var(--text-muted);">Synopsis</div>
+              <div class="text-[15px] leading-relaxed whitespace-pre-line [&_a]:text-[var(--accent)] [&_a]:underline"
+                style="color: var(--text-secondary);">
                 {@html m.descriptionHtml}
               </div>
             </div>
@@ -307,8 +307,8 @@
           <!-- TRAILER -->
           {#if m.trailer?.site === 'youtube' && m.trailer.id}
             <div class="mt-8 max-w-2xl">
-              <div class="text-xs uppercase tracking-widest mb-2" style="color: var(--la-text-muted);">Trailer</div>
-              <div class="aspect-video overflow-hidden rounded-sm border" style="border-color: var(--la-border);">
+              <div class="text-xs uppercase tracking-widest mb-2" style="color: var(--text-muted);">Trailer</div>
+              <div class="aspect-video overflow-hidden rounded-sm border" style="border-color: var(--border);">
                 <iframe class="h-full w-full"
                   src={`https://www.youtube-nocookie.com/embed/${m.trailer.id}`}
                   title="Trailer" loading="lazy" frameborder="0"
@@ -321,7 +321,7 @@
           <!-- PREQUELS & SEQUELS -->
           {#if selectedRelations.length > 0}
             <div class="mt-8">
-              <div class="text-xs uppercase tracking-widest mb-2" style="color: var(--la-text-muted);">Prequels & Sequels</div>
+              <div class="text-xs uppercase tracking-widest mb-2" style="color: var(--text-muted);">Prequels & Sequels</div>
               <div class="grid sm:grid-cols-2 gap-2">
                 {#each selectedRelations as e (e.node.id)}
                   {@const n = e.node}
@@ -334,7 +334,7 @@
                       src={n.coverImage?.large ?? ''} alt="" loading="lazy" />
                     <div class="flex-1 min-w-0">
                       <div class="text-sm font-medium leading-tight line-clamp-1">{rTitle}</div>
-                      <div class="text-xs mt-0.5 flex items-center gap-2" style="color: var(--la-text-muted);">
+                      <div class="text-xs mt-0.5 flex items-center gap-2" style="color: var(--text-muted);">
                         <span class="la-gold-text">{e.relationType === 'PREQUEL' ? 'Prequel' : 'Sequel'}</span>
                         <span class="badge {rn.className}">{rn.text}</span>
                         {#if relSeen > 0}<span class="badge b-progress">{relSeen}ep</span>{/if}
@@ -351,7 +351,7 @@
           <!-- SIMILAR -->
           {#if similar.length > 0 || similarLoading}
             <div class="mt-8">
-              <div class="text-xs uppercase tracking-widest mb-2" style="color: var(--la-text-muted);">
+              <div class="text-xs uppercase tracking-widest mb-2" style="color: var(--text-muted);">
                 You Might Also Like
               </div>
               {#if similarLoading}
@@ -365,7 +365,7 @@
                   {#each similar as s (s.id)}
                     {@const sTitle = s.title.english ?? s.title.romaji ?? mainTitle(s)}
                     <a href={`/anime/${s.id}/`} class="group block overflow-hidden rounded-sm border transition"
-                      style="border-color: var(--la-border); background: var(--la-panel);">
+                      style="border-color: var(--border); background: var(--panel);">
                       <div class="relative aspect-[2/3]" style="background: {coverGradient(s.coverImage.color)};">
                         <img class="h-full w-full object-cover transition duration-300 group-hover:scale-105"
                           src={s.coverImage.extraLarge ?? s.coverImage.large} alt={sTitle} loading="lazy" />
@@ -375,7 +375,7 @@
                       </div>
                       <div class="p-2 space-y-1">
                         <div class="text-sm font-medium leading-tight line-clamp-2">{sTitle}</div>
-                        <div class="text-[11px] line-clamp-1" style="color: var(--la-text-muted);">
+                        <div class="text-[11px] line-clamp-1" style="color: var(--text-muted);">
                           {studioNames(s)}
                         </div>
                       </div>

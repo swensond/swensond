@@ -148,7 +148,7 @@
     color: #e89080;
   }
   .progress-track {
-    background: rgba(255, 255, 255, 0.08);
+    background: var(--bg-tertiary);
   }
   .schedule-row.block {
     display: block;
@@ -167,7 +167,7 @@
 
 {#if watchingList.length === 0}
   <div class="card p-6 text-center">
-    <div class="text-[#a29e96]">
+    <div style="color: var(--text-muted);">
       No shows picked yet - head to <a href="/anime/seasons/" class="la-gold-text underline">Seasons</a> and tap
       <span class="la-gold-text">+</span> on anything you're watching.
     </div>
@@ -185,14 +185,14 @@
     <div class="card border overflow-hidden" style="border-color: rgba(74,222,128,0.25);">
       <button class="w-full px-4 py-2.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-left"
         onclick={() => (missedOpen = !missedOpen)} aria-expanded={missedOpen}>
-        <ChevronRight size={15} class="chevron-icon shrink-0 {missedOpen ? 'rotated' : ''}" color="var(--la-green-bright)" />
-        <span class="text-xs uppercase tracking-widest shrink-0" style="color: var(--la-text-muted);">Since your last visit</span>
-        <span class="text-[11px] tabular-nums ml-auto whitespace-nowrap" style="color: var(--la-green-bright);">
+        <ChevronRight size={15} class="chevron-icon shrink-0 {missedOpen ? 'rotated' : ''}" color="var(--green-bright)" />
+        <span class="text-xs uppercase tracking-widest shrink-0" style="color: var(--text-muted);">Since your last visit</span>
+        <span class="text-[11px] tabular-nums ml-auto whitespace-nowrap" style="color: var(--green-bright);">
           Missed {missedSinceVisit.length} episode{missedSinceVisit.length === 1 ? '' : 's'}
         </span>
       </button>
       {#if missedOpen}
-        <div class="px-4 pb-3 border-t" style="border-color: var(--la-border);">
+        <div class="px-4 pb-3 border-t" style="border-color: var(--border);">
           <div class="space-y-1 pt-2">
             {#each missedByShow as entry (entry.m.id)}
               {@const m = entry.m}
@@ -203,7 +203,7 @@
                   src={m.coverImage.extraLarge ?? m.coverImage.large} alt="" loading="lazy" />
                 <div class="flex-1 min-w-0">
                   <div class="text-[13px] font-medium leading-tight line-clamp-1">{ctx.selectedTitle(m)}</div>
-                  <div class="text-[11px] mt-0.5 tabular-nums" style="color: var(--la-text-muted);">
+                  <div class="text-[11px] mt-0.5 tabular-nums" style="color: var(--text-muted);">
                     {eps.length} episode{eps.length === 1 ? '' : 's'} missed - Ep {eps.join(', ')}
                   </div>
                 </div>
@@ -218,7 +218,7 @@
   <!-- CONTINUE WATCHING -->
   {#if continueWatching.length > 0}
     <div class="space-y-2">
-      <div class="text-xs uppercase tracking-widest" style="color: var(--la-text-muted);">Started Watching</div>
+      <div class="text-xs uppercase tracking-widest" style="color: var(--text-muted);">Started Watching</div>
       <div class="flex gap-3 snap-x overflow-x-auto pb-1">
         {#each continueWatching as m (m.id)}
           {@const seen = progressMap[m.id] ?? 0}
@@ -231,11 +231,11 @@
               src={m.coverImage.extraLarge ?? m.coverImage.large} alt="" loading="lazy" />
             <div class="min-w-0 flex-1">
               <div class="text-[13px] font-medium leading-tight line-clamp-1">{ctx.selectedTitle(m)}</div>
-              <div class="text-[11px] mt-0.5 tabular-nums" style="color: var(--la-text-muted);">
+              <div class="text-[11px] mt-0.5 tabular-nums" style="color: var(--text-muted);">
                 Ep {seen}{#if total !== Number.POSITIVE_INFINITY} / {total}{/if}{#if m.nextAiringEpisode} · next {m.nextAiringEpisode.episode}{/if}
               </div>
               <div class="mt-1.5 h-1 rounded-full overflow-hidden progress-track">
-                <div class="h-full rounded-full" style="width: {pct}%; background: var(--la-accent);"></div>
+                <div class="h-full rounded-full" style="width: {pct}%; background: var(--accent);"></div>
               </div>
               <div class="flex items-center gap-2 mt-1.5">
                 <span class="badge {ctx.statusLabel(m.status).className}">{ctx.statusLabel(m.status).text}</span>
@@ -255,8 +255,8 @@
   {#if todayAirings.length > 0}
     <div class="space-y-2">
       <div class="flex items-baseline gap-2">
-        <div class="text-xs uppercase tracking-widest" style="color: var(--la-text-muted);">Airing Today</div>
-        <div class="text-[11px] tabular-nums" style="color: var(--la-text-faint);">
+        <div class="text-xs uppercase tracking-widest" style="color: var(--text-muted);">Airing Today</div>
+        <div class="text-[11px] tabular-nums" style="color: var(--text-faint);">
           {todayAirings.length} episode{todayAirings.length === 1 ? '' : 's'}
         </div>
       </div>
@@ -272,7 +272,7 @@
               src={m.coverImage.extraLarge ?? m.coverImage.large} alt="" loading="lazy" />
             <div class="flex-1 min-w-0">
               <div class="text-sm font-medium leading-tight line-clamp-1">{ctx.selectedTitle(m)}</div>
-              <div class="text-xs mt-0.5 flex items-center flex-wrap gap-x-3" style="color: var(--la-text-muted);">
+              <div class="text-xs mt-0.5 flex items-center flex-wrap gap-x-3" style="color: var(--text-muted);">
                 <span class="tabular-nums">{label.text}</span>
                 <span class="tabular-nums">{label.at}</span>
                 <span class="badge {ctx.statusLabel(m.status).className} shrink-0">{ctx.statusLabel(m.status).text}</span>
@@ -299,14 +299,14 @@
   {#if weekAirings.length > 0}
     <div class="space-y-3">
       <div class="flex items-baseline gap-2">
-        <div class="text-xs uppercase tracking-widest" style="color: var(--la-text-muted);">Coming Up</div>
-        <div class="text-[11px] tabular-nums" style="color: var(--la-text-faint);">
+        <div class="text-xs uppercase tracking-widest" style="color: var(--text-muted);">Coming Up</div>
+        <div class="text-[11px] tabular-nums" style="color: var(--text-faint);">
           {weekAirings.length} episode{weekAirings.length === 1 ? '' : 's'}
         </div>
       </div>
       {#each Object.entries(weekGroups) as [day, list] (day)}
         <div class="space-y-1">
-          <div class="text-xs uppercase tracking-widest pt-1 first:pt-0" style="color: var(--la-text-muted);">{day}</div>
+          <div class="text-xs uppercase tracking-widest pt-1 first:pt-0" style="color: var(--text-muted);">{day}</div>
           {#each list as a (a.airingAt)}
             {@const m = a.media}
             {@const label = ctx.airingLabel(a)}
@@ -315,7 +315,7 @@
                 src={m.coverImage.extraLarge ?? m.coverImage.large} alt="" loading="lazy" />
               <div class="flex-1 min-w-0">
                 <div class="text-sm font-medium leading-tight line-clamp-1">{ctx.selectedTitle(m)}</div>
-                <div class="text-xs mt-0.5 flex items-center flex-wrap gap-x-3" style="color: var(--la-text-muted);">
+                <div class="text-xs mt-0.5 flex items-center flex-wrap gap-x-3" style="color: var(--text-muted);">
                   <span class="tabular-nums">{label.text}</span>
                   <span class="tabular-nums">{label.at}</span>
                   <span class="badge {ctx.statusLabel(m.status).className} shrink-0">{ctx.statusLabel(m.status).text}</span>

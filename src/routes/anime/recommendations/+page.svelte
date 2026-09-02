@@ -123,7 +123,7 @@
 <div class="h-px" aria-hidden="true"></div>
 <div class="card px-4 py-3 flex items-center justify-between gap-3">
   <div>
-    <div class="text-xs uppercase tracking-widest" style="color: var(--la-text-muted);">
+    <div class="text-xs uppercase tracking-widest" style="color: var(--text-muted);">
       Get Started Watching
     </div>
     <div class="la-heading text-lg font-bold la-gold-text">
@@ -133,7 +133,7 @@
   <div class="flex items-center gap-3">
     {#if topGenres.length > 0}
       <div class="text-xs hidden sm:flex flex-wrap gap-1 items-center max-w-md justify-end">
-        <span style="color: var(--la-text-muted);">Based on:</span>
+        <span style="color: var(--text-muted);">Based on:</span>
         {#each topGenres.slice(0, 3) as g}
           <span class="tag">{g}</span>
         {/each}
@@ -154,7 +154,7 @@
 
 {#if watched.length === 0}
   <div class="card p-8 text-center space-y-3">
-    <div class="text-[#a29e96]">
+    <div style="color: var(--text-muted);">
       Add some shows to your list first so we can learn your favorite genres and recommend anime for you to get started watching!
     </div>
     <a class="btn" href="/anime/seasons/">Browse Seasons</a>
@@ -173,13 +173,13 @@
   </div>
 {:else if recommendedError}
   <div class="card p-6 text-center space-y-3">
-    <div class="text-[#a29e96]">Could not load recommendations.</div>
-    <div class="text-xs" style="color: var(--la-red);">{recommendedError}</div>
+    <div style="color: var(--text-muted);">Could not load recommendations.</div>
+    <div class="text-xs" style="color: var(--red);">{recommendedError}</div>
     <button class="btn" onclick={loadRecommendations}>Retry</button>
   </div>
 {:else if recommendedMedia.length === 0}
   <div class="card p-6 text-center">
-    <div class="text-[#a29e96]">No recommendations found matching your favorite genres.</div>
+    <div style="color: var(--text-muted);">No recommendations found matching your favorite genres.</div>
   </div>
 {:else}
   <div class="anime-grid">
@@ -190,20 +190,20 @@
 
   <div use:scrollMoreRecommendations class="h-2" aria-hidden="true"></div>
   {#if loadingMoreRecommendations}
-    <div class="text-center text-xs py-4" style="color: var(--la-text-muted);">
+    <div class="text-center text-xs py-4" style="color: var(--text-muted);">
       Loading more recommendations…
     </div>
   {:else if loadMoreRecommendationsError}
     <div class="flex items-center justify-center gap-3 py-4">
-      <div class="text-xs" style="color: var(--la-red);">Could not load more.</div>
+      <div class="text-xs" style="color: var(--red);">Could not load more.</div>
       <button class="btn" onclick={loadMoreRecommendations}>Retry</button>
     </div>
   {:else if !recommendationsHasMore && recommendedMedia.length > 0}
-    <div class="text-center text-xs py-4" style="color: var(--la-text-faint);">
+    <div class="text-center text-xs py-4" style="color: var(--text-faint);">
       You've reached the end of these recommendations. Hit Refresh to pull a new batch!
     </div>
   {:else if recommendedMedia.length > 0}
-    <div class="text-center text-xs py-4" style="color: var(--la-text-faint);">
+    <div class="text-center text-xs py-4" style="color: var(--text-faint);">
       Scroll for more recommendations…
     </div>
   {/if}

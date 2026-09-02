@@ -127,13 +127,13 @@
   </div>
 {:else if watchedError}
   <div class="card p-6 text-center space-y-3">
-    <div class="text-[#a29e96]">Could not load your shows.</div>
-    <div class="text-xs" style="color: var(--la-red);">{watchedError}</div>
+    <div style="color: var(--text-muted);">Could not load your shows.</div>
+    <div class="text-xs" style="color: var(--red);">{watchedError}</div>
     <button class="btn" onclick={ctx.retryWatched}>Retry</button>
   </div>
 {:else if watchingList.length === 0}
   <div class="card p-6 text-center">
-    <div class="text-[#a29e96]">
+    <div style="color: var(--text-muted);">
       No shows picked yet - open the Season tab and tap <span class="la-gold-text">+</span> on anything you're watching.
     </div>
   </div>
@@ -156,7 +156,7 @@
     {#if finishedGroups.length > 1 && myFilter === 'finished'}
       <aside>
         <div class="card p-3">
-          <div class="text-xs uppercase tracking-widest px-2 pb-2" style="color: var(--la-text-muted);">
+          <div class="text-xs uppercase tracking-widest px-2 pb-2" style="color: var(--text-muted);">
             Seasons
           </div>
           <nav class="flex gap-1 lg:flex-col">
@@ -182,7 +182,7 @@
             <div class="space-y-1">
               <div class="flex items-baseline gap-2">
                 <h3 class="la-heading text-base font-bold">Airing</h3>
-                <span class="text-xs" style="color: var(--la-text-muted);">{airingList.length}</span>
+                <span class="text-xs" style="color: var(--text-muted);">{airingList.length}</span>
               </div>
               <div class="space-y-2">
                 {#each airingList as m (m.id)}
@@ -198,7 +198,7 @@
                 <div class="space-y-1">
                   <div class="flex items-baseline gap-2">
                     <h3 class="la-heading text-base font-bold">{g.label}</h3>
-                    <span class="text-xs" style="color: var(--la-text-muted);">{g.items.length}</span>
+                    <span class="text-xs" style="color: var(--text-muted);">{g.items.length}</span>
                   </div>
                   <div class="space-y-2">
                     {#each g.items as m (m.id)}
@@ -211,7 +211,7 @@
           {/if}
         {:else}
           <div class="card p-6 text-center">
-            <div class="text-[#a29e96]">
+            <div style="color: var(--text-muted);">
               Nothing currently airing or on the way - check back with the Season tab.
             </div>
           </div>
@@ -226,7 +226,7 @@
               <div class="space-y-1">
                 <div class="flex items-baseline gap-2">
                   <h3 class="la-heading text-base font-bold">{g.label}</h3>
-                  <span class="text-xs" style="color: var(--la-text-muted);">{g.items.length}</span>
+                  <span class="text-xs" style="color: var(--text-muted);">{g.items.length}</span>
                 </div>
                 <div class="space-y-2">
                   {#each g.items as m (m.id)}
@@ -238,7 +238,7 @@
           {/each}
         {:else}
           <div class="card p-6 text-center">
-            <div class="text-[#a29e96]">No finished shows on your list yet.</div>
+            <div style="color: var(--text-muted);">No finished shows on your list yet.</div>
           </div>
         {/if}
       {/if}
@@ -267,13 +267,13 @@
     }}
   >
     <div class="w-[3px] self-stretch shrink-0 rounded-sm"
-      style="background: {rel.isContinuation ? 'var(--la-accent)' : 'transparent'};"
+      style="background: {rel.isContinuation ? 'var(--accent)' : 'transparent'};"
       title={rel.label ?? undefined}></div>
     <img class="schedule-cover" style="background: {coverGradient(m.coverImage.color)};"
       src={m.coverImage.extraLarge ?? m.coverImage.large} alt="" loading="lazy" />
     <div class="flex-1 min-w-0">
       <div class="text-sm font-medium leading-tight line-clamp-1">{title}</div>
-      <div class="text-xs mt-0.5 flex items-center gap-2" style="color: var(--la-text-muted);">
+      <div class="text-xs mt-0.5 flex items-center gap-2" style="color: var(--text-muted);">
         <span class="badge {s.className} shrink-0">{s.text}</span>
         {#if rel.isContinuation}
           <span class="badge b-cont shrink-0" title={rel.label ?? 'Continuing franchise'}>Continuing</span>

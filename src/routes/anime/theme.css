@@ -73,6 +73,11 @@ html {
     outline-offset: 2px;
 }
 
+/* Legacy gold accent text, mapped to the theme's blue accent */
+.la-gold-text {
+    color: var(--accent);
+}
+
 /* Accent text */
 .text-accent {
     color: var(--accent);
