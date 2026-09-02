@@ -6,21 +6,21 @@
       tagline: "A comprehensive character progression planner for Lost Ark",
       href: "/loa-planner/",
       description:
-        "A full-featured progression planning tool for Lost Ark. Plan character builds, track raid rosters, calculate material requirements for honing and gear upgrades, manage gold income across multiple characters, and optimize weekly progression. Features a clean professional UI with real-time calculations.",
+        "A full-featured progression planning tool for Lost Ark. Plan character builds, track raid rosters, calculate material requirements for honing and gear upgrades, manage gold income across multiple characters, and optimize weekly progression. Features real-time calculations.",
       stack: [
         "SvelteKit",
         "Svelte 5",
         "TypeScript",
         "Tailwind CSS",
-        "IndexedDB",
+        "localStorage",
         "Vite",
       ],
       highlights: [
         "Character progression planner with honing cost calculations, material tracking, and upgrade probability estimates",
         "Raid roster management with role assignments, gate progression tracking, and weekly lockout timers",
         "Gold income calculator across alts with una tasks, raids, events, and rapport rewards",
-        "IndexedDB persistence for offline-first experience with import/export functionality",
-        "Responsive layout with collapsible panels and keyboard shortcuts for power users",
+        "localStorage persistence with import/export functionality",
+        "Responsive layout with tabbed navigation for power users",
       ],
       aiAssisted: true,
       aiNote:
@@ -33,7 +33,7 @@
       tagline: "A personal anime tracking and discovery tool",
       href: "/anime/",
       description:
-        "A full-featured anime watchlist manager built around the AniList GraphQL API. Track what you're watching, browse current and past seasons, get genre-based recommendations, maintain a backlog, and export shareable lists and visual infographics. Ships with a polished dark UI with gold accents and offline-first IndexedDB caching.",
+        "A full-featured anime watchlist manager built around the AniList GraphQL API. Track what you're watching, browse current and past seasons, get genre-based recommendations, maintain a backlog, and export shareable lists and visual infographics. Features offline-first IndexedDB caching.",
       stack: [
         "SvelteKit",
         "Svelte 5",
@@ -47,7 +47,7 @@
         "Live AniList API integration with 6-hour cached responses persisted to IndexedDB for a fast, offline-tolerant experience",
         "Dynamic season browsing, recommendations, and a persistent watchlist with custom watch statuses and progress tracking",
         "Shareable list URLs and generated visual infographics for easy list summaries",
-        "Fully client-side rendered section with responsive grids and a portal-based detail modal",
+        "Fully client-side rendered with offline-first caching and portal-based detail modal",
       ],
       aiAssisted: true,
       aiNote:

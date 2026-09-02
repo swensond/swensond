@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getContext } from 'svelte';
+  import { untrack, getContext } from 'svelte';
   import { page } from '$app/stores';
   import AnimeCard from '$lib/components/AnimeCard.svelte';
   import {
@@ -162,10 +162,8 @@
   let seasonPickerSentinel = $state<HTMLElement | null>(null);
 
   $effect(() => {
-    const el = seasonPickerSentinel;
-    if (!el) return;
-    const io = new IntersectionObserver(([entry]) => { seasonPickerStuck = !entry.isIntersecting; });
-    io.observe(el);
+    const io = new IntersectionObserver(([entry]) => { untrack(() => seasonPickerStuck = !entry.isIntersecting)});
+    io.observe(seasonPickerSentinel);
     return () => io.disconnect();
   });
 </script>
@@ -195,11 +193,9 @@
     </p>
   </div>
 {:else}
-{#if seasonPickerStuck}
-  <div class="h-px" aria-hidden="true"></div>
-{:else}
-  <div bind:this={seasonPickerSentinel} class="h-px" aria-hidden="true"></div>
-{/if}
+
+<div bind:this={seasonPickerSentinel} class="h-px" aria-hidden="true"></div>
+
 
 <!-- SEASON CONTROLS -->
 <div
@@ -209,7 +205,7 @@
   class:-mx-8={seasonPickerStuck}
   class:px-8={seasonPickerStuck}
   class:px-4={!seasonPickerStuck}
-  style="top: calc(3.5rem + {ctx.navHeight}px);"
+  style="top: 56px;"
 >
   <div>
     <div class="text-xs uppercase tracking-widest" style="color: var(--la-text-muted);">Season</div>
