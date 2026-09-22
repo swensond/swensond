@@ -1,0 +1,57 @@
+name: Deploy to swensond.github.io
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+# Only the latest commit needs to reach the live site.
+concurrency:
+  group: deploy
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+
+      - name: Build
+        run: |
+          npm install --global pnpm@12
+          pnpm install --frozen-lockfile
+          pnpm build
+
+      # Replaces the Pages repo's contents with dist/ (which carries CNAME and .nojekyll
+      # from static/). Auth is a deploy key with write access to that repo only.
+      - name: Push to swensond.github.io
+        env:
+          DEPLOY_KEY: ${{ secrets.PAGES_DEPLOY_KEY }}
+          SOURCE_MESSAGE: ${{ github.event.head_commit.message }}
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "$DEPLOY_KEY" > ~/.ssh/pages_deploy_key
+          chmod 600 ~/.ssh/pages_deploy_key
+          export GIT_SSH_COMMAND="ssh -i ~/.ssh/pages_deploy_key -o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new"
+
+          git clone --depth 1 --branch master git@github.com:swensond/swensond.github.io.git site
+          find site -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
+          cp -a dist/. site/
+
+          cd site
+          git add --all
+          if git diff --cached --quiet; then
+            echo "Build output unchanged; nothing to deploy."
+            exit 0
+          fi
+          git -c user.name="github-actions[bot]" \
+              -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+              commit -m "Deploy swensond@${GITHUB_SHA::7}" -m "${SOURCE_MESSAGE:-Manual deploy}"
+          git push origin master

@@ -84,10 +84,16 @@ body {
     background: color-mix(in srgb, var(--accent) 20%, transparent);
 }
 
-:focus-visible {
+/* The lightbox dialog takes focus on open; its Close button carries the visible cue. */
+:focus-visible:not(dialog) {
     outline: 2px solid var(--accent);
     outline-offset: 3px;
     border-radius: 2px;
+}
+
+/* Keep the page from scrolling behind an open lightbox. */
+html:has(dialog[open]) {
+    overflow: hidden;
 }
 
 .link {

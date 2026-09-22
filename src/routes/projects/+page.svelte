@@ -3,7 +3,7 @@
     {
       name: "Lost Ark Planner",
       tagline: "Character progression and gold planner for Lost Ark",
-      image: { src: "/projects/loa-planner.png", width: 1440, height: 900 },
+      image: { src: "/projects/loa-planner.webp", width: 3432, height: 2170 },
       description:
         "Plans progression across a full roster of characters. It calculates honing and material costs, tracks owned materials and weekly gold income, and projects whether the roster will have enough gold by a target date.",
       highlights: [
@@ -17,7 +17,7 @@
     {
       name: "Anime Watchlist",
       tagline: "Anime tracking and discovery built on the AniList API",
-      image: { src: "/projects/anime.png", width: 1440, height: 360 },
+      image: { src: "/projects/anime.webp", width: 3432, height: 1914 },
       description:
         "A watchlist manager backed by the AniList GraphQL API. It browses current and past seasons, recommends shows by genre, tracks progress and rewatches, and builds shared watch-party lists. A Cloudflare Worker backed by Workers KV keeps everything in sync across browsers.",
       highlights: [
@@ -31,7 +31,7 @@
     {
       name: "Recipes",
       tagline: "Recipe collection fed by a companion Chrome extension",
-      image: { src: "/projects/recipes.png", width: 1440, height: 640 },
+      image: { src: "/projects/recipes.webp", width: 3432, height: 1305 },
       description:
         "Clips recipes from any website with a Chrome extension and syncs them into a personal collection through a Cloudflare Worker backed by Workers KV, so the collection is the same in every browser. Recipes can be rated, tagged, and turned into a shopping list.",
       highlights: [
@@ -45,6 +45,15 @@
 
   const description =
     "Personal projects by David Swenson: a Lost Ark progression planner, an anime watchlist, and a recipe collection with a Chrome extension.";
+
+  // One native <dialog> serves as the lightbox for every screenshot.
+  let lightbox: HTMLDialogElement;
+  let active = $state<(typeof projects)[number] | null>(null);
+
+  function openScreenshot(project: (typeof projects)[number]) {
+    active = project;
+    lightbox.showModal();
+  }
 </script>
 
 <svelte:head>
@@ -68,14 +77,21 @@
       <h2 class="font-serif text-2xl font-semibold">{project.name}</h2>
       <p class="mt-1 text-muted">{project.tagline}</p>
 
-      <img
-        src={project.image.src}
-        width={project.image.width}
-        height={project.image.height}
-        alt="Screenshot of {project.name}"
-        loading="lazy"
-        class="mt-6 h-auto w-full rounded-md border border-line"
-      />
+      <button
+        type="button"
+        class="mt-6 block w-full cursor-zoom-in rounded-md"
+        aria-label="View larger screenshot of {project.name}"
+        onclick={() => openScreenshot(project)}
+      >
+        <img
+          src={project.image.src}
+          width={project.image.width}
+          height={project.image.height}
+          alt="Screenshot of {project.name}"
+          loading="lazy"
+          class="h-auto w-full rounded-md border border-line"
+        />
+      </button>
 
       <p class="mt-6 text-ink-soft">{project.description}</p>
 
@@ -89,3 +105,27 @@
     </article>
   {/each}
 </div>
+
+<!-- Clicking anywhere (image, backdrop, or Close) dismisses; Escape works natively. -->
+<dialog
+  bind:this={lightbox}
+  class="m-auto max-h-none max-w-none bg-transparent p-0 backdrop:bg-black/80"
+  aria-label={active ? `${active.name} screenshot` : undefined}
+  onclick={() => lightbox.close()}
+>
+  {#if active}
+    <figure class="flex flex-col items-center gap-3 p-4">
+      <img
+        src={active.image.src}
+        width={active.image.width}
+        height={active.image.height}
+        alt="Screenshot of {active.name}"
+        class="h-auto max-h-[85vh] w-auto max-w-[95vw] cursor-zoom-out rounded-md"
+      />
+      <figcaption class="flex items-baseline gap-4 text-[0.95rem] text-white/80">
+        {active.name}
+        <button type="button" class="text-white underline underline-offset-4">Close</button>
+      </figcaption>
+    </figure>
+  {/if}
+</dialog>
