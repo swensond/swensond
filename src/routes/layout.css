@@ -1,650 +1,201 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 @import 'tailwindcss';
-@plugin '@tailwindcss/typography';
 
-/* =========================================================
-   PROFESSIONAL WHITE THEME
-   Clean light surfaces, dark text, blue accents.
-   ========================================================= */
 :root {
-    /* Core palette */
-    --bg: #ffffff;
-    --bg-secondary: #f8fafc;
-    --bg-tertiary: #f1f5f9;
-    --panel: #ffffff;
-    --panel-hover: #f8fafc;
-
-    /* Blue - primary accent */
-    --accent: #2563eb;
-    --accent-bright: #3b82f6;
-    --accent-dim: #1d4ed8;
-    --accent-light: #dbeafe;
-
-    /* Green - success / positive */
-    --green: #16a34a;
-    --green-bright: #22c55e;
-    --green-light: #dcfce7;
-
-    /* Red - warnings / danger */
-    --red: #dc2626;
-    --red-bright: #ef4444;
-    --red-light: #fee2e2;
-
-    /* Amber - warnings */
-    --amber: #d97706;
-    --amber-light: #fef3c7;
-
-    /* Borders */
-    --border: #e2e8f0;
-    --border-strong: #cbd5e1;
-    --border-focus: #2563eb;
-
-    /* Text */
-    --text: #0f172a;
-    --text-secondary: #334155;
-    --text-muted: #64748b;
-    --text-faint: #94a3b8;
-    --text-inverse: #ffffff;
-
-    font-family: 'Inter', 'Helvetica Neue', Arial, 'Segoe UI', Roboto, sans-serif;
-    font-feature-settings: 'liga' 1, 'calt' 1;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
+    --paper: #ffffff;
+    --ink: #1b2330;
+    --ink-soft: #3a4452;
+    --muted: #5f6877;
+    --line: #e2e6ec;
+    --accent: #1f4fbf;
 }
 
-@supports (font-variation-settings: normal) {
+@media (prefers-color-scheme: dark) {
     :root {
-        font-family: 'InterVariable', 'Inter', 'Helvetica Neue', Arial, 'Segoe UI', Roboto, sans-serif;
+        --paper: #15181e;
+        --ink: #e8eaee;
+        --ink-soft: #c5cad3;
+        --muted: #9199a6;
+        --line: #2b313b;
+        --accent: #86a6f2;
     }
 }
 
-html,
-body {
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
+/* Print is the submittable resume: US Letter, black on white, plain links. */
+@page {
+    size: letter;
+    margin: 0.5in 0.6in;
+
+    /* Claiming the margin boxes stops browsers printing their own header and
+       footer (page title, date, URL) over the resume. */
+    @top-center {
+        content: '';
+    }
+
+    @bottom-center {
+        content: '';
+    }
+}
+
+@media print {
+    :root {
+        --paper: #ffffff;
+        --ink: #000000;
+        --ink-soft: #1a1a1a;
+        --muted: #444444;
+        --line: #b8b8b8;
+        --accent: #000000;
+    }
+
+    html {
+        font-size: 12.5px;
+    }
+
+    body {
+        line-height: 1.4;
+    }
+}
+
+@theme inline {
+    --font-sans: 'Source Sans 3', ui-sans-serif, system-ui, sans-serif;
+    --font-serif: 'Source Serif 4', ui-serif, Georgia, serif;
+    --color-paper: var(--paper);
+    --color-ink: var(--ink);
+    --color-ink-soft: var(--ink-soft);
+    --color-muted: var(--muted);
+    --color-line: var(--line);
+    --color-accent: var(--accent);
+}
+
+html {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-
-    background-color: var(--bg);
-    color: var(--text);
 }
 
-/* Smooth scrolling */
-html {
-    scroll-behavior: smooth;
+body {
+    margin: 0;
+    font-size: 1.0625rem;
+    line-height: 1.6;
 }
 
-/* Custom scrollbar - light, subtle */
-::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-}
-
-::-webkit-scrollbar-track {
-    background: var(--bg);
-}
-
-::-webkit-scrollbar-thumb {
-    background: var(--border-strong);
-    border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: var(--text-muted);
-}
-
-/* Selection - blue highlight */
 ::selection {
-    background-color: var(--accent-light);
-    color: var(--accent-dim);
+    background: color-mix(in srgb, var(--accent) 20%, transparent);
 }
 
-/* Focus styles for accessibility */
-*:focus-visible {
+:focus-visible {
     outline: 2px solid var(--accent);
-    outline-offset: 2px;
+    outline-offset: 3px;
+    border-radius: 2px;
 }
 
-/* Section navigation */
-.nav-link-active {
-    background-color: var(--accent);
-    color: var(--text-inverse);
-    text-decoration: none;
-}
-
-.nav-link-active:hover {
-    background-color: var(--accent-dim);
-    color: var(--text-inverse);
-}
-
-.nav-link-inactive {
-    color: var(--text-secondary);
-    text-decoration: none;
-}
-
-.nav-link-inactive:hover {
-    background-color: var(--bg-tertiary);
+.link {
     color: var(--accent);
-    text-decoration: none;
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, var(--accent) 35%, transparent);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
 }
 
-/* Utility classes */
-.text-accent {
-    color: var(--accent);
+.link:hover {
+    text-decoration-color: currentColor;
 }
 
-.bg-accent {
-    background-color: var(--accent);
+.nav-link {
+    color: var(--muted);
+    text-underline-offset: 8px;
+    text-decoration-thickness: 2px;
 }
 
-.bg-blue-accent {
-    background-color: var(--accent);
+.nav-link:hover,
+.nav-link[aria-current='page'] {
+    color: var(--ink);
 }
 
-.bg-blue-accent:hover {
-    background-color: var(--accent-dim);
-    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+.nav-link[aria-current='page'] {
+    text-decoration-line: underline;
+    text-decoration-color: var(--accent);
 }
 
-.text-white {
-    color: var(--text-inverse);
-}
-
-.hover-accent:hover {
-    color: var(--accent-bright);
-}
-
-.hover-bg-zinc-950:hover {
-    background-color: #18181b;
-}
-
-.accent-line {
-    height: 1px;
-    background-color: var(--border);
-}
-
-/* =========================================================
-   SHARED COMPONENT STYLES
-   ========================================================= */
-
-/* Cards / panels - clean white, subtle borders */
-.card {
-    @apply rounded-lg overflow-hidden;
-    background: var(--panel);
-    border: 1px solid var(--border);
-    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05), 0 1px 2px rgba(15, 23, 42, 0.03);
-}
-
-.card:hover {
-    box-shadow: 0 4px 6px rgba(15, 23, 42, 0.07), 0 2px 4px rgba(15, 23, 42, 0.04);
-}
-
-.card-header {
-    @apply flex items-center gap-3 px-4 py-3;
-    background: var(--bg-secondary);
-    border-bottom: 1px solid var(--border);
-}
-
-/* Buttons */
-.btn {
-    @apply text-sm px-3 py-1.5 rounded-lg border transition-all duration-150 font-medium;
-    color: var(--text-secondary);
-    border-color: var(--border);
-    background: var(--bg);
-}
-
-.btn:hover:not(:disabled) {
-    border-color: var(--border-strong);
-    color: var(--text);
-    background: var(--bg-secondary);
-}
-
-.btn:active:not(:disabled) {
-    background: var(--bg-tertiary);
-}
-
-.btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
-
-.btn-primary {
-    @apply px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-150;
-    color: var(--text-inverse);
-    background-color: var(--accent);
-    border: 1px solid transparent;
-}
-
-.btn-primary:hover:not(:disabled) {
-    background-color: var(--accent-dim);
-}
-
-.btn-primary:active:not(:disabled) {
-    background-color: var(--accent-dim);
-}
-
-.btn-secondary {
-    @apply px-4 py-2 rounded-lg text-sm font-medium transition-all duration-150;
-    color: var(--text-secondary);
-    border: 1px solid var(--border);
-    background: var(--bg);
-}
-
-.btn-secondary:hover {
-    color: var(--text);
-    border-color: var(--border-strong);
-    background: var(--bg-secondary);
-}
-
-.btn-ghost {
-    @apply px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-150;
-    color: var(--text-muted);
-    background: transparent;
-    border: 1px solid transparent;
-}
-
-.btn-ghost:hover {
-    color: var(--text);
-    background: var(--bg-tertiary);
-}
-
-.btn-danger {
-    @apply text-sm transition-all duration-150 rounded-lg;
-    color: var(--red);
-}
-
-.btn-danger:hover {
-    color: var(--red-bright);
-}
-
-.btn-danger-solid {
-    @apply rounded-lg transition-all duration-150 font-medium;
-    padding: 0.5rem 1rem;
-    color: var(--text-inverse);
-    border: 1px solid transparent;
-    background: var(--red);
-}
-
-.btn-danger-solid:hover {
-    background-color: #b91c1c;
-}
-
-/* Stat cards */
-.stat-card {
-    @apply rounded-lg p-5;
-    background: var(--panel);
-    border: 1px solid var(--border);
-    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
-}
-
-.stat-label {
-    @apply text-xs mb-1 uppercase tracking-wider font-medium;
-    color: var(--text-muted);
-}
-
-.stat-value {
-    @apply text-2xl font-bold tabular-nums;
-    color: var(--text);
-}
-
-.stat-value-red {
-    color: var(--red);
-}
-
-.stat-value-green {
-    color: var(--green);
-}
-
-.stat-value-amber {
-    color: var(--amber);
-}
-
-/* Inputs */
-.input {
-    @apply cursor-text px-3 py-2 outline-none rounded-lg text-sm transition-all duration-150;
-    background: var(--bg);
-    color: var(--text);
-    border: 1px solid var(--border);
-}
-
-.input:focus {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 3px var(--accent-light);
-}
-
-.input::placeholder {
-    color: var(--text-faint);
-}
-
-.input:disabled {
-    background: var(--bg-tertiary);
-    color: var(--text-muted);
-    cursor: not-allowed;
-}
-
-select.input {
-    appearance: none;
-    -webkit-appearance: none;
-    padding-right: 2.5rem;
-    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 0.75rem center;
-}
-
-/* Tabs - blue underline for active */
-.tab {
-    @apply cursor-pointer px-4 py-2.5 text-sm font-medium transition-all duration-150 border-b-2 border-transparent;
-    color: var(--text-muted);
-}
-
-.tab:hover {
-    color: var(--text);
-    background: var(--bg-secondary);
-}
-
-.tab.active,
-.tab-active {
-    color: var(--accent);
-    border-bottom-color: var(--accent);
-    background: var(--accent-light);
-}
-
-/* Loading skeleton */
-.skeleton {
-    background: linear-gradient(90deg, var(--bg-tertiary) 25%, var(--bg-secondary) 50%, var(--bg-tertiary) 75%);
-    background-size: 200% 100%;
-    animation: shimmer 1.5s infinite;
-    border-radius: 0.375rem;
-}
-
-@keyframes shimmer {
-    0% { background-position: 200% 0; }
-    100% { background-position: -200% 0; }
-}
-
-/* Spinner */
-.spinner {
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    border: 2px solid var(--border);
-    border-top-color: var(--accent);
-    animation: spin 0.7s linear infinite;
-    display: inline-block;
-}
-
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
-
-/* Badges */
-.badge {
-    @apply inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium;
-}
-
-.badge-primary {
-    background: var(--accent-light);
-    color: var(--accent-dim);
-}
-
-.badge-success {
-    background: var(--green-light);
-    color: #15803d;
-}
-
-.badge-warning {
-    background: var(--amber-light);
-    color: #b45309;
-}
-
-.badge-danger {
-    background: var(--red-light);
-    color: #b91c1c;
-}
-
-.badge-neutral {
-    background: var(--bg-tertiary);
-    color: var(--text-secondary);
-}
-
-/* Tables */
-.table-container {
-    overflow-x: auto;
-}
-
-.table {
-    @apply w-full text-sm;
-    border-collapse: collapse;
-}
-
-.table th {
-    @apply px-4 py-3 text-left font-semibold;
-    color: var(--text-secondary);
-    background: var(--bg-secondary);
-    border-bottom: 1px solid var(--border);
-    white-space: nowrap;
-}
-
-.table td {
-    @apply px-4 py-3;
-    color: var(--text);
-    border-bottom: 1px solid var(--border);
-}
-
-.table tbody tr {
-    transition: background-color 0.15s;
-}
-
-.table tbody tr:hover {
-    background: var(--bg-secondary);
-}
-
-.table tbody tr:last-child td {
-    border-bottom: none;
-}
-
-/* Dividers */
-.divider {
-    height: 1px;
-    background: var(--border);
-    border: none;
-}
-
-/* Alerts / Notices */
-.alert {
-    @apply p-4 rounded-lg border;
-}
-
-.alert-info {
-    background: var(--accent-light);
-    border-color: var(--accent);
-    color: var(--accent-dim);
-}
-
-.alert-success {
-    background: var(--green-light);
-    border-color: var(--green);
-    color: #15803d;
-}
-
-.alert-warning {
-    background: var(--amber-light);
-    border-color: var(--amber);
-    color: #b45309;
-}
-
-.alert-danger {
-    background: var(--red-light);
-    border-color: var(--red);
-    color: #b91c1c;
-}
-
-/* Dropdown menus */
-.dropdown-menu {
-    @apply absolute z-50 min-w-[160px] rounded-lg shadow-lg border;
-    background: var(--panel);
-    border-color: var(--border);
-    box-shadow: 0 10px 15px -3px rgba(15, 23, 42, 0.1), 0 4px 6px -2px rgba(15, 23, 42, 0.05);
-}
-
-.dropdown-item {
-    @apply w-full px-4 py-2 text-sm text-left transition-colors;
-    color: var(--text-secondary);
-    background: transparent;
-    border: none;
-}
-
-.dropdown-item:hover {
-    color: var(--text);
-    background: var(--bg-secondary);
-}
-
-.dropdown-item:focus {
-    outline: none;
-    color: var(--text);
-    background: var(--bg-secondary);
-}
-
-.dropdown-divider {
-    height: 1px;
-    background: var(--border);
-    margin: 0.25rem 0;
-}
-
-/* Tooltips */
-.tooltip {
-    @apply absolute z-50 px-2 py-1 text-xs font-medium rounded pointer-events-none;
-    background: var(--text);
-    color: var(--text-inverse);
-    box-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.1), 0 2px 4px -1px rgba(15, 23, 42, 0.06);
-}
-
-/* Modal overlay */
-.modal-overlay {
-    @apply fixed inset-0 z-50 flex items-center justify-center p-4;
-    background: rgba(15, 23, 42, 0.5);
-    backdrop-filter: blur(2px);
-}
-
-.modal {
-    @apply w-full max-w-lg rounded-xl overflow-hidden;
-    background: var(--panel);
-    box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.25);
-}
-
-.modal-header {
-    @apply px-6 py-4 border-b flex items-center justify-between;
-    border-color: var(--border);
-}
-
-.modal-body {
-    @apply p-6;
-}
-
-.modal-footer {
-    @apply px-6 py-4 border-t flex items-center justify-end gap-3;
-    border-color: var(--border);
-    background: var(--bg-secondary);
-}
-
-/* Resume page styles */
-.experience-entry {
-    border-bottom: 1px solid var(--border);
-    flex-direction: column;
-    gap: 0.5rem;
-    margin-bottom: 1.5rem;
-    padding-bottom: 1.5rem;
-    display: flex;
-}
-
-.experience-entry:last-child {
-    border-bottom: none;
-    padding-bottom: 0;
-}
-
-.company-name {
-    color: var(--text);
-    font-size: 1.125rem;
-    font-weight: 700;
-}
-
-.job-title {
-    color: var(--accent);
-    font-size: 1rem;
+.section-title {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
     font-weight: 600;
-    text-decoration: none;
 }
 
-.skills-chips {
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-top: 0.5rem;
-    display: flex;
+@media print {
+    .section-title {
+        font-size: 14pt;
+        padding-bottom: 0.2rem;
+        border-bottom: 1px solid var(--line);
+    }
 }
 
-.skill-chip {
-    color: var(--accent);
-    background-color: var(--accent-light);
-    border: 1px solid var(--accent-light);
-    border-radius: 9999px;
-    padding: 0.25rem 0.75rem;
-    font-size: 0.875rem;
-    font-weight: 500;
-    transition: all 0.2s;
+/* Career progression: one rule per company, one marker per role. */
+.timeline {
+    border-left: 1px solid var(--line);
+    margin-left: 0.25rem;
+    padding-left: 1.5rem;
 }
 
-.skill-chip:hover {
-    background-color: var(--accent);
-    color: var(--text-inverse);
-    transform: translateY(-1px);
-    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.1);
-}
-
-.skill-category-title {
-    color: var(--text);
-    margin-bottom: 0.5rem;
-    font-weight: 700;
-}
-
-.experience-entry ul li {
-    color: var(--text-secondary);
-}
-
-/* Social icons in header */
-.social-icon {
-    display: inline-block;
+.role {
     position: relative;
-    overflow: hidden;
-    width: 48px;
-    height: 48px;
 }
 
-.social-container {
+.role + .role {
+    margin-top: 1.75rem;
+}
+
+.role::before {
+    content: '';
     position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-}
-
-.social-svg {
+    left: calc(-1.5rem - 5px);
+    top: 0.45em;
+    width: 9px;
+    height: 9px;
     border-radius: 50%;
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    fill-rule: evenodd;
+    background: var(--paper);
+    border: 2px solid var(--accent);
 }
 
-.social-svg-background {
-    fill: var(--bg-tertiary);
+.role.current::before {
+    background: var(--accent);
 }
 
-.social-svg-mask {
-    fill: var(--text-muted);
-}
+@media print {
+    .link {
+        text-decoration: none;
+    }
 
-.social-icon:hover .social-svg-mask {
-    fill: var(--accent);
+    /* Plain indented roles on paper; the timeline is a screen device. */
+    .timeline {
+        border-left: 0;
+        margin-left: 0;
+        padding-left: 0;
+    }
+
+    /* Static roles keep the PDF text layer in reading order for ATS parsers. */
+    .role {
+        position: static;
+    }
+
+    .role::before {
+        display: none;
+    }
+
+    .role + .role {
+        margin-top: 0.9rem;
+    }
+
+    h2,
+    h3,
+    h4,
+    .keep-with-next {
+        break-after: avoid;
+    }
+
+    ul > li {
+        break-inside: avoid;
+    }
 }

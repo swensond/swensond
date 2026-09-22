@@ -1,139 +1,91 @@
 <script lang="ts">
-  let projects = [
+  const projects = [
     {
-      slug: "loa-planner",
       name: "Lost Ark Planner",
-      tagline: "A comprehensive character progression planner for Lost Ark",
-      href: "/loa-planner/",
+      tagline: "Character progression and gold planner for Lost Ark",
+      image: { src: "/projects/loa-planner.png", width: 1440, height: 900 },
       description:
-        "A full-featured progression planning tool for Lost Ark. Plan character builds, track raid rosters, calculate material requirements for honing and gear upgrades, manage gold income across multiple characters, and optimize weekly progression. Features real-time calculations.",
-      stack: [
-        "SvelteKit",
-        "Svelte 5",
-        "TypeScript",
-        "Tailwind CSS",
-        "localStorage",
-        "Vite",
-      ],
+        "Plans progression across a full roster of characters. It calculates honing and material costs, tracks owned materials and weekly gold income, and projects whether the roster will have enough gold by a target date.",
       highlights: [
-        "Character progression planner with honing cost calculations, material tracking, and upgrade probability estimates",
-        "Raid roster management with role assignments, gate progression tracking, and weekly lockout timers",
-        "Gold income calculator across alts with una tasks, raids, events, and rapport rewards",
-        "localStorage persistence with import/export functionality",
-        "Responsive layout with tabbed navigation for power users",
+        "Roster management with per-character honing, karma, engraving, and accessory planning",
+        "Gold projection chart comparing logged balance history with the gold required by a target date",
+        "Automatic gold log covering every purchase, deposit, and raid clear",
+        "Saved plans persisted locally in the browser",
       ],
-      aiAssisted: true,
-      aiNote:
-        "This project was built with the assistance of AI pair-programming tools. I used AI to design the data models for Lost Ark's complex progression systems, implement the calculation engines for honing and gold tracking, and iterate rapidly on the UI. It demonstrates how I leverage AI for complex domain modeling and state management.",
-      external: false,
+      stack: ["SvelteKit", "Svelte 5", "TypeScript", "Tailwind CSS", "Vite"],
     },
     {
-      slug: "anime",
       name: "Anime Watchlist",
-      tagline: "A personal anime tracking and discovery tool",
-      href: "/anime/",
+      tagline: "Anime tracking and discovery built on the AniList API",
+      image: { src: "/projects/anime.png", width: 1440, height: 360 },
       description:
-        "A full-featured anime watchlist manager built around the AniList GraphQL API. Track what you're watching, browse current and past seasons, get genre-based recommendations, maintain a backlog, and export shareable lists and visual infographics. Features offline-first IndexedDB caching.",
-      stack: [
-        "SvelteKit",
-        "Svelte 5",
-        "TypeScript",
-        "Tailwind CSS",
-        "GraphQL",
-        "IndexedDB",
-        "Vite",
-      ],
+        "A watchlist manager backed by the AniList GraphQL API. It browses current and past seasons, recommends shows by genre, tracks progress and rewatches, and builds shared watch-party lists. A Cloudflare Worker backed by Workers KV keeps everything in sync across browsers.",
       highlights: [
-        "Live AniList API integration with 6-hour cached responses persisted to IndexedDB for a fast, offline-tolerant experience",
-        "Dynamic season browsing, recommendations, and a persistent watchlist with custom watch statuses and progress tracking",
-        "Shareable list URLs and generated visual infographics for easy list summaries",
-        "Fully client-side rendered with offline-first caching and portal-based detail modal",
+        "AniList responses cached in IndexedDB for six hours, so repeat visits load quickly and survive flaky connections",
+        "Season browser, genre-based recommendations, backlog, and rewatch tracking",
+        "Cross-browser sync through a Cloudflare Worker with Workers KV storage, so the watchlist follows you between devices",
+        "Shareable list URLs and exportable image infographics",
       ],
-      aiAssisted: true,
-      aiNote:
-        "This project was built with the assistance of AI pair-programming tools. I used AI to scaffold components, iterate rapidly on UI and state management, and refactor across Svelte's runes model. It demonstrates how I blend modern AI-assisted engineering with real product decisions, architecture, and code review.",
-      external: false,
+      stack: ["SvelteKit", "Svelte 5", "TypeScript", "Tailwind CSS", "GraphQL", "IndexedDB", "Cloudflare Workers", "Workers KV"],
+    },
+    {
+      name: "Recipes",
+      tagline: "Recipe collection fed by a companion Chrome extension",
+      image: { src: "/projects/recipes.png", width: 1440, height: 640 },
+      description:
+        "Clips recipes from any website with a Chrome extension and syncs them into a personal collection through a Cloudflare Worker backed by Workers KV, so the collection is the same in every browser. Recipes can be rated, tagged, and turned into a shopping list.",
+      highlights: [
+        "Chrome extension that captures recipes from any page",
+        "Cloudflare Worker and Workers KV backend that syncs the collection between the extension and any browser, secured by a private collection key",
+        "Ratings, tags, favorites, and a generated shopping list",
+      ],
+      stack: ["SvelteKit", "TypeScript", "Tailwind CSS", "Chrome Extensions", "Cloudflare Workers", "Workers KV"],
     },
   ];
+
+  const description =
+    "Personal projects by David Swenson: a Lost Ark progression planner, an anime watchlist, and a recipe collection with a Chrome extension.";
 </script>
 
 <svelte:head>
   <title>Projects | David Swenson</title>
-  <meta
-    name="description"
-    content="Selected projects by David Swenson, including the AI-assisted Anime Watchlist app."
-  />
+  <meta name="description" content={description} />
+  <meta property="og:title" content="Projects | David Swenson" />
+  <meta property="og:description" content={description} />
 </svelte:head>
 
-<div>
-  <section class="mb-10">
-    <h3 class="font-bold text-2xl">Projects</h3>
-    <p class="tracking-tight leading-relaxed mt-4 text-zinc-700">
-      Selected work that demonstrates how I build, ship, and iterate —
-      including projects developed with AI-assisted workflows to move faster
-      and stay on top of modern software engineering.
-    </p>
-  </section>
+<header>
+  <h1 class="font-serif text-4xl font-semibold tracking-tight sm:text-5xl">Projects</h1>
+  <p class="mt-4 text-lg leading-relaxed text-ink-soft">
+    Personal projects I design, build, and use every day. I built them with AI pair-programming
+    tools, and I owned the product decisions, architecture, data modeling, and code review.
+  </p>
+</header>
 
+<div class="mt-16 space-y-20">
   {#each projects as project}
-    <section
-      class="project-card bg-white border border-zinc-200 rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.06)] p-8 mb-10"
-    >
-      <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
-        <div>
-          <h4 class="text-xl font-bold text-zinc-900">{project.name}</h4>
-          <p class="text-sm text-zinc-500 mt-1">{project.tagline}</p>
-        </div>
-        <a
-          href={project.href}
-          target={project.external ? "_blank" : "_self"}
-          class="shrink-0 inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-accent text-white text-sm font-semibold hover:bg-zinc-950 hover:text-white transition no-underline"
-        >
-          Open app
-        </a>
-      </div>
+    <article>
+      <h2 class="font-serif text-2xl font-semibold">{project.name}</h2>
+      <p class="mt-1 text-muted">{project.tagline}</p>
 
-      <p class="tracking-tight leading-relaxed mt-5 text-zinc-700">
-        {project.description}
-      </p>
+      <img
+        src={project.image.src}
+        width={project.image.width}
+        height={project.image.height}
+        alt="Screenshot of {project.name}"
+        loading="lazy"
+        class="mt-6 h-auto w-full rounded-md border border-line"
+      />
 
-      <!-- AI assistance badge -->
-      {#if project.aiAssisted}
-        <div
-          class="mt-6 rounded-xl border border-blue-100 bg-blue-50 p-5"
-        >
-          <div class="flex items-start gap-3">
-            <span
-              class="shrink-0 inline-flex items-center px-3 py-1 rounded-full bg-white border border-blue-200 text-blue-700 text-xs font-semibold"
-            >
-              Built with AI assistance
-            </span>
-            <p class="text-sm text-zinc-700 leading-relaxed">
-              {project.aiNote}
-            </p>
-          </div>
-        </div>
-      {/if}
+      <p class="mt-6 text-ink-soft">{project.description}</p>
 
-      <!-- Key features -->
-      {#if project.highlights?.length}
-        <h5 class="font-semibold text-zinc-900 mt-6 mb-2">Highlights</h5>
-        <ul class="list-disc list-outside ml-5 space-y-2 text-zinc-700">
-          {#each project.highlights as highlight}
-            <li>{highlight}</li>
-          {/each}
-        </ul>
-      {/if}
+      <ul class="mt-3 list-disc space-y-1.5 pl-5 text-ink-soft marker:text-muted">
+        {#each project.highlights as highlight}
+          <li>{highlight}</li>
+        {/each}
+      </ul>
 
-      <!-- Tech stack -->
-      {#if project.stack?.length}
-        <h5 class="font-semibold text-zinc-900 mt-6 mb-3">Tech stack</h5>
-        <div class="skills-chips">
-          {#each project.stack as tech}
-            <span class="skill-chip">{tech}</span>
-          {/each}
-        </div>
-      {/if}
-    </section>
+      <p class="mt-4 text-[0.95rem] text-muted">Built with {project.stack.join(", ")}</p>
+    </article>
   {/each}
 </div>

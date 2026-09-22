@@ -1,239 +1,222 @@
 <script lang="ts">
+    import { onMount } from "svelte";
+
+    const experience = [
+        {
+            company: "Global Unity Impact",
+            location: "Remote",
+            roles: [
+                {
+                    title: "Senior Software Engineer",
+                    dates: "Mar 2023 – Present",
+                    bullets: [
+                        "Own the architecture and development of a full-stack platform supporting nonprofit operations, built on React, TypeScript, Bun, Hono, and MongoDB.",
+                        "Designed the platform's REST API layer in TypeScript with Hono, establishing type-safe, maintainable patterns for backend services.",
+                        "Own the MongoDB data layer end to end, from schema design and indexing strategy to query performance and operational reliability.",
+                        "Led adoption of AI-assisted development across the team, integrating a range of coding assistants and LLMs into daily workflows to speed up delivery and strengthen code review.",
+                    ],
+                },
+            ],
+        },
+        {
+            company: "Evive Health",
+            location: "Remote",
+            roles: [
+                {
+                    title: "Senior Software Engineer",
+                    dates: "Jan 2022 – Mar 2023",
+                    bullets: [
+                        "Designed and deployed a cross-service auditing layer that enforced data integrity across the microservice platform and became a core reliability safeguard.",
+                        "Engineered an automated messaging system that replaced manual communication workflows, removing a bottleneck as the platform scaled.",
+                        "Led development of a demo sales site for myevive.com to prototype product direction, shaping UX decisions for the core product.",
+                        "Built and maintained production microservices and web applications across Python, Java, C#, and TypeScript on AWS and PostgreSQL.",
+                    ],
+                },
+                {
+                    title: "Software Engineer II",
+                    dates: "Jul 2021 – Jan 2022",
+                    bullets: [
+                        "Designed and built an external authentication service that lets partners generate access tokens and call APIs on behalf of end users, enabling partner integrations.",
+                        "Migrated internal authentication to Auth0, strengthening security and improving scalability.",
+                        "Mentored an intern from onboarding through production launch, guiding the design and build of a serverless medical code mapping API.",
+                        "Cut CI/CD build times by introducing ephemeral GoCD agents, speeding up automated testing and deployment.",
+                    ],
+                },
+                {
+                    title: "Software Engineer",
+                    dates: "Aug 2019 – Jun 2021",
+                    bullets: [
+                        "Launched Evive Care in response to COVID-19: a real-time search tool for state and county testing sites, used by thousands of employees.",
+                        "Led the migration of internal tooling from Rackspace to AWS, improving infrastructure management and performance.",
+                        "Established infrastructure as code with AWS CloudFormation, standardizing and automating environment provisioning.",
+                        "Architected serverless services on AWS Lambda, improving scalability while reducing operational overhead and infrastructure cost.",
+                        "Built the CI/CD foundation for the engineering team by integrating GoCD into the development pipeline.",
+                        "Championed TypeScript for backend development, improving type safety and long-term maintainability.",
+                        "Drove company-wide adoption of an accessible frontend framework, raising WCAG compliance across the product.",
+                    ],
+                },
+            ],
+        },
+        {
+            company: "WiserTogether",
+            location: "Boston, MA",
+            roles: [
+                {
+                    title: "Software Engineer",
+                    dates: "Apr 2018 – Jul 2019",
+                    bullets: [
+                        "Built and owned the Cordova-based iOS and Android app for mywiserhealth.com, maintaining feature parity across platforms.",
+                        "Migrated analytics from Adobe to self-hosted Matomo, bringing user data in-house for stronger privacy and control.",
+                    ],
+                },
+                {
+                    title: "Junior Software Engineer",
+                    dates: "Dec 2015 – Mar 2018",
+                    bullets: [
+                        "Designed and implemented a public-facing API with an emphasis on security, scalability, and clear developer documentation.",
+                        "Containerized backend services and migrated infrastructure from OpenShift to Apache Aurora.",
+                        "Introduced TypeScript to the frontend codebase and moved CI from Travis CI to Jenkins.",
+                    ],
+                },
+            ],
+        },
+        {
+            company: "Continuum Managed Services",
+            location: "Boston, MA",
+            roles: [
+                {
+                    title: "Software Engineering Intern",
+                    dates: "Jan 2014 – Dec 2014",
+                    bullets: [
+                        "Shipped features for the Continuum Cloud Console (C3) and Sync247 in PHP and JavaScript, including integrations with additional cloud providers.",
+                        "Helped fellow interns get up to speed on RESTful API development.",
+                    ],
+                },
+            ],
+        },
+    ];
+
+    const skills = [
+        { category: "Languages", items: ["TypeScript", "JavaScript", "Python", "Java", "C#", "PHP", "SQL"] },
+        { category: "Frontend", items: ["React", "Svelte", "Tailwind CSS", "HTML", "CSS", "Accessibility (WCAG)"] },
+        { category: "Backend", items: ["Node.js", "Bun", "Hono", "REST APIs", "Microservices", "Serverless", "Auth0"] },
+        { category: "Data", items: ["MongoDB", "PostgreSQL", "MySQL", "DynamoDB", "Cloudflare Workers KV", "Redis", "Memcached"] },
+        { category: "Cloud & DevOps", items: ["AWS", "Lambda", "ECS", "CloudFormation", "Cloudflare Workers", "Docker", "GitHub Actions", "GoCD", "Jenkins", "Travis CI"] },
+        { category: "Testing", items: ["Vitest", "Jest", "Pytest"] },
+        { category: "AI tooling", items: ["AI coding assistants", "LLM workflows", "Local LLMs"] },
+    ];
+
+    const description =
+        "David Swenson is a Boston-based senior software engineer with 10+ years of experience building cloud-native applications, backend services, and CI/CD pipelines on AWS.";
+
+    // Email and phone go on the printed resume only. They are stored as shifted
+    // char codes so neither the served HTML nor the JS bundle contains a harvestable
+    // string; they are decoded client-side into elements that only print shows.
+    const decode = (codes: number[]) => String.fromCharCode(...codes.map((c) => c - 3));
+    const EMAIL = [103, 100, 121, 108, 103, 67, 118, 122, 104, 113, 118, 114, 113, 103, 49, 102, 114, 112];
+    const PHONE = [43, 56, 51, 59, 44, 35, 56, 58, 60, 48, 57, 60, 59, 51];
+    let contact = $state<{ email: string; phone: string } | null>(null);
+
+    // Browsers name the saved PDF after document.title, so swap in a submittable filename.
+    let pageTitle = "";
+    function beforePrint() {
+        pageTitle = document.title;
+        document.title = "David Swenson Resume";
+    }
+    function afterPrint() {
+        document.title = pageTitle;
+    }
+
+    onMount(() => {
+        contact = { email: decode(EMAIL), phone: decode(PHONE) };
+    });
 </script>
 
+<svelte:window onbeforeprint={beforePrint} onafterprint={afterPrint} />
+
 <svelte:head>
-    <title>Resume | David Swenson</title>
-    <meta
-        name="description"
-        content="Senior Software Engineer with 10+ years of experience designing cloud-native applications, distributed systems, and developer platforms."
-    />
+    <title>David Swenson | Senior Software Engineer</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content="David Swenson | Senior Software Engineer" />
+    <meta property="og:description" content={description} />
 </svelte:head>
 
-<section class="mb-10">
-    <h3 class="font-bold text-2xl">Summary</h3>
-    <p class="tracking-tight leading-relaxed mt-4">
-        Senior Software Engineer with 10+ years of experience designing cloud-native applications,
-        distributed systems, and developer platforms. Proven record leading AWS migrations, modernizing
-        legacy systems, mentoring engineers, and delivering production software across healthcare, SaaS,
-        and nonprofit sectors. Expert in full-stack development with Python, Java, C#, TypeScript,
-        JavaScript, Node.js, and React, with deep experience building scalable backend services, CI/CD
-        pipelines, serverless architectures, and microservice-based systems.
-    </p>
+<header class="flex items-start gap-5">
+    <img
+        src="/avatar.png"
+        alt=""
+        width="72"
+        height="72"
+        class="mt-1 size-16 shrink-0 rounded-full border border-line bg-white sm:size-[72px] print:hidden"
+    />
+    <div>
+        <h1 class="font-serif text-4xl font-semibold tracking-tight sm:text-5xl print:text-[24pt]">David Swenson</h1>
+        <p class="mt-1 text-lg text-muted">Senior Software Engineer in Boston, MA</p>
+        <ul class="mt-4 flex flex-wrap gap-x-5 gap-y-1 text-[0.95rem] print:mt-1">
+            {#if contact}
+                <li class="hidden print:block"><a class="link" href="mailto:{contact.email}">{contact.email}</a></li>
+                <li class="hidden print:block">{contact.phone}</li>
+            {/if}
+            <li><a class="link" href="https://www.linkedin.com/in/swensond/" target="_blank" rel="noopener">linkedin.com/in/swensond</a></li>
+            <li><a class="link" href="https://github.com/swensond" target="_blank" rel="noopener">github.com/swensond</a></li>
+            <li class="print:hidden"><button type="button" class="link cursor-pointer" onclick={() => window.print()}>Save as PDF</button></li>
+        </ul>
+    </div>
+</header>
+
+<p class="mt-10 text-lg leading-relaxed text-ink-soft print:mt-4 print:text-base print:leading-normal">
+    Senior software engineer with 10+ years of experience designing and building cloud-native
+    applications for healthcare, SaaS, and nonprofit organizations. Hands-on across the stack in
+    TypeScript, Python, Java, and C#, with deep experience in serverless and microservice
+    architectures on AWS. Takes systems from design to production, with a record of leading cloud
+    migrations, modernizing legacy platforms, building CI/CD pipelines, and mentoring engineers.
+    Seasoned remote engineer who has led team-wide adoption of AI-assisted development.
+</p>
+
+<section class="mt-16 print:mt-6" aria-labelledby="experience">
+    <h2 id="experience" class="section-title">Experience</h2>
+    <ol class="mt-8 space-y-12 print:mt-3 print:space-y-4">
+        {#each experience as job}
+            <li>
+                <div class="keep-with-next flex flex-wrap items-baseline justify-between gap-x-4">
+                    <h3 class="font-serif text-xl font-semibold print:text-[12pt]">{job.company}</h3>
+                    <span class="text-[0.95rem] text-muted">{job.location}</span>
+                </div>
+                <ol class="timeline mt-4 print:mt-1">
+                    {#each job.roles as role}
+                        <li class="role" class:current={role.dates.endsWith("Present")}>
+                            <div class="keep-with-next flex flex-wrap items-baseline justify-between gap-x-4">
+                                <h4 class="font-semibold">{role.title}</h4>
+                                <span class="text-[0.95rem] whitespace-nowrap text-muted tabular-nums">{role.dates}</span>
+                            </div>
+                            <ul class="mt-2 list-disc space-y-1.5 pl-5 text-ink-soft marker:text-muted print:mt-1 print:space-y-0.5">
+                                {#each role.bullets as bullet}
+                                    <li>{bullet}</li>
+                                {/each}
+                            </ul>
+                        </li>
+                    {/each}
+                </ol>
+            </li>
+        {/each}
+    </ol>
 </section>
 
-<section class="mb-10">
-    <h3 class="font-bold text-2xl">Experience</h3>
-    <div class="space-y-8 mt-6">
-        <div class="experience-entry space-y-2">
-            <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
-                <div class="company-name font-medium">Global Unity Impact</div>
-                <div class="job-title text-sm">Senior Software Engineer</div>
-            </div>
-            <div class="flex flex-col sm:flex-row sm:justify-between gap-1">
-                <div class="text-sm text-muted">Chicago, IL</div>
-                <div class="text-sm text-muted whitespace-nowrap">March 2023 - Present</div>
-            </div>
-            <ul class="list-disc list-outside ml-5 space-y-2 text-secondary">
-                <li>Architected and developing full-stack web applications with React, TypeScript, MongoDB, Bun, and Hono, enabling a scalable platform serving nonprofit operations.</li>
-                <li>Designed and implemented RESTful APIs using TypeScript, Node.js, MongoDB, Bun, and Hono, ensuring type safety and maintainable backend services.</li>
-                <li>Managed MongoDB databases for data storage and retrieval, optimizing query performance, indexing strategies, and operational reliability.</li>
-                <li>Accelerated development velocity by integrating AI coding tools (Qwen, GitHub Copilot), reducing boilerplate time and improving code review quality.</li>
-            </ul>
-        </div>
-        <div class="experience-entry space-y-2">
-            <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
-                <div class="company-name font-medium">Evive Health LLC.</div>
-                <div class="job-title text-sm">Senior Software Engineer</div>
-            </div>
-            <div class="flex flex-col sm:flex-row sm:justify-between gap-1">
-                <div class="text-sm text-muted">Chicago, IL</div>
-                <div class="text-sm text-muted whitespace-nowrap">January 2022 - March 2023</div>
-            </div>
-            <ul class="list-disc list-outside ml-5 space-y-2 text-secondary">
-                <li>Built and maintained production microservices and web applications using Python, Java, C#, TypeScript, PostgreSQL, and AWS.</li>
-                <li>Engineered an automated messaging system that eliminated manual communication bottlenecks, improving platform responsiveness at scale.</li>
-                <li>Led development of a demo sales site to explore strategic product iterations for myevive.com, directly informing user experience decisions.</li>
-                <li>Designed and deployed a cross-microservice auditing layer that enforced data integrity and became a critical reliability pillar across the platform.</li>
-            </ul>
-        </div>
-        <div class="experience-entry space-y-2">
-            <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
-                <div class="company-name font-medium">Evive Health LLC.</div>
-                <div class="job-title text-sm">Software Engineer II</div>
-            </div>
-            <div class="flex flex-col sm:flex-row sm:justify-between gap-1">
-                <div class="text-sm text-muted">Chicago, IL</div>
-                <div class="text-sm text-muted whitespace-nowrap">July 2021 - January 2022</div>
-            </div>
-            <ul class="list-disc list-outside ml-5 space-y-2 text-secondary">
-                <li>Owned cross-platform application development in Python, Java, C#, and TypeScript, spanning backend services and customer-facing interfaces.</li>
-                <li>Integrated ephemeral GoCD agents into CI/CD pipelines, reducing build times and accelerating automated testing and deployment workflows.</li>
-                <li>Mentored an intern from onboarding to production — guiding the full design and build of a serverless medical code mapping API that shipped to production.</li>
-                <li>Built an external authentication service enabling partners to generate access tokens for API calls on behalf of end users.</li>
-                <li>Migrated the internal authentication system to Auth0, strengthening security posture and improving system scalability.</li>
-            </ul>
-        </div>
-        <div class="experience-entry space-y-2">
-            <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
-                <div class="company-name font-medium">Evive Health LLC.</div>
-                <div class="job-title text-sm">Software Engineer</div>
-            </div>
-            <div class="flex flex-col sm:flex-row sm:justify-between gap-1">
-                <div class="text-sm text-muted">Chicago, IL</div>
-                <div class="text-sm text-muted whitespace-nowrap">August 2019 - June 2021</div>
-            </div>
-            <ul class="list-disc list-outside ml-5 space-y-2 text-secondary">
-                <li>Introduced TypeScript into backend development, improving code consistency, type safety, and long-term maintainability.</li>
-                <li>Implemented AWS CloudFormation and infrastructure-as-code practices, standardizing and automating environment provisioning.</li>
-                <li>Architected AWS Lambda–based serverless solutions that improved scalability while reducing operational overhead and infrastructure costs.</li>
-                <li>Led the migration of internal tooling from Rackspace to AWS, improving infrastructure management and system performance.</li>
-                <li>Integrated GoCD into the development pipeline, establishing robust continuous integration and deployment workflows.</li>
-                <li>Drove company-wide adoption of an accessibility-compliant frontend framework, raising WCAG compliance and modernizing the user experience.</li>
-                <li>Launched Evive Care in response to the COVID-19 pandemic, delivering a real-time search platform for state and county testing sites used by thousands of employees.</li>
-            </ul>
-        </div>
-        <div class="experience-entry space-y-2">
-            <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
-                <div class="company-name font-medium">WiserTogether Inc.</div>
-                <div class="job-title text-sm">Software Engineer</div>
-            </div>
-            <div class="flex flex-col sm:flex-row sm:justify-between gap-1">
-                <div class="text-sm text-muted">Boston, MA</div>
-                <div class="text-sm text-muted whitespace-nowrap">April 2018 - July 2019</div>
-            </div>
-            <ul class="list-disc list-outside ml-5 space-y-2 text-secondary">
-                <li>Built and maintained a Cordova-based mobile application for iOS and Android, delivering feature parity across platforms for mywiserhealth.com.</li>
-                <li>Migrated analytics infrastructure from Adobe to a self-hosted Matomo instance, improving data privacy and organizational control over user analytics.</li>
-            </ul>
-        </div>
-        <div class="experience-entry space-y-2">
-            <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
-                <div class="company-name font-medium">WiserTogether Inc.</div>
-                <div class="job-title text-sm">Jr. Software Engineer</div>
-            </div>
-            <div class="flex flex-col sm:flex-row sm:justify-between gap-1">
-                <div class="text-sm text-muted">Boston, MA</div>
-                <div class="text-sm text-muted whitespace-nowrap">December 2015 - March 2018</div>
-            </div>
-            <ul class="list-disc list-outside ml-5 space-y-2 text-secondary">
-                <li>Developed and maintained applications using Python, PHP, Java, and TypeScript across backend services and frontend interfaces.</li>
-                <li>Introduced TypeScript to the frontend codebase, improving code maintainability and enabling scalable feature development.</li>
-                <li>Containerized backend services and migrated infrastructure from OpenShift to Aurora Apache, improving system performance and scalability.</li>
-                <li>Transitioned the build pipeline from Travis CI to Jenkins, streamlining continuous integration and deployment workflows.</li>
-                <li>Designed and implemented a public-facing API service, ensuring security, scalability, and developer-friendly documentation.</li>
-            </ul>
-        </div>
-        <div class="experience-entry space-y-2">
-            <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
-                <div class="company-name font-medium">Continuum Managed Services, LLC</div>
-                <div class="job-title text-sm">Software Engineer Intern</div>
-            </div>
-            <div class="flex flex-col sm:flex-row sm:justify-between gap-1">
-                <div class="text-sm text-muted">Boston, MA</div>
-                <div class="text-sm text-muted whitespace-nowrap">January 2014 - December 2014</div>
-            </div>
-            <ul class="list-disc list-outside ml-5 space-y-2 text-secondary">
-                <li>Developed and maintained Continuum Cloud Console (C3) and Sync247 platforms using PHP and JavaScript, delivering key features to production.</li>
-                <li>Expanded C3 integrations with additional cloud providers, broadening platform capabilities and customer options.</li>
-                <li>Supported fellow interns in mastering RESTful API development, contributing to team growth and knowledge sharing.</li>
-            </ul>
-        </div>
-    </div>
+<section class="mt-16 print:mt-6" aria-labelledby="skills">
+    <h2 id="skills" class="section-title">Skills</h2>
+    <dl class="mt-6 grid gap-x-8 sm:grid-cols-[10rem_1fr] sm:gap-y-3 print:mt-3 print:grid-cols-[9rem_1fr] print:gap-y-1">
+        {#each skills as group}
+            <dt class="font-semibold">{group.category}</dt>
+            <dd class="mb-3 text-ink-soft sm:mb-0 print:mb-0">{group.items.join(", ")}</dd>
+        {/each}
+    </dl>
 </section>
 
-<section class="mb-10">
-    <h3 class="font-bold text-2xl">Skills</h3>
-    <div class="space-y-6 mt-4">
-        <div class="skill-category">
-            <div class="skill-category-title">Languages</div>
-            <div class="skills-chips">
-                <span class="skill-chip">Python</span>
-                <span class="skill-chip">Java</span>
-                <span class="skill-chip">C#</span>
-                <span class="skill-chip">TypeScript</span>
-                <span class="skill-chip">JavaScript</span>
-                <span class="skill-chip">PHP</span>
-                <span class="skill-chip">SQL</span>
-            </div>
-        </div>
-        <div class="skill-category">
-            <div class="skill-category-title">Frontend</div>
-            <div class="skills-chips">
-                <span class="skill-chip">React</span>
-                <span class="skill-chip">Tailwind CSS</span>
-                <span class="skill-chip">HTML5</span>
-                <span class="skill-chip">CSS3</span>
-                <span class="skill-chip">Svelte</span>
-                <span class="skill-chip">Accessibility Standards (WCAG)</span>
-            </div>
-        </div>
-        <div class="skill-category">
-            <div class="skill-category-title">Backend</div>
-            <div class="skills-chips">
-                <span class="skill-chip">Node.js</span>
-                <span class="skill-chip">Bun</span>
-                <span class="skill-chip">RESTful APIs</span>
-                <span class="skill-chip">Auth0</span>
-                <span class="skill-chip">Serverless Architecture</span>
-                <span class="skill-chip">Microservices</span>
-            </div>
-        </div>
-        <div class="skill-category">
-            <div class="skill-category-title">Databases and Caching</div>
-            <div class="skills-chips">
-                <span class="skill-chip">MongoDB</span>
-                <span class="skill-chip">PostgreSQL</span>
-                <span class="skill-chip">MySQL</span>
-                <span class="skill-chip">DynamoDB</span>
-                <span class="skill-chip">Redis</span>
-                <span class="skill-chip">Memcached</span>
-            </div>
-        </div>
-        <div class="skill-category">
-            <div class="skill-category-title">Cloud & DevOps</div>
-            <div class="skills-chips">
-                <span class="skill-chip">AWS</span>
-                <span class="skill-chip">CloudFormation</span>
-                <span class="skill-chip">ECS</span>
-                <span class="skill-chip">Lambda</span>
-                <span class="skill-chip">Docker</span>
-                <span class="skill-chip">CI/CD</span>
-                <span class="skill-chip">GoCD</span>
-                <span class="skill-chip">Jenkins</span>
-                <span class="skill-chip">Travis CI</span>
-                <span class="skill-chip">GitHub Actions</span>
-                <span class="skill-chip">Rackspace</span>
-            </div>
-        </div>
-        <div class="skill-category">
-            <div class="skill-category-title">Testing</div>
-            <div class="skills-chips">
-                <span class="skill-chip">Vitest</span>
-                <span class="skill-chip">Jest</span>
-                <span class="skill-chip">Pytest</span>
-            </div>
-        </div>
-        <div class="skill-category">
-            <div class="skill-category-title">AI Tools</div>
-            <div class="skills-chips">
-                <span class="skill-chip">GitHub Copilot</span>
-                <span class="skill-chip">Qwen</span>
-                <span class="skill-chip">LM Studio</span>
-            </div>
-        </div>
+<section class="mt-16 print:mt-6" aria-labelledby="education">
+    <h2 id="education" class="section-title">Education</h2>
+    <div class="mt-6 flex flex-wrap items-baseline justify-between gap-x-4 print:mt-3">
+        <h3 class="font-serif text-xl font-semibold print:text-[12pt]">Wentworth Institute of Technology</h3>
+        <span class="text-[0.95rem] text-muted tabular-nums">2011 – 2015</span>
     </div>
-</section>
-
-<section>
-    <h3 class="font-bold text-2xl">Education</h3>
-    <div class="space-y-10 mt-6">
-        <div class="space-y-2">
-            <div class="grid grid-cols-12">
-                <div class="col-span-8">Wentworth Institute of Technology</div>
-                <div class="col-span-4 text-right">2011 - 2015</div>
-            </div>
-            <div class="font-extralight text-sm text-muted">Boston, MA</div>
-            <div class="font-extralight tracking-tight">Bachelor of Science in Computer Networking</div>
-        </div>
-    </div>
+    <p class="mt-1 text-ink-soft">B.S. Computer Networking, Boston, MA</p>
 </section>
