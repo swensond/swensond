@@ -508,6 +508,7 @@
     <a href="/anime/" class="tab" class:active={$page.url.pathname.replace(/\/$/, '') === '/anime'}>Dashboard</a>
     <a href="/anime/seasons/" class="tab" class:active={$page.url.pathname.startsWith('/anime/seasons')}>Seasons</a>
     <a href="/anime/recommendations/" class="tab" class:active={$page.url.pathname.startsWith('/anime/recommendations')}>Recommendations</a>
+    <a href="/anime/rewatch/" class="tab" class:active={$page.url.pathname.startsWith('/anime/rewatch')}>Rewatch</a>
     <a href="/anime/backlog/" class="tab" class:active={$page.url.pathname.startsWith('/anime/backlog')}>Backlog</a>
     <a href="/anime/list/" class="tab" class:active={$page.url.pathname.startsWith('/anime/list')}>My List ({$watchlist.length})</a>
 
