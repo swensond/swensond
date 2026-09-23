@@ -30,17 +30,17 @@
     },
     {
       name: "Mouse Research Intelligence",
-      tagline: "Research intelligence platform for mouse genetics research (work in progress)",
+      tagline: "Knowledge graph platform built from mouse genetics literature (work in progress)",
       image: { src: "/projects/mouse-research.webp", width: 3432, height: 1694 },
       description:
-        "Helps researchers navigate the mouse genetics literature. It tracks open questions, surfaces AI-read quotes for human verification, and flags contradictions and gaps across investigations.",
+        "Ingests papers from PubMed, Europe PMC, MGI, UniProt, ChEMBL, and other biomedical sources, then uses an LLM to extract sourced facts about genes, diseases, and drugs into a MongoDB knowledge graph. Every fact keeps a receipt back to its paper and quote, and every quote is checked against the source text before it's trusted, so researchers can verify AI-read findings rather than take them on faith.",
       highlights: [
-        "Investigation workspaces that track findings, open questions, and citation status per topic",
-        "Human-in-the-loop verification queue for AI-extracted quotes and peer review of corrections",
-        "Gap detection surfaces unsourced findings and open ends across investigations",
-        "Entity bookmarking and recently-viewed history for genes, molecules, and diseases",
+        "Ingestion pipeline across ten public sources (PubMed, Europe PMC, PubTator, MGI, UniProt, Gene Ontology, Reactome, ChEMBL, Disease Ontology) with raw payloads landed in SQLite before deterministic shaping into MongoDB",
+        "LLM-driven fact extraction with quote verification against source text, confidence scoring, and multi-pass re-reads that stop once no new facts are found",
+        "Conflicting evidence is kept and flagged rather than silently resolved, so contradicting papers stay visible for a human to weigh",
+        "Investigation workspaces with a human-in-the-loop verification queue for AI-extracted quotes, gap detection, and entity bookmarking",
       ],
-      stack: ["SvelteKit", "Svelte 5", "TypeScript", "Tailwind CSS"],
+      stack: ["React", "Vite", "TypeScript", "Hono", "MongoDB", "SQLite", "Prisma", "LLM extraction"],
     },
     {
       name: "Recipes",
