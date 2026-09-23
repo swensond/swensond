@@ -29,6 +29,20 @@
       stack: ["SvelteKit", "Svelte 5", "TypeScript", "Tailwind CSS", "GraphQL", "IndexedDB", "Cloudflare Workers", "Workers KV"],
     },
     {
+      name: "Mouse Research Intelligence",
+      tagline: "Research intelligence platform for mouse genetics research (work in progress)",
+      image: { src: "/projects/mouse-research.webp", width: 3432, height: 1694 },
+      description:
+        "Helps researchers navigate the mouse genetics literature. It tracks open questions, surfaces AI-read quotes for human verification, and flags contradictions and gaps across investigations.",
+      highlights: [
+        "Investigation workspaces that track findings, open questions, and citation status per topic",
+        "Human-in-the-loop verification queue for AI-extracted quotes and peer review of corrections",
+        "Gap detection surfaces unsourced findings and open ends across investigations",
+        "Entity bookmarking and recently-viewed history for genes, molecules, and diseases",
+      ],
+      stack: ["SvelteKit", "Svelte 5", "TypeScript", "Tailwind CSS"],
+    },
+    {
       name: "Recipes",
       tagline: "Recipe collection fed by a companion Chrome extension",
       image: { src: "/projects/recipes.webp", width: 3432, height: 1305 },
