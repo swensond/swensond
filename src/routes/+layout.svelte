@@ -5,26 +5,27 @@
     let { children } = $props();
 
     const links = [
-        { href: "/", label: "Resume" },
-        { href: "/projects/", label: "Projects" },
+        { href: "/", label: "resume" },
+        { href: "/projects/", label: "projects" },
     ];
 </script>
 
 <header class="print:hidden">
-    <nav class="mx-auto flex max-w-[44rem] items-center justify-between px-4 py-6 sm:px-6" aria-label="Primary">
-        <a href="/" class="font-serif text-lg font-semibold">David Swenson</a>
-        <div class="flex gap-6 text-[0.95rem]">
+    <nav class="mx-auto flex max-w-[80rem] items-center justify-between px-4 py-6 font-mono text-sm sm:px-8 lg:px-20" aria-label="Primary">
+        <a href="/">~/swensond</a>
+        <div class="flex gap-6 sm:gap-10">
             {#each links as link}
+                {@const current = $page.url.pathname === link.href}
                 <a
                     href={link.href}
-                    class="nav-link"
-                    aria-current={$page.url.pathname === link.href ? "page" : undefined}
-                >{link.label}</a>
+                    class="flex items-center gap-2 {current ? 'text-ink' : 'text-muted'}"
+                    aria-current={current ? "page" : undefined}
+                >{#if current}<span class="size-2 rounded-[2px] bg-accent"></span>{/if}{link.label}</a>
             {/each}
         </div>
     </nav>
 </header>
 
-<main class="mx-auto max-w-[44rem] px-4 pt-6 pb-24 sm:px-6 sm:pt-10 print:max-w-none print:p-0">
+<main class="mx-auto max-w-[80rem] px-4 pb-24 sm:px-8 lg:px-20 print:max-w-none print:p-0">
     {@render children()}
 </main>

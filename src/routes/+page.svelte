@@ -106,6 +106,34 @@
         { category: "AI tooling", items: ["AI coding assistants", "LLM workflows", "Local LLMs"] },
     ];
 
+    const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    const toMonths = (d: string) => {
+        if (d === "Present") {
+            const now = new Date();
+            return now.getFullYear() * 12 + now.getMonth();
+        }
+        const [mon, year] = d.split(" ");
+        return Number(year) * 12 + MONTHS.indexOf(mon);
+    };
+    function tenure(dates: string) {
+        const [start, end] = dates.split(" – ");
+        const total = toMonths(end) - toMonths(start);
+        const y = Math.floor(total / 12);
+        const m = total % 12;
+        return [y && `${y}y`, m && `${m}m`].filter(Boolean).join(" ");
+    }
+
+    const roles = experience.flatMap((job) =>
+        job.roles.map((role) => ({
+            ...role,
+            company: job.company,
+            location: job.location,
+            year: role.dates.match(/\d{4}/)?.[0],
+            current: role.dates.endsWith("Present"),
+            tenure: tenure(role.dates),
+        })),
+    );
+
     const description =
         "David Swenson is a Boston-based senior software engineer with 10+ years of experience building cloud-native applications, backend services, and CI/CD pipelines on AWS.";
 
@@ -141,82 +169,95 @@
     <meta property="og:description" content={description} />
 </svelte:head>
 
-<header class="flex items-start gap-5">
-    <img
-        src="/avatar.png"
-        alt=""
-        width="72"
-        height="72"
-        class="mt-1 size-16 shrink-0 rounded-full border border-line bg-white sm:size-[72px] print:hidden"
-    />
-    <div>
-        <h1 class="font-serif text-4xl font-semibold tracking-tight sm:text-5xl print:text-[24pt]">David Swenson</h1>
-        <p class="mt-1 text-lg text-muted">Senior Software Engineer in Boston, MA</p>
-        <ul class="mt-4 flex flex-wrap gap-x-5 gap-y-1 text-[0.95rem] print:mt-1">
-            {#if contact}
-                <li class="hidden print:block"><a class="link" href="mailto:{contact.email}">{contact.email}</a></li>
-                <li class="hidden print:block">{contact.phone}</li>
-            {/if}
-            <li><a class="link" href="https://www.linkedin.com/in/swensond/" target="_blank" rel="noopener">linkedin.com/in/swensond</a></li>
-            <li><a class="link" href="https://github.com/swensond" target="_blank" rel="noopener">github.com/swensond</a></li>
-            <li class="print:hidden"><button type="button" class="link cursor-pointer" onclick={() => window.print()}>Save as PDF</button></li>
-        </ul>
+<header class="border-t-[3px] border-ink pt-10 sm:pt-14 print:border-0 print:pt-0">
+    <h1 class="text-[clamp(3.25rem,11.5vw,9.125rem)] leading-[0.88] font-bold tracking-[-0.06em] print:text-[24pt] print:tracking-tight">David Swenson</h1>
+    <div class="mt-10 grid gap-8 sm:mt-14 lg:grid-cols-12 lg:gap-6 print:mt-1 print:block">
+        <div class="flex flex-col gap-4 lg:col-span-3 print:gap-1">
+            <img
+                src="/avatar.png"
+                alt=""
+                width="80"
+                height="80"
+                class="size-16 rounded-[18px] bg-ink sm:size-20 print:hidden"
+            />
+            <p class="text-lg leading-snug font-semibold print:text-base">
+                Senior Software Engineer<br />
+                <span class="font-mono text-sm font-normal text-muted">Boston, MA · 10+ yrs</span>
+            </p>
+            <ul class="flex flex-col gap-2 print:flex-row print:flex-wrap print:gap-x-5">
+                {#if contact}
+                    <li class="hidden print:block"><a href="mailto:{contact.email}">{contact.email}</a></li>
+                    <li class="hidden print:block">{contact.phone}</li>
+                {/if}
+                <li><a class="link-button" href="https://www.linkedin.com/in/swensond/" target="_blank" rel="noopener">linkedin/swensond <span class="text-accent print:hidden" aria-hidden="true">↗</span></a></li>
+                <li><a class="link-button" href="https://github.com/swensond" target="_blank" rel="noopener">github/swensond <span class="text-accent print:hidden" aria-hidden="true">↗</span></a></li>
+                <li class="print:hidden">
+                    <button type="button" class="link-button w-full cursor-pointer border-0 bg-accent text-paper" onclick={() => window.print()}>save-as.pdf <span aria-hidden="true">↓</span></button>
+                </li>
+            </ul>
+        </div>
+        <p class="text-2xl leading-tight tracking-[-0.02em] sm:text-[2rem] sm:leading-[1.25] lg:col-span-9 print:mt-4 print:text-base print:leading-normal print:tracking-normal">
+            Ten-plus years designing and building cloud-native applications for healthcare, SaaS, and
+            nonprofit organizations. I take systems from design to production — <span class="text-accent">cloud migrations,
+            legacy modernization, CI/CD pipelines</span> — and mentor the engineers around me.
+        </p>
     </div>
 </header>
 
-<p class="mt-10 text-lg leading-relaxed text-ink-soft print:mt-4 print:text-base print:leading-normal">
-    Senior software engineer with 10+ years of experience designing and building cloud-native
-    applications for healthcare, SaaS, and nonprofit organizations. Hands-on across the stack in
-    TypeScript, Python, Java, and C#, with deep experience in serverless and microservice
-    architectures on AWS. Takes systems from design to production, with a record of leading cloud
-    migrations, modernizing legacy platforms, building CI/CD pipelines, and mentoring engineers.
-    Seasoned remote engineer who has led team-wide adoption of AI-assisted development.
-</p>
-
-<section class="mt-16 print:mt-6" aria-labelledby="experience">
-    <h2 id="experience" class="section-title">Experience</h2>
-    <ol class="mt-8 space-y-12 print:mt-3 print:space-y-4">
-        {#each experience as job}
-            <li>
-                <div class="keep-with-next flex flex-wrap items-baseline justify-between gap-x-4">
-                    <h3 class="font-serif text-xl font-semibold print:text-[12pt]">{job.company}</h3>
-                    <span class="text-[0.95rem] text-muted">{job.location}</span>
+<section class="mt-20 sm:mt-28 print:mt-6" aria-labelledby="experience">
+    <div class="section-head keep-with-next">
+        <h2 id="experience" class="section-title">Experience</h2>
+        <span class="section-count">01 / 03</span>
+    </div>
+    <ol>
+        {#each roles as role}
+            <li class="grid gap-4 border-b border-line py-8 sm:py-9 lg:grid-cols-12 lg:gap-6 print:block print:border-0 print:py-2">
+                <span class="text-5xl leading-[0.85] font-bold tracking-[-0.05em] tabular-nums lg:col-span-2 lg:text-6xl print:hidden {role.current ? 'text-accent' : ''}">{role.year}</span>
+                <div class="keep-with-next flex flex-col gap-2 lg:col-span-3 print:flex-row print:flex-wrap print:items-baseline print:gap-x-3 print:gap-y-0">
+                    <h3 class="text-xl leading-tight font-semibold tracking-[-0.01em] print:text-[11pt]">{role.title}</h3>
+                    <span>{role.company}</span>
+                    <span class="font-mono text-xs text-muted print:ml-auto print:font-sans print:text-[inherit]">{role.dates}</span>
+                    <span class="self-start rounded-md bg-surface px-2 py-0.5 font-mono text-xs text-ink-soft print:hidden">{role.tenure} · {role.location}</span>
                 </div>
-                <ol class="timeline mt-4 print:mt-1">
-                    {#each job.roles as role}
-                        <li class="role" class:current={role.dates.endsWith("Present")}>
-                            <div class="keep-with-next flex flex-wrap items-baseline justify-between gap-x-4">
-                                <h4 class="font-semibold">{role.title}</h4>
-                                <span class="text-[0.95rem] whitespace-nowrap text-muted tabular-nums">{role.dates}</span>
-                            </div>
-                            <ul class="mt-2 list-disc space-y-1.5 pl-5 text-ink-soft marker:text-muted print:mt-1 print:space-y-0.5">
-                                {#each role.bullets as bullet}
-                                    <li>{bullet}</li>
-                                {/each}
-                            </ul>
-                        </li>
+                <ul class="flex list-disc flex-col gap-2 pl-[18px] text-[0.9375rem] leading-relaxed text-ink-soft marker:text-muted lg:col-span-7 print:mt-1 print:gap-0.5 print:leading-snug">
+                    {#each role.bullets as bullet}
+                        <li>{bullet}</li>
                     {/each}
-                </ol>
+                </ul>
             </li>
         {/each}
     </ol>
 </section>
 
-<section class="mt-16 print:mt-6" aria-labelledby="skills">
-    <h2 id="skills" class="section-title">Skills</h2>
-    <dl class="mt-6 grid gap-x-8 sm:grid-cols-[10rem_1fr] sm:gap-y-3 print:mt-3 print:grid-cols-[9rem_1fr] print:gap-y-1">
+<section class="mt-20 sm:mt-24 print:mt-6" aria-labelledby="skills">
+    <div class="section-head keep-with-next">
+        <h2 id="skills" class="section-title">Stack</h2>
+        <span class="section-count">02 / 03</span>
+    </div>
+    <dl>
         {#each skills as group}
-            <dt class="font-semibold">{group.category}</dt>
-            <dd class="mb-3 text-ink-soft sm:mb-0 print:mb-0">{group.items.join(", ")}</dd>
+            <div class="grid gap-3 border-b border-line py-4 lg:grid-cols-12 lg:items-center lg:gap-6 print:grid-cols-[9rem_1fr] print:gap-x-4 print:border-0 print:py-0.5">
+                <dt class="font-mono text-[0.8125rem] text-muted lg:col-span-3 print:font-sans print:font-semibold print:text-ink">{group.category}</dt>
+                <dd class="flex flex-wrap gap-2 lg:col-span-9 print:block">
+                    {#each group.items as item, i}
+                        <span class="chip">{item}</span><span class="hidden print:inline">{i < group.items.length - 1 ? ", " : ""}</span>
+                    {/each}
+                </dd>
+            </div>
         {/each}
     </dl>
 </section>
 
-<section class="mt-16 print:mt-6" aria-labelledby="education">
-    <h2 id="education" class="section-title">Education</h2>
-    <div class="mt-6 flex flex-wrap items-baseline justify-between gap-x-4 print:mt-3">
-        <h3 class="font-serif text-xl font-semibold print:text-[12pt]">Wentworth Institute of Technology</h3>
-        <span class="text-[0.95rem] text-muted tabular-nums">2011 – 2015</span>
+<section class="mt-20 sm:mt-24 print:mt-6" aria-labelledby="education">
+    <div class="section-head keep-with-next">
+        <h2 id="education" class="section-title">Education</h2>
+        <span class="section-count">03 / 03</span>
     </div>
-    <p class="mt-1 text-ink-soft">B.S. Computer Networking, Boston, MA</p>
+    <div class="grid gap-4 py-9 lg:grid-cols-12 lg:gap-6 print:py-2">
+        <span class="text-5xl leading-[0.85] font-bold tracking-[-0.05em] text-[#5e5c57] lg:col-span-2 lg:text-6xl print:hidden">2011</span>
+        <div class="lg:col-span-10">
+            <h3 class="text-xl font-semibold print:text-[11pt]">Wentworth Institute of Technology</h3>
+            <p class="mt-1.5 text-muted">B.S. Computer Networking · 2011 – 2015 · Boston, MA</p>
+        </div>
+    </div>
 </section>
