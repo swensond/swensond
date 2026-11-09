@@ -19,9 +19,12 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
+      # v5 auto-enables caching from packageManager and shells out to pnpm, which corepack
+      # hasn't provided yet at this point, so the step fails without this.
       - uses: actions/setup-node@v5
         with:
           node-version: 24
+          package-manager-cache: false
 
       # packageManager pins the pnpm version, so corepack resolves it rather than a hardcoded global.
       - name: Install
