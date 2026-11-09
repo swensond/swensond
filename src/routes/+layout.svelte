@@ -5,27 +5,32 @@
     let { children } = $props();
 
     const links = [
-        { href: "/", label: "resume" },
-        { href: "/projects/", label: "projects" },
+        { href: "/", label: "Resume" },
+        { href: "/projects/", label: "Projects" },
     ];
 </script>
 
-<header class="print:hidden">
-    <nav class="mx-auto flex max-w-[80rem] items-center justify-between px-4 py-6 font-mono text-sm sm:px-8 lg:px-20" aria-label="Primary">
-        <a href="/">~/swensond</a>
-        <div class="flex gap-6 sm:gap-10">
-            {#each links as link}
-                {@const current = $page.url.pathname === link.href}
-                <a
-                    href={link.href}
-                    class="flex items-center gap-2 {current ? 'text-ink' : 'text-muted'}"
-                    aria-current={current ? "page" : undefined}
-                >{#if current}<span class="size-2 rounded-[2px] bg-accent"></span>{/if}{link.label}</a>
-            {/each}
-        </div>
-    </nav>
-</header>
+<div class="mx-auto flex max-w-[84rem] flex-col gap-4 px-4 pb-10 sm:px-8 lg:px-12 print:max-w-none print:gap-0 print:p-0">
+    <header class="print:hidden">
+        <nav class="flex flex-wrap items-center justify-between gap-x-6 gap-y-2 pt-5 pb-1" aria-label="Primary">
+            <!-- The resume page already leads with the name as its h1, so the wordmark would only repeat it. -->
+            {#if $page.url.pathname !== "/"}
+                <a href="/" class="display py-2.5 text-lg font-semibold">David Swenson</a>
+            {/if}
+            <div class="ml-auto flex flex-wrap items-center gap-2 text-[0.9375rem] font-medium">
+                {#each links as link}
+                    {@const current = $page.url.pathname === link.href}
+                    <a
+                        href={link.href}
+                        class="flex min-h-11 items-center rounded-full px-[1.125rem] {current ? 'bg-ink text-paper hover:text-paper' : ''}"
+                        aria-current={current ? "page" : undefined}
+                    >{link.label}</a>
+                {/each}
+            </div>
+        </nav>
+    </header>
 
-<main class="mx-auto max-w-[80rem] px-4 pb-24 sm:px-8 lg:px-20 print:max-w-none print:p-0">
-    {@render children()}
-</main>
+    <main class="flex flex-col gap-4 print:block">
+        {@render children()}
+    </main>
+</div>
