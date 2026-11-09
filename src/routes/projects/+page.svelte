@@ -38,9 +38,9 @@
     <ProjectPanel {project} size="panel" onopen={(index) => lightbox.open(galleryOf(project), index)} />
     <div class="box-border flex min-w-0 flex-[1_1_21.25rem] flex-col gap-4 p-[clamp(1.5rem,2.6vw,2.25rem)]">
       <div class="flex flex-wrap items-center gap-x-3 gap-y-2">
-        <span class="display text-[0.9375rem] font-semibold text-accent">{project.index}</span>
+        <span class="font-mono text-[0.875rem] font-medium text-accent">{project.index}</span>
         {#if project.wip}
-          <span class="rounded-full bg-accent px-[0.6875rem] py-[0.1875rem] text-[0.8125rem] font-semibold text-paper">In progress</span>
+          <span class="rounded-sm border border-accent/60 px-2 py-0.5 font-mono text-[0.6875rem] font-medium tracking-[0.08em] text-accent uppercase">In progress</span>
         {/if}
       </div>
       <div class="flex flex-col gap-1.5">

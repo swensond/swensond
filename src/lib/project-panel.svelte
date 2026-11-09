@@ -14,7 +14,7 @@
   }: { project: ProjectView; size: 'tile' | 'panel'; onopen?: (index: number) => void } = $props();
 
   const tile = $derived(size === 'tile');
-  const backdrop = $derived(project.backdrop ?? '#0A0A0C');
+  const backdrop = $derived(project.backdrop ?? '#05070A');
   const phones = $derived(project.images.slice(0, 3));
   const lead = $derived(project.images[0]);
 
@@ -25,7 +25,7 @@
 {#if project.multi}
   <div
     class="flex justify-center {tile
-      ? 'aspect-[16/10] items-start gap-2 overflow-hidden rounded-2xl px-3.5 pt-3.5'
+      ? 'aspect-[16/10] items-start gap-2 overflow-hidden rounded-md px-3.5 pt-3.5'
       : 'min-w-0 flex-[1.5_1_30rem] items-center gap-[3%] p-8 sm:min-h-[23.75rem]'}"
     style:background={backdrop}
   >
@@ -39,7 +39,7 @@
             height={image.height}
             alt={alt(image.caption)}
             loading="lazy"
-            class="block h-auto w-full {tile ? 'rounded-lg' : 'rounded-[14px]'}"
+            class="block h-auto w-full {tile ? 'rounded-sm' : 'rounded-md'}"
           />
         {/snippet}
         {#if onopen}
@@ -55,7 +55,7 @@
 {:else}
   <div
     class="relative overflow-hidden {tile
-      ? 'mb-0 aspect-[16/10] rounded-2xl border border-line'
+      ? 'mb-0 aspect-[16/10] rounded-md border border-line'
       : 'min-h-[17rem] min-w-0 flex-[1.5_1_30rem] sm:min-h-[23.75rem]'}"
     style:background={backdrop}
   >

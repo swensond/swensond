@@ -22,7 +22,7 @@
                     {@const current = $page.url.pathname === link.href}
                     <a
                         href={link.href}
-                        class="flex min-h-11 items-center rounded-full px-[1.125rem] {current ? 'bg-ink text-paper hover:text-paper' : ''}"
+                        class="flex min-h-11 items-center rounded-md px-[1.125rem] {current ? 'bg-ink text-paper hover:text-paper' : ''}"
                         aria-current={current ? "page" : undefined}
                     >{link.label}</a>
                 {/each}

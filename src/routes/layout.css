@@ -1,13 +1,13 @@
 @import 'tailwindcss';
 
 :root {
-    --paper: #0f0f0e;
-    --surface: #1a1a18;
-    --ink: #f2f0ea;
-    --ink-soft: #cfccc4;
-    --muted: #9c9a94;
-    --line: #2e2d2a;
-    --accent: #f2b84b;
+    --paper: #05070a;
+    --surface: #0b0f14;
+    --ink: #e6edf5;
+    --ink-soft: #b4c0cf;
+    --muted: #8494a8;
+    --line: #1a222d;
+    --accent: #4ade80;
 }
 
 /* Print is the submittable resume: US Letter, black on white, plain links. */
@@ -50,6 +50,7 @@
 @theme inline {
     --font-sans: 'Inter', 'Helvetica Neue', Arial, ui-sans-serif, system-ui, sans-serif;
     --font-display: 'Space Grotesk', 'Helvetica Neue', Arial, ui-sans-serif, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
     --color-paper: var(--paper);
     --color-surface: var(--surface);
     --color-ink: var(--ink);
@@ -95,7 +96,7 @@ a:hover {
 
 .card {
     border: 1px solid var(--line);
-    border-radius: 28px;
+    border-radius: 8px;
     background: var(--surface);
 }
 
@@ -105,7 +106,7 @@ a:hover {
     min-height: 2.75rem;
     padding: 0 1.125rem;
     border: 1px solid var(--muted);
-    border-radius: 999px;
+    border-radius: 6px;
     font-size: 0.9375rem;
     font-weight: 500;
 }
@@ -116,7 +117,7 @@ a:hover {
 
 .chip {
     padding: 0.25rem 0.6875rem;
-    border-radius: 999px;
+    border-radius: 4px;
     background: var(--line);
     font-size: 0.875rem;
     line-height: 1.5;

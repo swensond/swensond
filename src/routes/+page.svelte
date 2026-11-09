@@ -50,7 +50,7 @@
                 alt=""
                 width="72"
                 height="72"
-                class="size-[4.5rem] rounded-[20px] bg-accent print:hidden"
+                class="size-[4.5rem] rounded-lg bg-accent print:hidden"
             />
             <p class="text-[0.9375rem] leading-normal text-ink-soft print:text-base print:text-ink">
                 Senior Software Engineer<br />
@@ -83,7 +83,7 @@
     <section class="card flex min-w-0 flex-[2_1_35rem] flex-col p-3 print:mt-6" aria-labelledby="experience">
         <div class="section-head keep-with-next flex items-baseline justify-between gap-4 px-5 pt-5 pb-[1.125rem] print:px-0 print:pt-0">
             <h2 id="experience" class="display text-[1.75rem] leading-none font-semibold tracking-[-0.02em]">Experience</h2>
-            <span class="text-sm text-muted print:hidden">2014 – Present</span>
+            <span class="font-mono text-[0.8125rem] text-muted print:hidden">2014 – Present</span>
         </div>
         <ol>
             {#each roles as role, i}
@@ -98,7 +98,7 @@
                             onclick={() => (open = isOpen ? -1 : i)}
                         >
                             <span class="flex min-w-0 flex-1 flex-wrap items-baseline gap-x-4 gap-y-0.5 print:gap-x-3">
-                                <span class="w-40 shrink-0 text-sm font-normal text-muted tabular-nums print:order-last print:ml-auto print:w-auto print:text-[inherit]">{role.dates}</span>
+                                <span class="w-40 shrink-0 font-mono text-[0.8125rem] font-normal text-muted tabular-nums print:font-sans print:order-last print:ml-auto print:w-auto print:text-[inherit]">{role.dates}</span>
                                 <span class="flex min-w-[13.75rem] flex-1 flex-wrap items-baseline gap-x-3 print:flex-none">
                                     <span class="font-semibold print:text-[11pt]">{role.title}</span>
                                     <span class="text-[0.9375rem] font-normal text-muted print:text-[inherit]">{role.company} · {role.location}</span>
@@ -126,7 +126,7 @@
             {/each}
         </ol>
         <div class="flex flex-wrap items-baseline gap-x-4 gap-y-0.5 border-t border-line px-5 pt-5 pb-3 print:border-0 print:p-0 print:pt-1.5">
-            <span class="w-40 shrink-0 text-sm text-muted tabular-nums print:order-last print:ml-auto print:w-auto print:text-[inherit]">{education.dates}</span>
+            <span class="w-40 shrink-0 font-mono text-[0.8125rem] text-muted tabular-nums print:font-sans print:order-last print:ml-auto print:w-auto print:text-[inherit]">{education.dates}</span>
             <span class="flex min-w-[13.75rem] flex-1 flex-wrap items-baseline gap-x-3 print:flex-none">
                 <span class="font-semibold print:text-[11pt]">{education.degree}</span>
                 <span class="text-[0.9375rem] text-muted print:text-[inherit]">{education.school} · {education.location}</span>
@@ -139,7 +139,7 @@
         <dl class="flex flex-col gap-5 print:gap-0">
             {#each skills as group}
                 <div class="flex flex-col gap-2 print:grid print:grid-cols-[9rem_1fr] print:gap-x-4 print:py-0.5">
-                    <dt class="text-[0.8125rem] font-semibold tracking-[0.06em] text-muted uppercase print:text-[inherit] print:tracking-normal print:text-ink print:normal-case">{group.category}</dt>
+                    <dt class="font-mono text-[0.75rem] font-medium tracking-[0.08em] text-muted uppercase print:font-sans print:text-[inherit] print:tracking-normal print:text-ink print:normal-case">{group.category}</dt>
                     <dd class="flex flex-wrap gap-1.5 print:block">
                         {#each group.items as item, i}
                             <span class="chip">{item}</span><span class="hidden print:inline">{i < group.items.length - 1 ? ', ' : ''}</span>
@@ -154,7 +154,7 @@
 <section class="card flex flex-col gap-6 p-8 print:hidden" aria-labelledby="projects">
     <div class="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
         <h2 id="projects" class="display text-[1.75rem] leading-none font-semibold tracking-[-0.02em]">Projects</h2>
-        <a href="/projects/" class="flex min-h-11 items-center rounded-full bg-ink px-[1.125rem] text-[0.9375rem] font-medium text-paper hover:text-paper">All {projects.length} projects</a>
+        <a href="/projects/" class="flex min-h-11 items-center rounded-md bg-ink px-[1.125rem] text-[0.9375rem] font-medium text-paper hover:text-paper">All {projects.length} projects</a>
     </div>
     <ul class="grid grid-cols-[repeat(auto-fit,minmax(min(13.125rem,100%),1fr))] gap-x-4 gap-y-6">
         {#each projects as project}

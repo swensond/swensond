@@ -8,7 +8,7 @@ let { lightbox }: { lightbox: Lightbox } = $props();
      Previous/Next buttons, thumbnails, and horizontal swipes page through the shots. -->
 <dialog
   bind:this={lightbox.element}
-  class="m-0 h-dvh max-h-none w-screen max-w-none bg-transparent p-0 text-ink backdrop:bg-[#0f0f0e]/95 backdrop:backdrop-blur-sm"
+  class="m-0 h-dvh max-h-none w-screen max-w-none bg-transparent p-0 text-ink backdrop:bg-paper/95 backdrop:backdrop-blur-sm"
   aria-label={lightbox.active ? `${lightbox.active.title} screenshots` : undefined}
   onclick={(event) => {
     if (event.target === event.currentTarget || (event.target as HTMLElement).dataset.backdrop !== undefined) {
@@ -36,7 +36,7 @@ let { lightbox }: { lightbox: Lightbox } = $props();
           {/if}
           <button
             type="button"
-            class="flex min-h-11 cursor-pointer items-center gap-2 rounded-[10px] border border-line px-3.5 hover:border-accent hover:text-accent"
+            class="flex min-h-11 cursor-pointer items-center gap-2 rounded-md border border-line px-3.5 hover:border-accent hover:text-accent"
             onclick={() => lightbox.close()}
           >close <kbd class="text-muted">esc</kbd></button>
         </div>
@@ -48,7 +48,7 @@ let { lightbox }: { lightbox: Lightbox } = $props();
             <button
               type="button"
               aria-label="Previous screenshot"
-              class="absolute left-4 z-10 hidden size-11 cursor-pointer items-center justify-center rounded-[10px] border border-line bg-surface font-mono hover:border-accent hover:text-accent sm:flex lg:left-8"
+              class="absolute left-4 z-10 hidden size-11 cursor-pointer items-center justify-center rounded-md border border-line bg-surface font-mono hover:border-accent hover:text-accent sm:flex lg:left-8"
               onclick={() => lightbox.prev()}
             >←</button>
           {/if}
@@ -59,14 +59,14 @@ let { lightbox }: { lightbox: Lightbox } = $props();
               height={shot.height}
               alt={shot.caption ?? `Screenshot of ${active.title}`}
               draggable="false"
-              class="max-h-full w-auto max-w-full rounded-[14px] border border-line object-contain select-none {lightbox.multi ? 'sm:max-w-[calc(100%-8rem)]' : ''}"
+              class="max-h-full w-auto max-w-full rounded-lg border border-line object-contain select-none {lightbox.multi ? 'sm:max-w-[calc(100%-8rem)]' : ''}"
             />
           {/key}
           {#if lightbox.multi}
             <button
               type="button"
               aria-label="Next screenshot"
-              class="absolute right-4 z-10 hidden size-11 cursor-pointer items-center justify-center rounded-[10px] border border-line bg-surface font-mono hover:border-accent hover:text-accent sm:flex lg:right-8"
+              class="absolute right-4 z-10 hidden size-11 cursor-pointer items-center justify-center rounded-md border border-line bg-surface font-mono hover:border-accent hover:text-accent sm:flex lg:right-8"
               onclick={() => lightbox.next()}
             >→</button>
           {/if}
@@ -84,7 +84,7 @@ let { lightbox }: { lightbox: Lightbox } = $props();
                   type="button"
                   aria-label="Show screenshot {i + 1}"
                   aria-current={i === active.index ? 'true' : undefined}
-                  class="shrink-0 cursor-pointer overflow-hidden rounded-md border-2 {i === active.index ? 'border-accent' : 'border-transparent opacity-50 hover:opacity-100'}"
+                  class="shrink-0 cursor-pointer overflow-hidden rounded-sm border-2 {i === active.index ? 'border-accent' : 'border-transparent opacity-50 hover:opacity-100'}"
                   onclick={() => lightbox.goTo(i)}
                 >
                   <img src={image.src} alt="" class="h-14 w-auto object-cover object-top" />
